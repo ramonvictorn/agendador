@@ -90,7 +90,12 @@ $(function() {
             // change the border color just for fun
             $(this).css('border-color', 'red');
         
-          }
+          },
+          groupByResource: true,
+          resources: [
+          { id: 'a', title: 'Room A' },
+          { id: 'b', title: 'Room B' }
+          ],
          
           
           
