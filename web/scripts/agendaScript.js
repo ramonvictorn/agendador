@@ -37,4 +37,13 @@ function eventos(){
     fechar.on( "click", function() {
         hideModal()
       });
+
+    $('.cadastroEventoFechar').on('click',function(){
+        $('.modalCadastro').hide();
+    })
+
+
+    $(".data").mask("99/99/9999 99:99:99",{autoclear: false});
 }
+
+

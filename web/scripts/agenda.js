@@ -58,18 +58,27 @@ $(function() {
         
         // Events Mouse
           dayClick: function(date) {
-            console.log('clicked ' + date.format());
+            console.log('clicked ' + date.format('DD/MM/YYYY HH:mm:ss'));
+            $('.modalCadastro').show();
+            $('.modalCadastro').css('opacity', 1);
+           
           },
 
           // Alguma data é selecionada
           select: function(startDate, endDate,eventObj) {
-            console.log('selected ' + startDate.format() + ' to ' + endDate.format());
-            
+            console.log('selected aqui ' + startDate.format() + ' to ' + endDate.format());
+            var inicio = $('.cadastroInicio');
+            inicio.val(startDate.format('DD/MM/YYYY HH:mm:ss'));
+            $('.cadastroFim').val(endDate.format('DD/MM/YYYY HH:mm:ss'))
+            console.log('inicio ', inicio)
+            $('.modalCadastro').show();
           },
 
           // Quando é selecionado um horário com evento
           selectOverlap: function(event) {
             console.log('ja tem evento cadastrado neste horário')
+            $('.modalPequena').show(); //mostrar a modal
+            $('.pequenaTittle').text("Reserva não é possivel");
             return event.rendering === 'background';
           },
 
@@ -77,11 +86,11 @@ $(function() {
           eventClick: function(calEvent, jsEvent, view) {
             $('.modalPequena').show(); //mostrar a modal
             $('.pequenaTittle').text(calEvent.title);
-            $('.inicio').text(calEvent.start.format('DD/MM/YYY HH:mm:ss'));
+            $('.inicio').text(calEvent.start.format('DD/MM/YYYY HH:mm:ss'));
             $('.fim').text(calEvent.end.format('DD/MM/YYY HH:mm:ss'));
             $('.titulo').text(calEvent.description);
             $('.pequenaBody').css('background-color', calEvent.color)
-            console.log(calEvent)
+            console.log('start: ',calEvent.start.format('DD/MM/YYYY HH:mm:ss'))
           },       
           
     });
