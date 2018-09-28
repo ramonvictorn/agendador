@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://localhost:8080/callendar/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <h2>Usuário:</h2>
+    <input id="usuario" type="text"/>
+    <h2>Senha:</h2>
+    <input id="senha">
+    <button id="login">Login</button>
+    <div class="result"></div>
+</body>
+
+<script>
+    var credenciais = {}
+    function getDados(){
+        var usuario = $('#usuario');
+        usuario = usuario.val()
+        var senha = $('#senha');
+        senha = senha.val();
+        credenciais.usuario = usuario;
+        credenciais.senha = senha;
+        console.log('foo credenciais ', credenciais); 
+        postLogin(credenciais);  
+    }
+    function events(){
+        var login = $('#login');
+        login.on("click", getDados);
+    }
+
+    function postLogin(data){
+        console.log('foo postLogin', data);
+
+        // $.post( "/login", data)
+
+        $.post( "/login", data)
+            .done(function( data ) {
+                alert( "Usuario correto: " + data );
+        });
+        
+   
+    }
+    events();
+</script>
+</html>
