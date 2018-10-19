@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
     createdAt:{
         type:Date,
         default:Date.now,
-    },
+    }
 });
 
 UserSchema.pre('save',  function (next) {
@@ -31,7 +31,7 @@ UserSchema.pre('save',  function (next) {
 })
 
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema, 'user');
 
 
 module.exports = User;

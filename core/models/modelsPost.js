@@ -1,7 +1,9 @@
 exports.login = login;
 exports.register = register;
+exports.getEvents = getEvents;
 const crypto = require('crypto');
-const User = require('../models/user')
+const User = require('../models/user');
+const Event = require('../models/event');
 
 async function login(login, cb,erro){
     const hasher = crypto.createHash('SHA256');
@@ -26,3 +28,15 @@ function register(login, cb){
     console.log('user ,', login)    
 }
 
+
+async function getEvents(cb){
+    console.log('model getEvents')
+    var events = await Event.find({}, function (err, event) {
+        
+    });
+    
+    if(events){
+        console.log('events ', events)
+        cb(events)
+    }
+}
