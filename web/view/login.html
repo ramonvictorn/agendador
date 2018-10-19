@@ -9,9 +9,9 @@
 </head>
 <body>
     <h2>Usuário:</h2>
-    <input id="usuario" type="text"/>
+    <input id="email" type="text"/>
     <h2>Senha:</h2>
-    <input id="senha">
+    <input id="password">
     <button id="login">Login</button>
     <div class="result"></div>
 </body>
@@ -19,12 +19,12 @@
 <script>
     var credenciais = {}
     function getDados(){
-        var usuario = $('#usuario');
-        usuario = usuario.val()
-        var senha = $('#senha');
-        senha = senha.val();
-        credenciais.usuario = usuario;
-        credenciais.senha = senha;
+        var email = $('#email');
+        email = email.val()
+        var password = $('#password');
+        password = password.val();
+        credenciais.email = email;
+        credenciais.password = password;
         console.log('foo credenciais ', credenciais); 
         postLogin(credenciais);  
     }

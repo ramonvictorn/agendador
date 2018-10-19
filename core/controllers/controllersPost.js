@@ -1,13 +1,19 @@
 exports.login = login;
-const modelsPost = require('../models/modelsPost');
-
+const modelPost = require('../models/modelsPost')
 
 
 
 
 function login(req,res){
     console.log('controllersPost --> function /login  ')
-    modelsPost.login(req,res)
+    const login = {email:req.body.email,
+                    password: req.body.password
+                }
+                    console.log('controllersPost --> login , ', login)
+    if(modelPost.login(login)){
+        console.log('model true')
+
+    }
 }
 
 

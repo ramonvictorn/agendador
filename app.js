@@ -21,7 +21,7 @@ app.use('/callendar', express.static('node_modules/'))
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
-    store: new FileStore('./session'),
+    store: new FileStore('../session'),
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,

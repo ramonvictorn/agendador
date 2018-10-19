@@ -1,7 +1,11 @@
 exports.login = login;
+const bcryptjs = require('bcryptjs')
 
-function login(req,res){
 
+function login(login){
+    console.log('model', login)
+    return true;
+    
 }
 
 
