@@ -103,4 +103,16 @@
     <div id='calendar'></div>
 </body>
 <script src="http://localhost:8080/static/scripts/events.js"></script>
+
+
+<script>
+  function get(){
+    $.post( "/getEvents")
+            .done(function( data ) {
+                console.log( "Eventos  " , data.eventos );
+                $('#calendar').fullCalendar('addEventSource', data.eventos)
+        });
+  }
+  get();
+</script>
 </html>

@@ -36,7 +36,7 @@ async function getEvents(cb){
     });
     
     if(events){
-        console.log('events ', events)
+        console.log('events ', events, 'teste data',events[0].start)
         cb(events)
     }
 }
