@@ -12,7 +12,8 @@ app.set('view engine', 'html') // sets the template engine
 app.engine('html',ejs.renderFile);
 // Configure body parse
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json())
 // //permitir acesso ao Js e css
 app.use('/static', express.static('web/'));
 app.use('/callendar', express.static('node_modules/'))

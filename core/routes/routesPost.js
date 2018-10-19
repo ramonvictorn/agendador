@@ -9,6 +9,7 @@ const router = express.Router();
 
 function initPost (app){
     app.post('/login', controllersPost.login);
+    app.post('/register', controllersPost.register)
 }
 
 router.post('/register', async(req,res)=>{

@@ -40,7 +40,11 @@
 
         $.post( "/login", data)
             .done(function( data ) {
-                alert( "Usuario correto: " + data );
+                console.log( "Usuario correto: " , data );
+                if(data.sucess){
+                    console.log( "Usuariooo correto: " , data );
+                    window.location = 'agenda'
+                }
         });
         
    
