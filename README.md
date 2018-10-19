@@ -13,6 +13,14 @@ Sistema para realizar reserva de espaços fisicos.
   - Background
   - Usuario que reservou
 
+ # Caracteristicas de um usuario
+  -Nome
+  -Email
+  -Senha
+  -Role
+  -Color
+  
+  
 
 
 ### Bibliotecas
