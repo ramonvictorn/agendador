@@ -5,8 +5,9 @@ const models = require('../models/models');
 
 
 function agenda(req,res){
-    res.render('agenda');
-    console.log('rota / acessada')
+    res.send('Page agenda');
+  
+    console.log('rota /agenda acessada')
 }
 
 
