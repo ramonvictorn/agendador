@@ -26,7 +26,9 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: { secure: false },
+    maxAge  : new Date(Date.now() + 3600), //1 Hour
+    expires : new Date(Date.now() + 3600), //1 Hour
 }))
 
 

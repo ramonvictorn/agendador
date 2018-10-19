@@ -15,7 +15,8 @@ function login(req,res){
     function cb(){
         console.log('permissao sucess')
         req.session.agendador = {};
-        req.session.agendador.user = 'ramon';
+        req.session.agendador.user = login;
+        req.session.cookie.expires = new Date(Date.now() + 3600000)
         res.status(200).send({sucess:'Ok'})
          
     }

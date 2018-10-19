@@ -12,7 +12,7 @@ function init(app){
 function checkSecurity(req, res, next){
     console.log('checkSecurity')
     if(req.session.agendador ){
-        if(req.session.agendador.user == 'ramon'){
+        if(req.session.agendador.user){
             console.log('User autenticado')
             next()
         }   
