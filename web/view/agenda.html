@@ -106,13 +106,29 @@
 
 
 <script>
+  var eventos;
   function get(){
     $.post( "/getEvents")
             .done(function( data ) {
                 console.log( "Eventos  " , data.eventos );
-                $('#calendar').fullCalendar('addEventSource', data.eventos)
+                  eventos = arrumarData(data.eventos);
+                  $('#calendar').fullCalendar('addEventSource', eventos)
         });
   }
+
+
+  function arrumarData(events){
+    var temp = events;
+    console.log('foo events antes' , events[0].start)
+    console.log('foo events depois' , events[0].start)
+    for (var index = 0; index < events.length; index++) {
+      temp[0].start = moment.utc(events[0].start).local().format()
+      temp[0].end = moment.utc(events[0].end).local().format()
+    }
+
+    temp = events;
+    console.log('foo events depois' , events[0].start)
+  return events}
   get();
 </script>
 </html>
