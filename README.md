@@ -20,6 +20,11 @@ Sistema para realizar reserva de espaços fisicos.
   -Role
   -Color
   
+
+
+   # Rotas
+  -post  /insertEvent
+  -post  /getEvents
   
 
 

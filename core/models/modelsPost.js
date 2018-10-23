@@ -1,6 +1,7 @@
 exports.login = login;
 exports.register = register;
 exports.getEvents = getEvents;
+exports.insertEvent = insertEvent;
 const crypto = require('crypto');
 const User = require('../models/user');
 const Event = require('../models/event');
@@ -39,4 +40,9 @@ async function getEvents(cb){
         console.log('events ', events, 'teste data',events[0].start)
         cb(events)
     }
+}
+
+function insertEvent(evento){
+    console.log('model insertEvent', evento)
+    const event = Event.create(evento);
 }

@@ -55,10 +55,6 @@ function selecionadoJaExiste(){
 
 
 
-
-
-
-
 // BACKUP NÃO APAGAR------------------------------
 
 // dayClick: function(date) {

@@ -2,7 +2,8 @@ const mongoose = require('../db.js');
 const crypto = require('crypto');
 const EventSchema = new mongoose.Schema({
     agenda:{
-        type:String
+        type:String,
+        required:false,
     },
     name:{
         type:String,
@@ -11,16 +12,18 @@ const EventSchema = new mongoose.Schema({
     start:{
         type:Date,
         required:true,
-        unique:true,
-        lowercase:true,
     },
     end:{
         type:Date,
         required:true,
     },
+    finalidade:{
+        type:String,
+        required:false,
+    },
     user:{
         type:String,
-        require:true,
+        require:false,
     },
     createdAt:{
         type:Date,

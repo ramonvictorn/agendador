@@ -1,6 +1,7 @@
 exports.login = login;
 exports.register = register;
 exports.getEvents = getEvents;
+exports.insertEvent = insertEvent;
 const modelPost = require('../models/modelsPost')
 
 
@@ -46,4 +47,11 @@ function getEvents(req,res){
         console.log('callback getEvent', eventos)
         res.status(200).send({eventos})
     }
+}
+
+
+function insertEvent(req,res){
+    console.log('insert event', req.body)
+    var evento= req.body;
+    modelPost.insertEvent(evento);
 }
