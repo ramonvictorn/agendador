@@ -7,6 +7,12 @@ const User = require('../models/user');
 const authConfig = require('../config/auth')
 const router = express.Router();
 
+
+/**  
+*
+* @desc Routes api and controllers
+* @param {object} app is a object express()
+*/
 function initPost (app){
     app.post('/login', controllersPost.login);
     app.post('/register', controllersPost.register)
@@ -15,7 +21,11 @@ function initPost (app){
 }
 
 
-//verifica se o usuario esta logado com base na session
+/**  
+*
+* @desc Middleware to verify that the user is allowed to access the route
+* @param {Object} next is a controller for this route
+*/
 function checkSecurity(req, res, next){
     console.log('checkSecurity')
     if(req.session.agendador ){
