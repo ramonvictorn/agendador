@@ -1,35 +1,46 @@
 # Agendador
 
-Sistema para realizar reserva de espaços fisicos.
+[![Build Status](http://www.lantec.ufsc.br/wp-content/themes/lantec/img/logo_lantec.png)](http://www.lantec.ufsc.br/)
 
-  - Aceita cadastro de salas
-  - Controle de usuários
+Sistema que possibilita a reserva de salas.
 
-# Caracteristicas de um evento
-
-  - Inicio
-  - Fim
-  - Detalhe
-  - Background
-  - Usuario que reservou
-
- # Caracteristicas de um usuario
-  -Nome
-  -Email
-  -Senha
-  -Role
-  -Color
-  
+# Entidades banco de dados
+  - Salas
+  - Usuarios
+  - Reservas
 
 
-   # Rotas
-  -post  /insertEvent
-  -post  /getEvents
-  
+#### Salas
+
+        Nome
+        Definição
+
+### Usuários
+        Nome
+        Login
+        Senha
+        Ocupação
+        Cor
+
+### Reservas
+        Nome
+        Sala
+        Start
+        End
+        Descrição
+        Usuário
 
 
-### Bibliotecas
 
-* [FullCalendar](https://fullcalendar.io/docs) - Criação de calendarios
-* [BootStrap](http://getbootstrap.com/?) - Framework css e js.
+# Instalação
+    $ cd agendador
+    $ npm install 
+    $ node app
 
+Para rodar o projeto **node app.js**
+Acessar http://localhost:8080/agenda
+
+## Bibliotecas usadas:
+FullCalendar
+Bootstrap
+Jquery
