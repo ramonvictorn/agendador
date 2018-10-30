@@ -1,5 +1,9 @@
-var t;
 
+
+var t;
+/**
+ *  @description function Configura as opções da agenda
+ */
 $(function() {
 
     // page is now ready, initialize the calendar...

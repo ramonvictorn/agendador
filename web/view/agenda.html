@@ -9,8 +9,9 @@
     <script src="http://localhost:8080/callendar/jquery/dist/jquery.min.js"></script>
     <script src="http://localhost:8080/callendar/moment/min/moment.min.js"></script>
     <script src="http://localhost:8080/callendar/fullcalendar/dist/fullcalendar.js"></script>
+    <script src="http://localhost:8080/static/scripts/insertEvent.js"></script>
     <script src="http://localhost:8080/callendar/fullcalendar/dist/locale-all.js"></script>
-    <script src="http://localhost:8080/static/scripts/agenda.js"></script>
+    <script src="http://localhost:8080/static/scripts/agendaConfig.js"></script>
     <!-- <link rel='stylesheet' href="http://localhost:8080/static/css/agenda.css"/> -->
     <script src="http://localhost:8080/static/scripts/agendaScript.js"></script>
     <!-- BooStrap -->
@@ -102,33 +103,5 @@
     <!-- Fim modal Cadastro Evento -->
     <div id='calendar'></div>
 </body>
-<script src="http://localhost:8080/static/scripts/events.js"></script>
-
-
-<script>
-  var eventos;
-  function get(){
-    $.post( "/getEvents")
-            .done(function( data ) {
-                console.log( "Eventos  " , data.eventos );
-                  eventos = arrumarData(data.eventos);
-                  $('#calendar').fullCalendar('addEventSource', eventos)
-        });
-  }
-
-
-  function arrumarData(events){
-    var temp = events;
-    console.log('foo events antes' , events[0].start)
-    console.log('foo events depois' , events[0].start)
-    for (var index = 0; index < events.length; index++) {
-      temp[0].start = moment.utc(events[0].start).local().format()
-      temp[0].end = moment.utc(events[0].end).local().format()
-    }
-
-    temp = events;
-    console.log('foo events depois' , events[0].start)
-  return events}
-  get();
-</script>
+<script type="text/javascript" src="http://localhost:8080/static/scripts/getEvents.js"></script>
 </html>

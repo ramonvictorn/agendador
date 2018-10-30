@@ -1,3 +1,4 @@
+
 $( document ).ready(function() {
     clickDia();
     selectDay();
@@ -5,8 +6,11 @@ $( document ).ready(function() {
     selecionadoJaExiste();
 })
 
+/**
+ * @function clickDia - Atrela o evento de click ao dia a função
+ */
 function clickDia(){
-    console.log('[interacao.js] - clickDia');
+    //console.log('[interacao.js] - clickDia');
     $('#calendar').fullCalendar('option', 'dayClick', function(date) {
             console.log('[interacao.js] - evento - Click ' + date.format('DD/MM/YYYY HH:mm:ss'));
             $('.modalCadastro').show();
@@ -27,8 +31,11 @@ function selectDay(){
         });
 }
 
+/**
+ * @function clickEvento - Atrela o evento de click em uma reserva a uma ação
+ */
 function clickEvento(){
-    console.log('[interacao.js] - clickEvento');
+    //console.log('[interacao.js] - clickEvento');
     $('#calendar').fullCalendar('option', 'eventClick', function(calEvent, jsEvent, view) {
             console.log('[interacao.js] Evento -> Click sobre evento');
             $('.modalPequena').show(); //mostrar a modal
@@ -41,9 +48,12 @@ function clickEvento(){
         });
 }
 
-
+/**
+ * @function selecionadoJaExiste - Atrela o evento do usuário selecionar uma data
+ * com reserva já existente a uma ação
+ */
 function selecionadoJaExiste(){
-    console.log('[interacao.js] - selecionadoJaExiste');
+    //console.log('[interacao.js] - selecionadoJaExiste');
     $('#calendar').fullCalendar('option', 'selectOverlap', function(event) {
             console.log('[interacao.js] Evento -> Selecionado Já Existe');
             $('.modalPequena').show(); //mostrar a modal
