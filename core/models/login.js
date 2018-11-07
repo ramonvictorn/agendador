@@ -1,5 +1,5 @@
 exports.login = login;
-
+const userSchema = require('../Schemas/user');
 const crypto = require('crypto')
 
 async function login(login, cb,erro){
@@ -7,7 +7,7 @@ async function login(login, cb,erro){
     hasher.update(login.password);
     const enteredHash = hasher.digest('hex');
     login.password = enteredHash;
-    const user =  await User.findOne({'email':login.email , 'password':login.password}).select('+password');
+    const user =  await userSchema.findOne({'email':login.email , 'password':login.password}).select('+password');
     if(user){
         console.log('Usuario com permissao ')
         cb();

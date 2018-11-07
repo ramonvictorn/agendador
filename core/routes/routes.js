@@ -1,6 +1,6 @@
 /** 
 * @author Ramon Victor <ramon.lantec@gmail.com>
-* @desc Concentra as rotas que retornam paginas
+* @desc Concentra todas as rotas da API
 */
 
 exports.init = init;
@@ -18,6 +18,7 @@ const insertEventController = require('../controllers/insertEvent');
 * @param {object} app is a object express()
 */
 function init(app){
+    app.get('/', checkSecurity,renderAgendaControler.agenda)
     app.get('/agenda', checkSecurity ,renderAgendaControler.agenda);
     app.get('/login',  renderLoginController.login);
     app.post('/login', loginController.login);
@@ -33,7 +34,6 @@ function init(app){
 * @param {Object} next is a controller for this route
 */
 function checkSecurity(req, res, next){
-    console.log('checkSecurity')
     if(req.session.agendador ){
         if(req.session.agendador.user){
             console.log('User autenticado')

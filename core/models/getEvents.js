@@ -8,7 +8,7 @@ async function getEvents(cb){
     });
     
     if(events){
-        console.log('events ', events, 'teste data',events[0].start)
+        console.log('total de reservas ', events.length)
         cb(events)
     }
 }

@@ -1,3 +1,9 @@
+/**
+ * @author Ramon Victor <ramon.lantec@gmail.com>
+ * @description Model para registro de usuário
+ */
+
+
 exports.register = register;
 
 function register(login, cb){

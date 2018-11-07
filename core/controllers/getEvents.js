@@ -7,7 +7,7 @@ function getEvents(req,res){
     GetEventsModel.getEvents(cb);
 
     function cb(eventos){
-        console.log('callback getEvent', eventos)
+        console.log('callback getEvent', eventos.length)
         res.status(200).send({eventos})
     }
 }
