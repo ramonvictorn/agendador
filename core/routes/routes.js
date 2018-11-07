@@ -5,8 +5,12 @@
 
 exports.init = init;
 
-const controllers = require('../controllers/controllers');
-
+const renderAgendaControler = require('../controllers/renderAgenda');
+const renderLoginController = require('../controllers/renderLogin');
+const loginController = require('../controllers/login');
+const registerUserController = require('../controllers/registerUser');
+const getEventsController = require('../controllers/getEvents');
+const insertEventController = require('../controllers/insertEvent');
 
 /**  
 *
@@ -14,8 +18,12 @@ const controllers = require('../controllers/controllers');
 * @param {object} app is a object express()
 */
 function init(app){
-    app.get('/agenda', checkSecurity ,controllers.agenda);
-    app.get('/login',  controllers.login);
+    app.get('/agenda', checkSecurity ,renderAgendaControler.agenda);
+    app.get('/login',  renderLoginController.login);
+    app.post('/login', loginController.login);
+    app.post('/register', registerUserController.register)
+    app.post('/getEvents', getEventsController.getEvents)
+    app.post('/insertEvent', checkSecurity , insertEventController.insertEvent)
 }
 
 
@@ -33,7 +41,7 @@ function checkSecurity(req, res, next){
         }   
     }else{
         console.log('User Não autenticado')
-        res.redirect('/login')
+        return res.status(403).send({error:"User not permited"});
     }
     
 }

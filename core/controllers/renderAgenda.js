@@ -3,10 +3,9 @@
 * @desc Concentra os das rotas que retornam páginas
 */
 
-exports.agenda = agenda;
-exports.login = login;
-const models = require('../models/models');
 
+exports.agenda = agenda;
+const models = require('../models/models');
 
 /**  
 *
@@ -19,10 +18,5 @@ function agenda(req,res){
     console.log('rota /agenda acessada')
 }
 
-
-function login(req,res){
-    res.render('login');
-    console.log('rota /login acessada')
-}
 
 

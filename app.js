@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const routes = require('./core/routes/routes.js');
-const routesPost = require('./core/routes/routesPost.js');
+//const routesPost = require('./core/routes/routesPost.js');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 const ejs = require('ejs');
@@ -35,5 +35,5 @@ app.use(session({
 
 
 routes.init(app);
-routesPost.initPost(app);
+//routesPost.initPost(app);
 app.listen(8080,()=> console.log('App listening on port 8080'));
