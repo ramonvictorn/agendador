@@ -7,8 +7,8 @@ function getEvents(){
     var eventos;
     $.post( "/getEvents")
             .done(function( data ) {
-                console.log( "Eventos  " , data.eventos );
-                eventos = arrumarData(data.eventos);
+                console.log( "Eventos  " , data.events );
+                eventos = arrumarData(data.events);
                 $('#calendar').fullCalendar('addEventSource', eventos)
         });
 }

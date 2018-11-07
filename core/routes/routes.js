@@ -14,7 +14,7 @@ const insertEventController = require('../controllers/insertEvent');
 
 /**  
 *
-* @desc Routes and controllers for pages
+* @desc Routes and controllers for API
 * @param {object} app is a object express()
 */
 function init(app){
@@ -40,6 +40,10 @@ function checkSecurity(req, res, next){
             next()
         }   
     }else{
+        if(req.method == "GET"){
+            console.log('User Não autenticado, redirecionando para /login')
+            return res.status(403).send({error:"User not permited"});
+        }
         console.log('User Não autenticado')
         return res.status(403).send({error:"User not permited"});
     }
