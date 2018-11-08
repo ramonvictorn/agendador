@@ -8,7 +8,7 @@ function insertEvent(req,res){
     evento.start = req.body.start;
     evento.end = req.body.end;
     evento.finalidade = req.body.finalidade;
-    evento.usuario = req.body.usuario;
+    evento.user = req.session.agendador.user.email;
 
     if(evento.name == null || evento.name == undefined || evento.name == ""){
         return res.status(401).send({error:"Parametros_Invalidos"})
@@ -22,9 +22,9 @@ function insertEvent(req,res){
     if(evento.finalidade == null || evento.finalidade == undefined || evento.finalidade == ""){
         return res.status(401).send({error:"Parametros_Invalidos"})
     }
-    if(evento.usuario == null || evento.usuario == undefined || evento.usuario == ""){
-        return res.status(401).send({error:"Parametros_Invalidos"})
-    }
+    // if(evento.usuario == null || evento.usuario == undefined || evento.usuario == ""){
+    //     return res.status(401).send({error:"Parametros_Invalidos"})
+    // }
 
 
     if(validarEvento(evento)){

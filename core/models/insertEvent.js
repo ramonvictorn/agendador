@@ -12,8 +12,9 @@ const EventSchema = require('../Schemas/event');
  * @param {Function} cb - callback de sucesso
  * @param {Function} erro - callback de erro
  */
-function insertEvent(evento,cb, erro){
-    var evento = new EventSchema(evento);
+function insertEvent(eventoContext,cb, erro){
+    var evento = new EventSchema(eventoContext);
+    console.log('foo event', evento, eventoContext)
     evento.save(function (err, event) {
       if (err) erro();
       cb(event);
