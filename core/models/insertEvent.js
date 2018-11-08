@@ -16,7 +16,10 @@ function insertEvent(eventoContext,cb, erro){
     var evento = new EventSchema(eventoContext);
     console.log('foo event', evento, eventoContext)
     evento.save(function (err, event) {
-      if (err) erro();
-      cb(event);
+      if (err) {
+        erro()
+      }else{
+        cb(event);
+      }
     }); 
 }
