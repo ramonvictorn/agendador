@@ -18,7 +18,7 @@ const insertEventController = require('../controllers/insertEvent');
 * @param {object} app is a object express()
 */
 function init(app){
-    app.get('/', checkSecurity,renderAgendaControler.agenda)
+    app.get('/', checkSecurity ,renderAgendaControler.agenda)
     app.get('/agenda', checkSecurity ,renderAgendaControler.agenda);
     app.get('/login',  renderLoginController.login);
     app.post('/login', loginController.login);
@@ -42,10 +42,12 @@ function checkSecurity(req, res, next){
     }else{
         if(req.method == "GET"){
             console.log('User Não autenticado, redirecionando para /login')
-            return res.status(403).send({error:"User not permited"});
-        }
-        console.log('User Não autenticado')
+            //return res.status(403).send({error:"User not permited for this page"});
+            return res.redirect("/login");
+        }else{
+            console.log('User Não autenticado')
         return res.status(403).send({error:"User not permited"});
+        }
     }
     
 }
