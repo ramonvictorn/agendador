@@ -24,7 +24,7 @@ function login(req,res){
         res.status(200).send({sucess:"User found"});
     }, ()=>{
         console.log('controller Login -> Usuario sem premissão')
-        return res.status(403).send({error:"User not found"});
+        return res.status(200).send({error:"User not found"});
     })
     
 }

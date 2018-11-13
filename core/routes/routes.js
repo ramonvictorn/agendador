@@ -7,10 +7,12 @@ exports.init = init;
 
 const renderAgendaControler = require('../controllers/renderAgenda');
 const renderLoginController = require('../controllers/renderLogin');
+const renderAdmController = require('../controllers/renderAdm');
 const loginController = require('../controllers/login');
 const registerUserController = require('../controllers/registerUser');
 const getEventsController = require('../controllers/getEvents');
 const insertEventController = require('../controllers/insertEvent');
+
 
 /**  
 *
@@ -18,7 +20,8 @@ const insertEventController = require('../controllers/insertEvent');
 * @param {object} app is a object express()
 */
 function init(app){
-    app.get('/', checkSecurity ,renderAgendaControler.agenda)
+    app.get('/', checkSecurity ,renderAgendaControler.agenda);
+    app.get('/adm', checkSecurity , renderAdmController.adm );
     app.get('/agenda', checkSecurity ,renderAgendaControler.agenda);
     app.get('/login',  renderLoginController.login);
     app.post('/login', loginController.login);
