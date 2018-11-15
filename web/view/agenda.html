@@ -9,17 +9,18 @@
     <script src="http://localhost:8080/callendar/jquery/dist/jquery.min.js"></script>
     <script src="http://localhost:8080/callendar/moment/min/moment.min.js"></script>
     <script src="http://localhost:8080/callendar/fullcalendar/dist/fullcalendar.js"></script>
-    <script src="http://localhost:8080/static/scripts/insertEvent.js"></script>
+    <script src="http://localhost:8080/static/scripts/agenda/insertEvent.js"></script>
     <script src="http://localhost:8080/callendar/fullcalendar/dist/locale-all.js"></script>
-    <script src="http://localhost:8080/static/scripts/agendaConfig.js"></script>
+    <script src="http://localhost:8080/static/scripts/agenda/agendaConfig.js"></script>
+    <link rel='stylesheet' href="http://localhost:8080/static/css/menu/menu.css"/>
     <!-- <link rel='stylesheet' href="http://localhost:8080/static/css/agenda.css"/> -->
-    <script src="http://localhost:8080/static/scripts/agendaScript.js"></script>
+    <script src="http://localhost:8080/static/scripts/agenda/agendaScript.js"></script>
     <!-- BooStrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script type="text/javascript" src="http://localhost:8080/static/scripts/jqueryMaskedinput/dist/jquery.mask.min.js"></script>
-    <script src="http://localhost:8080/static/scripts/interacao.js"></script>
+    <script src="http://localhost:8080/static/scripts/agenda/interacao.js"></script>
     <style>
       .positionModal {
         
@@ -29,10 +30,33 @@
     </style>
   </head>
 <body>
-    <ul>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/agenda">Agenda</a></li>
-    </ul>
+    <!--MENU PRONTO -->
+    <nav>
+      <ul>
+        <li class="sub-menu-parent" tab-index="0">
+          <a href="http://google.com">Agendas</a>
+          <ul class="sub-menu">
+            <li><a href="#">Sala de Reunião -501</a></li>
+            <li><a href="#">Estúdio - 500</a></li>
+          </ul>
+        </li>
+        <li class="sub-menu-parent" tab-index="0">
+          <a href="#">Configurações</a>
+          <ul class="sub-menu">
+            <li><a href="#">Agendas</a></li>
+            <li><a href="#">Usuarios</a></li>
+            <li><a href="#">Logs</a></li>
+          </ul>
+        </li>
+        <li class="sub-menu-parent" tab-index="0">
+          <a href="#">Menu Item 3</a>
+          <ul class="sub-menu">
+            <li><a href="#">Sub Item 1</a></li>
+            <li><a href="#">Sub Item 2</a></li>
+          </ul></li>
+      </ul>
+    </nav>
+    <!--FIM MENU PRONTO-->
     <!-- Modal Pequena -->
     <div class="modal  modalPequena" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -107,5 +131,5 @@
     <!-- Fim modal Cadastro Evento -->
     <div id='calendar'></div>
 </body>
-<script type="text/javascript" src="http://localhost:8080/static/scripts/getEvents.js"></script>
+<script type="text/javascript" src="http://localhost:8080/static/scripts/agenda/getEvents.js"></script>
 </html>

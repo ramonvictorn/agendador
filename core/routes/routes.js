@@ -24,10 +24,10 @@ function init(app){
     app.get('/adm', checkSecurity , renderAdmController.adm );
     app.get('/agenda', checkSecurity ,renderAgendaControler.agenda);
     app.get('/login',  renderLoginController.login);
-    app.post('/login', loginController.login);
+    app.post('/user/login', loginController.login);
     app.post('/register', registerUserController.register)
     app.post('/getEvents', getEventsController.getEvents)
-    app.post('/insertEvent', checkSecurity , insertEventController.insertEvent)
+    app.post('/events/insertEvent', checkSecurity , insertEventController.insertEvent)
 }
 
 

@@ -41,7 +41,7 @@ function postLogin(){
     // else window.location = 'agenda';
     // });
     $.ajax({
-        url: '/login',
+        url: '/user/login',
         type: 'POST',
         data: getDados(),
         dataType: 'json',  

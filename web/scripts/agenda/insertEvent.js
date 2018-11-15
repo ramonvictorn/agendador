@@ -11,7 +11,6 @@ function createEvent(){
     evento.finalidade = $('.cadastroFinalidade').val();
     evento.start = converteDataTimestamp(dataInicio);
     evento.end = converteDataTimestamp(dataFim);
-    
     console.log('insertEvent.js -> Function createEvent -> Evento criado', evento)
 return evento;}
 
@@ -21,14 +20,33 @@ return evento;}
  */
 function insertEvent(){
     console.log('insertEvent.js -> Function insertEvent')
-    var evento = createEvent();
-    $.post( "/insertEvent", evento)
-            .done(function( evento ) {
-                console.log( "Evento cadastrado: " , evento );
-                
-    });
+
+    $.ajax({
+        url: '/events/insertEvent',
+        type: 'POST',
+        data: createEvent(),
+        dataType: 'json',  
+        beforeSend: function () {
+            //Aqui adicionar o loader
+            console.log('cadastrando evento')
+        },         
+        success: function(data) {
+            //Aqui adicionar msg de sucesso
+            console.log('insert event')
+        },
+        error: function() {
+            //Aqui adicionar msg de erro
+            console.log("erro");
+        }   
+     });
 }
 
+
+/**
+ * @function converteDataTimestamp - converte as datas para timestamp
+ * @param {String }dataHora - String com uma data na order DD/MM/YYYY HH:MM
+ * @returns {timestamp} data convertida em timestamp 
+ */
 function converteDataTimestamp(dataHora){
     var separador = /\D/;
     var separaDataHora = dataHora.split(separador);
