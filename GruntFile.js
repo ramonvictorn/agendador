@@ -17,8 +17,8 @@ module.exports = function(grunt) {
   uglify: {
     my_target: {
       files: {
-        'dist/web/js/agenda.min.js': ['web/scripts/agenda/*'],
-        'dist/web/js/login.min.js': ['web/scripts/login/*']
+        'dist/web/scripts/agenda.min.js': ['web/scripts/agenda/*'],
+        'dist/web/scripts/login.min.js': ['web/scripts/login/*']
       }
     }
   },
