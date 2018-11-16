@@ -20,7 +20,7 @@ const insertEventController = require('../controllers/insertEvent');
 * @param {object} app is a object express()
 */
 function init(app){
-    app.get('/', checkSecurity ,renderAgendaControler.agenda);
+    //app.get('/', checkSecurity ,renderAgendaControler.agenda);
     app.get('/adm', checkSecurity , renderAdmController.adm );
     app.get('/agenda', checkSecurity ,renderAgendaControler.agenda);
     app.get('/login',  renderLoginController.login);

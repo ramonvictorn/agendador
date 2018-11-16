@@ -7,7 +7,7 @@ var FileStore = require('session-file-store')(session);
 const ejs = require('ejs');
 
 
-app.set('views', './web/view') // specify the views directory
+app.set('views', './public/templates') // specify the views directory
 app.set('view engine', 'html') // sets the template engine
 app.engine('html',ejs.renderFile);
 // Configure body parse
@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 // //permitir acesso ao Js e css
 app.use('/static', express.static('web/'));
+// app.get('/javascripts', express.static(__dirname + '/dist/web/scripts/'));
 app.use('/callendar', express.static('node_modules/'))
 // //finish2
 
@@ -35,5 +36,11 @@ app.use(session({
 
 
 routes.init(app);
+if(process.env.NODE_ENV == "development"){
+    app.use('/js', express.static(__dirname + '/web/scripts/login/'));
+}else{
+    app.use('/js', express.static(__dirname + '/public/js'));
+}
+
 //routesPost.initPost(app);
 app.listen(8080,()=> console.log('App listening on port 8080'));
