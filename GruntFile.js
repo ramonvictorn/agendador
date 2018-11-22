@@ -17,8 +17,10 @@ module.exports = function(grunt) {
   uglify: {
     my_target: {
       files: {
-        'dist/web/scripts/agenda.min.js': ['web/scripts/agenda/*'],
-        'dist/web/scripts/login.min.js': ['web/scripts/login/*']
+        'public/js/agenda.js': ['web/js/agendaInsertEvent.js','web/js/agendaConfig.js', 'web/js/agendaGetEvents.js', 'web/js/agendaScript.js','web/js/agendaInteracao.js'],
+        
+        'public/js/login.js': ['web/js/loginLogin.js', 'jquery.mask.min.js'],
+        'public/js/jquery.mask.min.js': ['web/js/jquery.mask.min.js']
       }
     }
   },
@@ -26,15 +28,21 @@ module.exports = function(grunt) {
     main: {
       files: [
         // includes files within path
-        {expand: true,flatten: true ,src: ['web/css/**'], dest: 'dist/web/css/', filter: 'isFile'},
-  
+        {expand: true,flatten: true ,src: ['web/css/**'], dest: 'public/css/', filter: 'isFile'},
+        {expand: true,flatten: true ,src: ['web/templates/*.html'], dest: 'public/templates/', filter: 'isFile'},
+        {expand: true,flatten: true ,src: ['node_modules/jquery/dist/jquery.min.js'], dest: 'public/js/', filter: 'isFile'},
+        {expand: true,flatten: true ,src: ['node_modules/fullcalendar/dist/fullcalendar.min.js'], dest: 'public/js/', filter: 'isFile'},
+        {expand: true,flatten: true ,src: ['node_modules/fullcalendar/dist/fullcalendar.min.css'], dest: 'public/css/', filter: 'isFile'},
+        {expand: true,flatten: true ,src: ['node_modules/moment/min/moment.min.js'], dest: 'public/js/', filter: 'isFile'},
+        {expand: true,flatten: true ,src: ['node_modules/fullcalendar/dist/locale-all.js'], dest: 'public/js/', filter: 'isFile'},
       ],
     },
   },
   processhtml: {
     build: {
         files: {
-            'dist/web/view/login.html' : ['dist/web/view/login.html'],
+            'public/templates/login.html' : ['public/templates/login.html'],
+            'public/templates/agenda.html':['public/templates/agenda.html'],
         }
     }
 }
@@ -45,7 +53,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-processhtml');
 
-
-  grunt.registerTask('default', ['string-replace','uglify','copy','processhtml']);
+  function nodeMdules(){
+    console.log('ramonnn')
+  }
+  nodeMdules();
+  grunt.registerTask('default', ['uglify','copy','processhtml']);
 
 };
