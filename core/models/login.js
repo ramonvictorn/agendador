@@ -14,7 +14,8 @@ function login(login,cb, erro){
     userSchema.find({email:login.email, password:login.password}, function (err,docs){
       if(err || docs.length == 0){erro()
       }else{
-        cb();
+        console.log('doc ', docs[0])
+        cb(docs[0]);
       }
     })
       

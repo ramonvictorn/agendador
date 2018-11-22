@@ -21,11 +21,11 @@ const insertEventController = require('../controllers/insertEvent');
 */
 function init(app){
     app.get('/', checkSecurity ,renderAgendaControler.agenda);
-    app.get('/adm', checkSecurity , renderAdmController.adm );
+    app.get('/adm', checkSecurityAdm , renderAdmController.adm );
     app.get('/agenda', checkSecurity ,renderAgendaControler.agenda);
     app.get('/login',  renderLoginController.login);
     app.post('/user/login', loginController.login);
-    app.post('/user/register', registerUserController.register)
+    app.post('/user/register',checkSecurityAdm, registerUserController.register)
     app.post('/getEvents', getEventsController.getEvents)
     app.post('/events/insertEvent', checkSecurity , insertEventController.insertEvent)
 }
@@ -55,3 +55,36 @@ function checkSecurity(req, res, next){
     
 }
 
+
+/**  
+*
+* @desc Middleware to verify that the user is allowed to access the route
+* @param {Object} next is a controller for this route
+*/
+function checkSecurityAdm(req, res, next){
+    if(req.session.agendador ){
+        if(req.session.agendador.user.role == 'admin'){
+            console.log('User é admin')
+            next()
+        }else{
+            if(req.method == "GET"){
+                console.log('User Não é admin, redirecionando para /login')
+                //return res.status(403).send({error:"User not permited for this page"});
+                return res.redirect("/login");
+            }else{
+                console.log('User Não é admin')
+            return res.status(403).send({error:"User not permited"});
+            }
+        }   
+    }else{
+        if(req.method == "GET"){
+            console.log('User Não está logado, redirecionando para /login')
+            //return res.status(403).send({error:"User not permited for this page"});
+            return res.redirect("/login");
+        }else{
+            console.log('User Não autenticado')
+        return res.status(403).send({error:"User not permited"});
+        }
+    }
+    
+}

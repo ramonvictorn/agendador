@@ -16,12 +16,12 @@ function login(req,res){
     const enteredHash = hasher.digest('hex');
     login.password = enteredHash;
     
-    loginModel.login(login, ()=>{
+    loginModel.login(login, (usuario)=>{
         console.log('controller Login -> Usuario com premissão')
         if(!req.session.agendador){
-            console.log('usuario sem sessao iniciada, criando...')
+            console.log('usuario sem sessao iniciada, criando...', usuario)
             req.session.agendador = {};
-            req.session.agendador.user = login;
+            req.session.agendador.user = usuario;
         }
         req.session.cookie.expires = new Date(Date.now() + 3600000)
         res.status(200).send({sucess:"User found"});
