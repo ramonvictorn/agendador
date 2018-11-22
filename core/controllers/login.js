@@ -18,8 +18,11 @@ function login(req,res){
     
     loginModel.login(login, ()=>{
         console.log('controller Login -> Usuario com premissão')
-        req.session.agendador = {};
-        req.session.agendador.user = login;
+        if(!req.session.agendador){
+            console.log('usuario sem sessao iniciada, criando...')
+            req.session.agendador = {};
+            req.session.agendador.user = login;
+        }
         req.session.cookie.expires = new Date(Date.now() + 3600000)
         res.status(200).send({sucess:"User found"});
     }, ()=>{
