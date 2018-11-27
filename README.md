@@ -14,13 +14,13 @@ Sistema desenvolvido para reserva de salas para o Laboratório de Novas tecnolog
 # Database entities
 
 
-### Usuários
-
-name 
-email 
-password
-role
-
+### Users
+| Field        | Type       | Required |
+| -------------|:----------:| -------: |
+| name         | String     |   true   |
+| email        | String     |   true   |
+| password     | String     |   true   |
+| role         | String     |   true   |
  
 
 ### event
