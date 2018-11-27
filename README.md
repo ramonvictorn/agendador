@@ -23,15 +23,16 @@ Sistema desenvolvido para reserva de salas para o Laboratório de Novas tecnolog
 | role         | String     |   true   |
  
 
-### event
-agenda
-title
-start
-end
-finalidade
-user
+### Events
+| Field        | Type       | Required |
+| -------------|:----------:| -------: |
+| agenda       | String     |   false  |
+| title        | String     |   true   |
+| start        | Date       |   true  |
+| end          | Date       |   true   |
+| finalidade   | String     |   false  |
+| user         | String     |   false  |
 
-  
 
 # Instalation and start
 
