@@ -1,8 +1,8 @@
 function getDadosForm(){
     var formData = {};
-    formData.nome = $('#cadUserNome').val();
+    formData.name = $('#cadUserNome').val();
     formData.email = $('#cadUserEmail').val();
-    formData.senha = $('#cadUserSenha').val();
+    formData.password = $('#cadUserSenha').val();
     formData.role = $('#cadUserRoles').val();
 return formData;}
 

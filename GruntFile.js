@@ -20,7 +20,8 @@ module.exports = function(grunt) {
         'public/js/agenda.js': ['web/js/agendaInsertEvent.js','web/js/agendaConfig.js', 'web/js/agendaGetEvents.js', 'web/js/agendaScript.js','web/js/agendaInteracao.js'],
         
         'public/js/login.js': ['web/js/loginLogin.js', 'jquery.mask.min.js'],
-        'public/js/jquery.mask.min.js': ['web/js/jquery.mask.min.js']
+        'public/js/jquery.mask.min.js': ['web/js/jquery.mask.min.js'],
+        'public/js/admCadastroUsuario.js':['web/js/admCadastroUsuario.js'],
       }
     }
   },

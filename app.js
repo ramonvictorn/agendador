@@ -20,9 +20,9 @@ app.use(bodyParser.json())
 //app.use('/callendar', express.static('node_modules/'))
 // //finish2
 
-app.use('/js', express.static(__dirname + '/public/js'));
-app.use('/css', express.static(__dirname + '/public/css'));
-app.set('views', './public/templates') // specify the views directory
+//app.use('/js', express.static(__dirname + '/public/js'));
+//app.use('/css', express.static(__dirname + '/public/css'));
+//app.set('views', './public/templates') // specify the views directory
 
 
 app.set('trust proxy', 1) // trust first proxy
@@ -44,10 +44,10 @@ if(process.env.NODE_ENV == "development"){
     app.use('/js', express.static(__dirname + '/web/js/'));
     app.use('/css', express.static(__dirname + '/web/css/'));
     app.set('views', './web/templates') // specify the views directory
-    app.use('/callendar', express.static('node_modules/'))
+    app.use('/node_modules', express.static('node_modules/'))
 }else{
     app.use('/js', express.static(__dirname + '/public/js'));
-    app.use('/js', express.static(__dirname + '/public/css'));
+    app.use('/css', express.static(__dirname + '/public/css'));
     app.set('views', './public/templates') // specify the views directory
 }
 

@@ -2,6 +2,8 @@
  * @author Ramon Victor <ramon.lantec@gmail.com>
  * @description Model para registro de usuário
  */
+
+ const User = require('../Schemas/user');
 exports.register = register;
 
 /**
@@ -10,8 +12,5 @@ exports.register = register;
  * @param {Function} cb - callback de sucesso 
  */
 function register(login, cb){
-    console.log('model register', login)
-    login.name = "teste";
-    const user = User.create(login);
-    console.log('user ,', login)    
+    const user = User.create(login);    
 }

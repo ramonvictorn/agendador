@@ -21,7 +21,7 @@ const insertEventController = require('../controllers/insertEvent');
 */
 function init(app){
     app.get('/', checkSecurity ,renderAgendaControler.agenda);
-    app.get('/adm', checkSecurityAdm , renderAdmController.adm );
+    app.get('/adm/user', checkSecurityAdm , renderAdmController.adm );
     app.get('/agenda', checkSecurity ,renderAgendaControler.agenda);
     app.get('/login',  renderLoginController.login);
     app.post('/user/login', loginController.login);
