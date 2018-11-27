@@ -44,6 +44,7 @@ module.exports = function(grunt) {
         files: {
             'public/templates/login.html' : ['public/templates/login.html'],
             'public/templates/agenda.html':['public/templates/agenda.html'],
+            'public/templates/adm.html':['public/templates/adm.html'],
         }
     }
 }
