@@ -58,3 +58,19 @@ body {
 .sub-menu > ul {
   display: none !mportant;
 }
+
+
+.perfil{
+  float: right;
+}
+
+.perfil img{
+  width: 34px;
+  height: 28px;
+}
+
+.perfil:hover{
+  background-color: red;
+  cursor: pointer;
+}
+

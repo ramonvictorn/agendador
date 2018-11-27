@@ -7,7 +7,7 @@ function createEvent(){
     var evento = {};
     var dataInicio = $('.cadastroInicio').val();
     var dataFim = $('.cadastroFim').val();
-    evento.name = $('.cadastroNome').val();
+    evento.title = $('.cadastroNome').val();
     evento.finalidade = $('.cadastroFinalidade').val();
     evento.start = converteDataTimestamp(dataInicio);
     evento.end = converteDataTimestamp(dataFim);

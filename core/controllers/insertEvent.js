@@ -4,13 +4,13 @@ const insertEventModel = require('../models/insertEvent');
 function insertEvent(req,res){
     console.log('Controller insert event')
     var evento = {};
-    evento.name = req.body.name;
+    evento.title = req.body.title;
     evento.start = req.body.start;
     evento.end = req.body.end;
     evento.finalidade = req.body.finalidade;
     evento.user = req.session.agendador.user.email;
 
-    if(evento.name == null || evento.name == undefined || evento.name == ""){
+    if(evento.title == null || evento.title == undefined || evento.title == ""){
         return res.status(401).send({error:"Parametros_Invalidos"})
     }
     if(evento.start == null || evento.start == undefined || evento.start == ""){

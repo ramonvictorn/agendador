@@ -33,8 +33,7 @@ $(function() {
     displayEventEnd: true,
     weekNumbers: true,
     selectOverlap:false,
-    eventLimit: true, 
-          
+    eventLimit: true,      
     });
 
     
