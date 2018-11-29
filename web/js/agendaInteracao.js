@@ -4,6 +4,7 @@ $( document ).ready(function() {
     selectDay();
     clickEvento();
     selecionadoJaExiste();
+    logout();
 })
 
 /**
@@ -63,8 +64,37 @@ function selecionadoJaExiste(){
 }
 
 
-
-
+/* @function Faz o logout e destroi a session
+ * 
+ */
+function logout(){
+    $('.perfil').on( "click", function(){
+        console.log('foo logout')
+        $.ajax({
+            url: '/user/logout',
+            type: 'POST',
+            data: 'teste',
+            dataType: 'json',  
+            beforeSend: function () {
+                //Aqui adicionar o loader
+                console.log('cadastrando evento')
+            },         
+            success: function(data) {
+                //Aqui adicionar msg de sucesso
+                console.log('logout sucess', data)
+                if(data){
+                    window.location = 'login';
+                }else{
+                    alert('ERRO LOGOUT');
+                }
+            },
+            error: function() {
+                //Aqui adicionar msg de erro
+                console.log("erro");
+            }   
+         });
+    })
+}
 // BACKUP NÃO APAGAR------------------------------
 
 // dayClick: function(date) {

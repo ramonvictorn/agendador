@@ -10,6 +10,7 @@ const renderLoginController = require('../controllers/renderLogin');
 const renderAdmController = require('../controllers/renderAdm');
 const loginController = require('../controllers/login');
 const registerUserController = require('../controllers/registerUser');
+const userLogoutController = require('../controllers/logout.js');
 const getEventsController = require('../controllers/getEvents');
 const insertEventController = require('../controllers/insertEvent');
 
@@ -26,6 +27,7 @@ function init(app){
     app.get('/login',  renderLoginController.login);
     app.post('/user/login', loginController.login);
     app.post('/user/register',checkSecurityAdm, registerUserController.register)
+    app.post('/user/logout',checkSecurity, userLogoutController.logout )
     app.post('/getEvents', getEventsController.getEvents)
     app.post('/events/insertEvent', checkSecurity , insertEventController.insertEvent)
 }
