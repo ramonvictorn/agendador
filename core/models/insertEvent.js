@@ -17,7 +17,7 @@ function insertEvent(eventoContext,cb, erro){
     console.log('foo event', evento, eventoContext)
     evento.save(function (err, event) {
       if (err) {
-        erro()
+        erro(err)
       }else{
         cb(event);
       }

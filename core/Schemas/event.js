@@ -12,10 +12,12 @@ const EventSchema = new mongoose.Schema({
     start:{
         type:Date,
         required:true,
+        unique:false,
     },
     end:{
         type:Date,
         required:true,
+        unique:false,
     },
     finalidade:{
         type:String,

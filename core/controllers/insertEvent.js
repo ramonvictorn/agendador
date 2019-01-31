@@ -30,8 +30,8 @@ function insertEvent(req,res){
     if(validarEvento(evento)){
         insertEventModel.insertEvent(evento,(eventoInserido)=>{
             res.status(200).send({eventoInserido})
-        },()=>{
-            console.log('errorrrr')
+        },(err)=>{
+            console.log('errorrrr', err)
             res.status(401).send({error:"Insert_Error"})
         });
 
