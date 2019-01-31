@@ -1,13 +1,9 @@
 import React from 'react';
-import ReactDOM from "react-dom";
 
-const Button = ({ clickHandler, title, qtdClicks}) => {
-
+const Button = ({ clickHandler, title}) => {
     return (
-        <button onClick={() => clickHandler()} >{title}-{qtdClicks}</button>
+        <button onClick={() => clickHandler()} >{title}</button>
     )
-
 }
-
 
 export default Button;

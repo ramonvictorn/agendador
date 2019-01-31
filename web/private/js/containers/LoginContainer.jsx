@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from "react-dom";
 import Button from '../components/Button.jsx';
+import FormLogin from '../components/FormLogin.jsx';
 
 class LoginContainer extends React.Component{
     constructor(props){
@@ -21,8 +21,8 @@ class LoginContainer extends React.Component{
     render() {
         return (
           <div>
-           <h1>Oi cara</h1>
-            
+              <FormLogin></FormLogin>
+            <Button clickHandler={this.onClickHandler} title='Login'></Button>
           </div>  
         );
       }

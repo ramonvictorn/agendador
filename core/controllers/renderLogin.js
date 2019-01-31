@@ -2,6 +2,6 @@ exports.login = login;
 
 
 function login(req,res){
-    res.render('login');
+    res.render('index');
     console.log('rota /login acessada')
 }

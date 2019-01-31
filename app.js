@@ -41,10 +41,10 @@ app.use(session({
 
 routes.init(app);
 if(process.env.NODE_ENV == "development"){
-    app.use('/js', express.static(__dirname + '/web/js/'));
-    app.use('/css', express.static(__dirname + '/web/css/'));
-    app.set('views', './web/templates') // specify the views directory
-    app.use('/node_modules', express.static('node_modules/'))
+    app.use('/', express.static(__dirname + '/web/public/'));
+    //app.use('/css', express.static(__dirname + '/web/css/'));
+    app.set('views', './web/public') // specify the views directory
+    ///app.use('/node_modules', express.static('node_modules/'))
 }else{
     app.use('/js', express.static(__dirname + '/public/js'));
     app.use('/css', express.static(__dirname + '/public/css'));
