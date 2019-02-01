@@ -1,14 +1,17 @@
-//import Button from './js/containers/LoginContainer.jsx'
 import React from 'react';
 import ReactDOM from "react-dom";
 import LoginView from '../private/js/views/LoginView.jsx'
-//import LoginContainer from '../private/js/containers/LoginContainer.jsx';
-import Agenda from '../private/js/views/Agenda.jsx';
+import {BrowserRouter as Router, Route} from 'react-router-dom'; 
+import NoMatch404 from '../private/js/views/NoMatch404.jsx';
+import AgendaView from '../private/js/views/AgendaView.jsx';
 ReactDOM.render(
-    <div>
-    <LoginView> </LoginView>
-    <Agenda></Agenda>
-    </div>
+    <Router>
+        <div>
+            <Route path='/login' component={LoginView}/>
+            <Route path='/agenda' component={AgendaView}/>
+            <Route component={NoMatch404}/>
+        </div>
+    </Router>
     ,
     document.getElementById("app")
 );

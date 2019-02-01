@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-const Agenda = ()=>{
+const AgendaView = ()=>{
     return(
         <h1>ESSA É A PAGINA DE AGENDA</h1>
     )
 }
 
-export default Agenda;
+export default AgendaView;

@@ -21,15 +21,16 @@ const insertEventController = require('../controllers/insertEvent');
 * @param {object} app is a object express()
 */
 function init(app){
-    app.get('/', checkSecurity ,renderAgendaControler.agenda);
-    app.get('/adm/user', checkSecurityAdm , renderAdmController.adm );
-    app.get('/agenda', checkSecurity ,renderAgendaControler.agenda);
-    app.get('/login',  renderLoginController.login);
-    app.post('/user/login', loginController.login);
-    app.post('/user/register',checkSecurityAdm, registerUserController.register)
-    app.post('/user/logout',checkSecurity, userLogoutController.logout )
-    app.post('/getEvents', getEventsController.getEvents)
-    app.post('/events/insertEvent', checkSecurity , insertEventController.insertEvent)
+    //app.get('*', (req, res) => res.render('index.js'));
+    // app.get('/', checkSecurity ,renderAgendaControler.agenda);
+    // app.get('/adm/user', checkSecurityAdm , renderAdmController.adm );
+    // app.get('/agenda', checkSecurity ,renderAgendaControler.agenda);
+    //app.get('*',  renderLoginController.login);
+    //app.post('/user/login', loginController.login);
+    // app.post('/user/register',checkSecurityAdm, registerUserController.register)
+    // app.post('/user/logout',checkSecurity, userLogoutController.logout )
+    // app.post('/getEvents', getEventsController.getEvents)
+    // app.post('/events/insertEvent', checkSecurity , insertEventController.insertEvent)
 }
 
 
