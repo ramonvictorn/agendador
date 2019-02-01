@@ -60,26 +60,20 @@
 // //routesPost.initPost(app);
 // app.listen(8080,()=> console.log('App listening on port 8080'));
 
-
 const express = require('express');
 const path = require('path');
-
 const app = express();
+
+//Config view engine
+app.set('views', path.resolve('./web/private/templates')) // specify the views directory
+app.set('view engine', 'ejs');
+
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'web/public')));
 
-// An api endpoint that returns a short list of items
-app.get('/api/getList', (req,res) => {
-    var list = ["item1", "item2", "item3"];
-    res.json(list);
-    console.log('Sent list of items');
-});
-
 // Handles any requests that don't match the ones above
-app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/web/public/index.html'));
-});
+app.get('*', (req,res) =>{res.render('index.ejs', {scripts:['/js/index.js',]})});
 
 const port = process.env.PORT || 8080;
 app.listen(port);
