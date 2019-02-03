@@ -1,8 +1,23 @@
 import React from 'react';
-
+import Calendar from '../components/Calendar.jsx';
+import MyCalendar from '../components/Mycalendar.jsx';
 const AgendaView = ()=>{
-    return(
-        <h1>ESSA É A PAGINA DE AGENDA</h1>
+    let events = [
+        {
+          title: 'Ramon',
+          start: (1549130434)*1000, 
+          end: (1549144834)*1000,
+          allDay: false,
+          resource: false,
+        }
+      ]
+    return (
+        <div>
+            <h1>Página da agenda mano</h1>
+            {/* <Calendar/> */}
+            <h1>AGR É O BIG</h1>
+            <MyCalendar events={events}/>
+        </div>
     )
 }
 

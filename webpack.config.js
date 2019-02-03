@@ -7,6 +7,7 @@ module.exports = {
         path: path.resolve(__dirname, "web/public/js"),
         filename: "index.js"
     },
+    performance: { hints: false },
   module: {
     rules: [
       {
