@@ -109,6 +109,14 @@
 
 
 /* evenst */
-.modalEvent{
+.active{
+    display: block;
+}
+
+.disabled {
     display: none;
+}
+
+.modalEvent{
+    position:absolute;
 }

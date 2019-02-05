@@ -29,7 +29,7 @@ function init(app){
     //app.post('/user/login', loginController.login);
     // app.post('/user/register',checkSecurityAdm, registerUserController.register)
     // app.post('/user/logout',checkSecurity, userLogoutController.logout )
-    // app.post('/getEvents', getEventsController.getEvents)
+    app.post('/events/getEvents', getEventsController.getEvents)
     // app.post('/events/insertEvent', checkSecurity , insertEventController.insertEvent)
 }
 

@@ -1,13 +1,15 @@
 import React from 'react';
 
 
-const ModalEvent = ()=>{
-    const toogleView = ()=> {
-        console.log('clicado')
-    };
+const ModalEvent = ({show})=>{
+        
+    const toggleShow = ()=> {
+        if(show == true) return 'active'
+        else {return 'disabled'} 
+    }   
     
     return (
-        <div className='modalEvent'>
+        <div className={'modalEvent ' + toggleShow()}>
             <form>
                 <label>
                     Titulo:

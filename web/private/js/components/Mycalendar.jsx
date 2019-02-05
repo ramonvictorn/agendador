@@ -5,15 +5,14 @@ import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 const localizer = BigCalendar.momentLocalizer(moment) 
 
-const MyCalendar = ({events}) => {
+const MyCalendar = ({click, events}) => {
 
   const configDate = (date)=> {
     var newDate = new Date (date);
-    console.log('date ', newDate);
     return newDate;
 }
   const selectSlot = (slotInfo)=>{
-    console.log('select slot',slotInfo)
+    click()
   }
   
   return (

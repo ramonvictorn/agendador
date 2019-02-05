@@ -36,7 +36,7 @@
   },
   "scripts": {
     "build": "webpack --mode production",
-    "watch" : "webpack --watch --info-verbosity verbose",
+    "watch" : "webpack --watch --info-verbosity verbose --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-dev": "NODE_ENV=development node app.js",
     "start-prod": "NODE_ENV=production node app.js"

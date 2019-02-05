@@ -1,8 +1,8 @@
 // const express = require('express');
 // const app = express();
 // const path = require('path');
-// const routes = require('./core/routes/routes.js');
-//const routesPost = require('./core/routes/routesPost.js');
+const routes = require('./core/routes/routes.js');
+//const routesPost = require('./core/routes/routes');
 // var session = require('express-session');
 // var FileStore = require('session-file-store')(session);
 // const ejs = require('ejs');
@@ -45,7 +45,7 @@
 
 
 
-// routes.init(app);
+
 // if(process.env.NODE_ENV == "development"){
 //     //app.use('/js', express.static(__dirname + '/web/public/js'));
 //     // app.use('/js', express.static(__dirname + '/web/public/js'));
@@ -57,7 +57,7 @@
 //     app.set('views', './public/templates') // specify the views directory
 // }
 
-// //routesPost.initPost(app);
+// routesPost.initPost(app);
 // app.listen(8080,()=> console.log('App listening on port 8080'));
 
 const express = require('express');
@@ -71,7 +71,7 @@ app.set('view engine', 'ejs');
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'web/public')));
-
+routes.init(app);
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{res.render('index.ejs', {scripts:['/js/index.js',]})});
 
