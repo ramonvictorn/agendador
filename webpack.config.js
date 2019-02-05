@@ -31,6 +31,7 @@ module.exports = {
       }
     ]
   },
+  watch: true,
   // plugins: [
   //   new HtmlWebPackPlugin({
   //     template: "./web/private/templates/index.ejs",
