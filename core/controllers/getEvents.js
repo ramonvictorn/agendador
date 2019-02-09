@@ -6,7 +6,7 @@ const GetEventsModel = require('../models/getEvents')
  * @description define os callbacks 
  */
 function getEvents(req,res){
-    console.log('post events/getEvents -> controller - function getEvents')
+    console.log('post events/getEvents -> controller - function getEvents',req.body)
     GetEventsModel.getEvents((events) => {
         if(events){
             console.log('Eventos OK total de reservas ')

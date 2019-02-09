@@ -1,5 +1,4 @@
 import React from 'react';
-import Calendar from '../components/Calendar.jsx';
 import MyCalendar from '../components/Mycalendar.jsx';
 import ModalEvent from '../components/ModalEvent.jsx';
 
@@ -12,7 +11,7 @@ class AgendaView extends React.Component {
         };
         this.toogleModalEvent = this.toogleModalEvent.bind(this);
         this.getEvents = this.getEvents.bind(this);
-        this.addEventsCb = this.addEventsCb.bind(this);
+        this.   addEventsCb = this.addEventsCb.bind(this);
 
         this.getEvents(this.addEventsCb);
     }

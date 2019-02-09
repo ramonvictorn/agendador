@@ -30,7 +30,7 @@ function init(app){
     // app.post('/user/register',checkSecurityAdm, registerUserController.register)
     // app.post('/user/logout',checkSecurity, userLogoutController.logout )
     app.post('/events/getEvents', getEventsController.getEvents)
-    // app.post('/events/insertEvent', checkSecurity , insertEventController.insertEvent)
+    app.post('/events/insertEvent', insertEventController.insertEvent)
 }
 
 

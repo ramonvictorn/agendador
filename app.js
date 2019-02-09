@@ -20,7 +20,7 @@ const routes = require('./core/routes/routes.js');
 // var bodyParser = require('body-parser');
 // app.use(bodyParser.urlencoded({extended: true}));
 // app.use(bodyParser.json())
-// //permitir acesso ao Js e css
+// //permitir acesso ao Js e css    
 //app.use('/static', express.static('public/'));
 // app.get('/javascripts', express.static(__dirname + '/dist/web/scripts/'));
 //app.use('/callendar', express.static('node_modules/'))
@@ -68,6 +68,10 @@ const app = express();
 app.set('views', path.resolve('./web/private/templates')) // specify the views directory
 app.set('view engine', 'ejs');
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json())
+
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'web/public')));
@@ -75,7 +79,7 @@ routes.init(app);
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{res.render('index.ejs', {scripts:['/js/index.js',]})});
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3001;
 app.listen(port);
 
 console.log('App is listening on port ' + port);
