@@ -79,45 +79,56 @@ class ModalEvent extends Component {
     constructor({modalShow}){
         super();
         this.showModal = this.showModal.bind(this);
+        this.getValues = this.getValues.bind(this);
     }
 
     showModal(){
         if(this.props.modalShow == 'show') return ' active'
         else return ' disabled'
     }
+    getValues(){
+        const eventObj = {};
+        eventObj.title = $('.titleEvent').val()
+        eventObj.start = $('.startEvent').val()
+        eventObj.end = $('.endEvent').val()
+        eventObj.agenda = $('.agendaEvent').val()
+        console.log('evento obj ', eventObj);
+    }
+
     render(){
         console.log('foo modal' , this.showModal(), this.props,'state ', this.state)
         return (
             <div className={'modalEvent' + this.showModal()}>
-//             <form>
-//                 <label>
-//                     Titulo:
-//                     <input type="text" name="title" className="titleEvent" />
-//                 </label>
-//                 <label>
-//                     Inicio:
-//                     <input type="datetime-local" name="start" className="startEvent"/>
-//                 </label>
-//                 <label>
-//                     Fim:
-//                     <input type="datetime-local" name="end" className="endEvent"/>
-//                 </label>
-//                 <label>
-//                     Agenda:
-//                 <select className="agendaEvent">
-//                     <option value="501">Sala de Reunião</option>
-//                     <option value="201">Estúdio</option>
-//                     </select>
-//                 </label>
-//             </form>
-//             <button>Reservar</button>
-//         </div>
+             <form>
+                <label>
+                     Titulo:
+                     <input type="text" name="title" className="titleEvent" value={this.props.modalValues.titleEvent}/> 
+                 </label>
+                 <label>
+                     Inicio:
+                     <input type="datetime-local" name="start" className="startEvent" value={this.props.modalValues.startEvent}/>
+                 </label>
+                 <label>
+                     Fim:
+                     <input type="datetime-local" name="end" className="endEvent"/>
+                 </label>
+                 <label>
+                     Agenda:
+                 <select className="agendaEvent">
+                     <option value="501">Sala de Reunião</option>
+                     <option value="201">Estúdio</option>
+                     </select>
+                 </label>
+             </form>
+             <button onClick={()=> this.getValues()}>Reservar evento</button>
+         </div>
         )
     }
 }
 
 const mapStateToProps = store => ({
-    modalShow: store.agendaReduce.modalShow
+    modalShow: store.agendaReduce.modalShow,
+    modalValues : store.agendaReduce.modalValues,
   });
 
 // export default ModalEvent;
