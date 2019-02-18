@@ -75,6 +75,13 @@ app.use(bodyParser.json())
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'web/public')));
+
+app.use((req, res, next) => {
+    console.log(req.method, req.url);
+    console.log(req.host, req.url);
+    next();
+});
+
 routes.init(app);
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{res.render('index.ejs', {scripts:['/js/index.js',]})});
