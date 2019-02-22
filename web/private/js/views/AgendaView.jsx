@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import MyCalendar from '../components/Mycalendar.jsx';
 import ModalEvent from '../components/ModalEvent.jsx';
 import { connect } from 'react-redux';
@@ -29,6 +30,7 @@ class AgendaView extends Component {
         console.log('foo agenda view render ')
         return (
             <div>
+                <Link to="/login">Login Page</Link>
                 <ModalEvent></ModalEvent>
                 <MyCalendar/>
             </div>

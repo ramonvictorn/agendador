@@ -5,14 +5,12 @@
 
 exports.init = init;
 
-const renderAgendaControler = require('../controllers/renderAgenda');
-const renderLoginController = require('../controllers/renderLogin');
-const renderAdmController = require('../controllers/renderAdm');
 const loginController = require('../controllers/login');
 const registerUserController = require('../controllers/registerUser');
 const userLogoutController = require('../controllers/logout.js');
 const getEventsController = require('../controllers/getEvents');
 const insertEventController = require('../controllers/insertEvent');
+
 
 
 /**  
@@ -31,6 +29,7 @@ function init(app){
     // app.post('/user/logout',checkSecurity, userLogoutController.logout )
     app.post('/events/getEvents', getEventsController.getEvents)
     app.post('/events/insertEvent', insertEventController.insertEvent)
+    app.post('/user/registerUser', registerUserController.register)
 }
 
 

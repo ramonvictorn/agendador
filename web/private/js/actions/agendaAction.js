@@ -5,7 +5,7 @@ export const SET_VALUES_MODAL = 'SET_VALUES_MODAL';
 export const toggleModal = {
     type: TOGGLE_MODAL,
     payload : {}
-  };
+};
 
 
 export const updateEvents = events => ({
