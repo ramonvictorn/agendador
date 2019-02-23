@@ -1,6 +1,6 @@
 exports.insertEvent = insertEvent;
 
-const EventSchema = require('../Schemas/event');
+const Event = require('../Schemas/event');
 
 /**
  * @function insertEvent - realiza a criacao do evento atráves do Schema e o insere no banco
@@ -12,13 +12,31 @@ const EventSchema = require('../Schemas/event');
  * @param {Function} cb - callback de sucesso
  * @param {Function} erro - callback de erro
  */
-function insertEvent(eventoContext,cb, erro){
-    var evento = new EventSchema(eventoContext);
-    evento.save(function (err, event) {
+function insertEvent(data,cb){
+  save();
+
+  function save(){
+    var evento = new Event({
+        agenda: data.agenda,
+        title:data.login,
+        start:data.start,
+        end:data.end,
+        user:data.user,
+        dayStart: data.dayStart,
+        dayEnd: data.dayEnd,
+        details: data.details,
+    });
+
+    evento.save(function (err,event) {
       if (err) {
-        erro(err)
-      }else{
-        cb(event);
-      }
-    }); 
+          console.log('INSERT EVENT MODEL ERROR - ', err, user)
+          response.error = {text: 'SAVE_ERROR'};
+        }else {
+            // saved!
+            //console.log('INSERT EVENT MODEL - SAVE SUCESS');
+            response.data = event
+        }
+        cb(response);
+    });
+  }
 }

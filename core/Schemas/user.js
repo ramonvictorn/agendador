@@ -14,6 +14,7 @@ const UserSchema = new mongoose.Schema({
     password:{
         type:String,
         required:false,
+        select: false,
     },
     role:{
         type:String,
@@ -21,14 +22,15 @@ const UserSchema = new mongoose.Schema({
     },
     details:{
         type:Object,
-        required:false,
+        required:true,
+        default:'{url:"lantec"}',
     },
     createdAt:{
         type:Date,
         default:Date.now,
     }
 });
-
+ 
 UserSchema.pre('save',  function (next) {
     const hasher = crypto.createHash('SHA256');
     hasher.update(this.password);
@@ -39,7 +41,7 @@ UserSchema.pre('save',  function (next) {
 })
 
 
-const User = mongoose.model('User', UserSchema, 'user');
+const User = mongoose.model('User', UserSchema, 'users');
 
 
 module.exports = User;

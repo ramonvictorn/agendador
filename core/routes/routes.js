@@ -24,7 +24,7 @@ function init(app){
     // app.get('/adm/user', checkSecurityAdm , renderAdmController.adm );
     // app.get('/agenda', checkSecurity ,renderAgendaControler.agenda);
     //app.get('*',  renderLoginController.login);
-    //app.post('/user/login', loginController.login);
+    app.post('/user/login', loginController.login);
     // app.post('/user/register',checkSecurityAdm, registerUserController.register)
     // app.post('/user/logout',checkSecurity, userLogoutController.logout )
     app.post('/events/getEvents', getEventsController.getEvents)

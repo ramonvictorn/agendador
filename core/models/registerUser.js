@@ -13,25 +13,51 @@ exports.register = register;
  */
 function register(data, cb){
     var response = {};
-    var user = new User({
-        name: data.name,
-        login:data.login,
-        password:data.password,
-        details: data.details,
-    });
+    verifyExistLogin();
 
-    user.save(function (err,user) {
-      if (err) {
-          console.log('Model Register User ERROR - ', err, user)
-          response.error = err;
-        }else {
-            // saved!
-            console.log('save 1', user);
-            response.data = user
-        }
-        cb(response);
-    });
+    /**
+     * @summary This function verify if user existi
+     */
+    function verifyExistLogin(){
+        User.find({ login: data.login}, 
+            function (err, docs) {
+                if(err){
+                    console.log('VERIFY EXIST LOGIN ', err)
+                    response.error = err;
+                } else{
+                    if(docs.length >=1){
+                        response.error = {text:'THIS_USER_ALREADY_EXIST'}
+                        cb(response);
+                    }else{
+                        save();
+                    }
+                }
+            }
+        );
+        
+    }
     
-return  'oi'
+    function save(){
+        var user = new User({
+            name: data.name,
+            login:data.login,
+            password:data.password,
+            details: data.details,
+        });
+    
+        user.save(function (err,user) {
+          if (err) {
+              console.log('REGISTER USER MODEL ERROR - ', err, user)
+              response.error = {text: 'SAVE_ERROR'};
+            }else {
+                // saved!
+                //console.log('REGISTER USER MODEL - SAVE SUCESS');
+                response.data = user
+            }
+            cb(response);
+        });
+    }
 }
+
+
 

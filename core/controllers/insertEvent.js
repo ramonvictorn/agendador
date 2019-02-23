@@ -3,17 +3,24 @@ const insertEventModel = require('../models/insertEvent');
 
 function insertEvent(req,res){
     const context = {
-        title: req.body.title,
-        start:req.body.start,
-        end:req.body.end,
-        agenda:req.body.agenda,
+        agenda: req.body.agenda,
+        title:req.body.title,
+        start:req.body.agenda.start,
+        end:req.body.agenda.end,
+        user:req.session._id,
+        dayStart: req.body.dayStart,
+        dayEnd: req.body.dayEnd,
+        details: req.body.details,
     }
-    
-    insertEventModel.insertEvent(context,(eventoInserido)=>{
-            res.status(200).send({eventoInserido})
-        },(err)=>{
-            console.log('errorrrr', err)
-            res.status(401).send({error:"Insert_Error"})
+    if(!checkParams(req.body)) res.status(400).send({error:'INVALID_PARAMS'})
+
+    insertEventModel.insertEvent(context,
+        (response)=>{
+            if(response.error){
+                res.status(400).send({error:response.error.text})
+            }else{
+                res.status(200).send({data: response.data})
+            }
         });
     // var evento = {};
     // evento.title = req.body.title;
@@ -56,11 +63,3 @@ function checkParams(){
     return true;
 }
 
-
-function validarEvento(evento){
-    var valido = false;
-    if(evento != null && evento != undefined){
-        valido = true;
-    }
-
-return valido;}

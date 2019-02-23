@@ -3,8 +3,8 @@
 // const path = require('path');
 const routes = require('./core/routes/routes.js');
 //const routesPost = require('./core/routes/routes');
-// var session = require('express-session');
-// var FileStore = require('session-file-store')(session);
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
 // const ejs = require('ejs');
 
 // const { createEngine } = require('express-react-views');
@@ -71,6 +71,17 @@ app.set('view engine', 'ejs');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+    store: new FileStore('../session'),
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+    maxAge  : new Date(Date.now() + 3600), //1 Hour
+    expires : new Date(Date.now() + 3600), //1 Hour
+}))
 
 
 // Serve the static files from the React app

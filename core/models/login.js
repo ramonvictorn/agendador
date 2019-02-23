@@ -1,5 +1,5 @@
 exports.login = login;
-const userSchema = require('../Schemas/user');
+const User = require('../Schemas/user');
 const crypto = require('crypto')
 
 /**
@@ -10,13 +10,30 @@ const crypto = require('crypto')
  * @param {function} cb - callback para se executado 
  * @param {function} erro - callback de erro
  */
-function login(login,cb, erro){
-    userSchema.find({email:login.email, password:login.password}, function (err,docs){
-      if(err || docs.length == 0){erro()
-      }else{
-        console.log('doc ', docs[0])
-        cb(docs[0]);
+function login(data,cb){
+  let response = {};
+    // userSchema.find({email:login.email, password:login.password}, function (err,docs){
+    //   if(err || docs.length == 0){erro()
+    //   }else{
+    //     console.log('doc ', docs[0])
+    //     cb(docs[0]);
+    //   }
+    // })
+    
+  User.find({ login: data.login, password: data.password}, 
+      function (err, docs) {
+          if(err){
+              console.log('VERIFY EXIST LOGIN ', err)
+              response.error = err;
+          } else{
+              if(docs.length >=1){
+                  response.data = docs[0]
+                  cb(response);
+              }else{
+                response.error = {text:'USER_NOT_FOUND'}
+                cb(response)
+              }
+          }
       }
-    })
-      
+  )
 }

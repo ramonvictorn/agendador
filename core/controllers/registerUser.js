@@ -11,14 +11,17 @@ function register(req,res){
         login:req.body.login,
         password:req.body.password,
         role: req.body.role,
-        details: req.body.details
+        details: req.body.details || {
+            urlUser:'https://static.thenounproject.com/png/994628-200.png',
+            agendas:[500,501],
+        },
     }
     registerUserModel.register(data, 
         (response)=>{
             if(response.error){
-                res.status(400).send({error: 'ERRO_IN_SCHEMA'})
+                res.status(400).send({error: response.error.text})
             }else{
-                res.status(200).send({data:'SUCESS'})
+                res.status(200).send({data:response.data})
             }
         })
 }

@@ -19,13 +19,24 @@ const EventSchema = new mongoose.Schema({
         required:true,
         unique:false,
     },
-    finalidade:{
-        type:String,
-        required:false,
+    dayStart:{
+        type:Number,
+        required:true,
+        unique:false,
+    },
+    dayEnd:{
+        type:Number,
+        required:true,
+        unique:false,
     },
     user:{
         type:String,
         require:false,
+    },
+    details:{
+        type:Object,
+        required:true,
+        default:{},
     },
     createdAt:{
         type:Date,
