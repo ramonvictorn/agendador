@@ -12,7 +12,8 @@ const appReduce = (state = initialState, action)=>{
     case IS_LOGGED:
       return {...state};
     case SET_LOGGED:
-      return {...state, isLogged: !isLogged}
+      console.log('INITIAL ', initialState ,'state ', state)
+      return {...state, isLogged: !state.isLogged}
     default:
       return state;
   }

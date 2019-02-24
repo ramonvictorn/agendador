@@ -16,13 +16,16 @@ import NoMatch404 from '../private/js/views/NoMatch404.jsx';
 import AgendaView from '../private/js/views/AgendaView.jsx';
 
 
-const PrivateRoute = ({component:Component, ...rest})=> (
-    <Route {...rest} render={(props)=>(
-        props.isLogged === true
-        ? <Component {...props}/>
-        : <Redirect to='/login'/>
-    )}/>
-)
+const PrivateRoute = ({component:Component, ...rest})=> {
+    console.log('private aqui', rest ,)
+    return (
+        <Route {...rest} render={(props)=>(
+            rest.isLogged === true
+            ? <Component {...props}/>
+            : <Redirect to='/login'/>
+        )}/>
+    )
+}
 
 
 
@@ -40,8 +43,7 @@ class AppRoutes extends Component{
                 <Switch>
                     <Route path='/login' component={LoginView}/>
                     <Route path='/ramon' component={AgendaView}/>
-                    <PrivateRoute path='/agenda' component={AgendaView}/>
-                    {/* <PrivateRoute path='/private' component={AgendaView}/> */}
+                    <PrivateRoute path='/agenda' isLogged={this.props.isLogged} component={AgendaView}/>
                     <Route component={NoMatch404}/>
                 </Switch>
             </Router>

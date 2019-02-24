@@ -32,6 +32,9 @@ module.exports = {
     ]
   },
   watch: true,
+  watchOptions: {
+    ignored: /node_modules/
+  }
   // plugins: [
   //   new HtmlWebPackPlugin({
   //     template: "./web/private/templates/index.ejs",

@@ -8,7 +8,6 @@ function login(req,res){
         login : req.body.login,
         password : req.body.password,
     };
-
     const hasher = crypto.createHash('SHA256');
     hasher.update(context.password);
     const enteredHash = hasher.digest('hex');
