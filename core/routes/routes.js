@@ -10,8 +10,7 @@ const registerUserController = require('../controllers/registerUser');
 const userLogoutController = require('../controllers/logout.js');
 const getEventsController = require('../controllers/getEvents');
 const insertEventController = require('../controllers/insertEvent');
-
-
+const isLoggedController = require('../controllers/isLogged.js')
 
 /**  
 *
@@ -24,6 +23,7 @@ function init(app){
     // app.get('/adm/user', checkSecurityAdm , renderAdmController.adm );
     // app.get('/agenda', checkSecurity ,renderAgendaControler.agenda);
     //app.get('*',  renderLoginController.login);
+    app.post('/user/isLogged', isLoggedController)
     app.post('/user/login', loginController.login);
     // app.post('/user/login', (req,res)=>{
     //     console.log('to no routes', req.body)

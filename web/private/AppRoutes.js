@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom'; 
 import { connect } from 'react-redux';
 import {
-    IS_LOGGED 
+    isLogged,
+    setLogged, 
 } from './js/actions/appActions.js'
 
 // views
@@ -35,9 +36,38 @@ const PrivateRoute = ({component:Component, ...rest})=> {
 class AppRoutes extends Component{
     constructor(){
         super()
+        console.log('props app routes ', this.props)
+    }
+
+    componentDidMount(){
+        console.log('oi did app routes')
+        $.ajax({
+            url: '/user/isLogged',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify({teste:'oi'}),
+            success: (ans) => { this.response = ans; },
+            error: (err) => { this.response = {error : err.responseJSON.error} },
+            complete: () => {
+                console.log('foi a res ', this.response);
+                if(this.response.data){
+                    this.props._setLogged()
+                    console.log('loggado com sucesso')
+                   
+                }else{  
+                    console.log('error: ' + this.response.error)
+                }
+                
+            }
+        });
     }
     render(){
         console.log('render app routes ', this.props,)
+        const isLogged = this.props.isLogged;
+        if (isLogged == null) {
+            return <div></div>
+        }
         return(
             <Router>    
                 <Switch>
@@ -58,8 +88,9 @@ const mapStateToProps = store => ({
   });
 
 
-// const mapDispatchToProps = dispatch => ({
-//     _toggleModal: () => dispatch(toggleModal),
-// });
+const mapDispatchToProps = dispatch => ({
+    _isLogged: () => dispatch(isLogged),
+    _setLogged: () => dispatch(setLogged),
+});
 
-export default connect(mapStateToProps)(AppRoutes);
+export default connect(mapStateToProps,mapDispatchToProps)(AppRoutes);

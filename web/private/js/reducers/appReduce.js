@@ -4,7 +4,7 @@ import {
   } from '../actions/appActions.js';
   
 const initialState = {
-    isLogged: false
+    isLogged: null
 }
   
 const appReduce = (state = initialState, action)=>{

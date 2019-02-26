@@ -32,7 +32,7 @@ class FormLogin extends Component{
                 console.log('foi a res ', this.response);
                 if(this.response.data){
                     this.props._setLogged()
-                    console.log('red')
+                    alert('loggado com sucesso')
                    
                 }else{  
                     alert('error: ' + this.response.error)
