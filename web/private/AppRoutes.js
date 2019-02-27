@@ -40,7 +40,8 @@ class AppRoutes extends Component{
     }
 
     componentDidMount(){
-        console.log('oi did app routes')
+        console.log('oi did app routes antes', this.props)
+        //this.props._setLogged(true)
         $.ajax({
             url: '/user/isLogged',
             dataType: 'json',
@@ -52,21 +53,22 @@ class AppRoutes extends Component{
             complete: () => {
                 console.log('foi a res ', this.response);
                 if(this.response.data){
-                    this.props._setLogged()
-                    console.log('loggado com sucesso')
+                    this.props._setLogged(true)
+                    console.log('loggado com sucesso', this.props)
                    
                 }else{  
-                    console.log('error: ' + this.response.error)
+                    console.log('nao ta logado: ' + this.response.error,'props ', this.props)
+                    this.props._setLogged(false)
                 }
                 
             }
         });
     }
     render(){
-        console.log('render app routes ', this.props,)
+        console.log('render app routes ', this.props)
         const isLogged = this.props.isLogged;
         if (isLogged == null) {
-            return <div></div>
+            return <div><h1>NÃO TAS LOGADO CARA, FOI MAL</h1></div>
         }
         return(
             <Router>    
@@ -90,7 +92,7 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
     _isLogged: () => dispatch(isLogged),
-    _setLogged: () => dispatch(setLogged),
+    _setLogged: (value) => dispatch(setLogged(value)),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(AppRoutes);

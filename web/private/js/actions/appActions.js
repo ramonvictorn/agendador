@@ -12,7 +12,7 @@ export const isLogged = {
 //   payload: {}
 // })
 
-export const setLogged = {
-  type: SET_LOGGED,
-  payload : {}
-};
+export const setLogged = value =>({
+  type:SET_LOGGED,
+  payload : {value},
+})

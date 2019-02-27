@@ -31,11 +31,11 @@ class FormLogin extends Component{
             complete: () => {
                 console.log('foi a res ', this.response);
                 if(this.response.data){
-                    this.props._setLogged()
-                    alert('loggado com sucesso')
+                    this.props._setLogged(true)
+                    console.log('FormLogin data: loggado com sucesso', this.props)
                    
                 }else{  
-                    alert('error: ' + this.response.error)
+                    console.log('FormLogin error: ' + this.response.error)
                 }
                 
             }
@@ -67,7 +67,7 @@ const mapStateToProps = store => ({
 
 
 const mapDispatchToProps = dispatch => ({
-    _setLogged: () => dispatch(setLogged),
+    _setLogged: (value) => dispatch(setLogged(value)),
   });
 
 export default connect(mapStateToProps,mapDispatchToProps)(FormLogin);
