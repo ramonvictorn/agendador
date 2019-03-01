@@ -13,7 +13,6 @@ class AgendaView extends Component {
     }
 
     getEvents(){
-        console.log('AgendaView -> getEvents')
         $.ajax({
             url: "/events/getEvents",
             type:'POST',
@@ -27,7 +26,6 @@ class AgendaView extends Component {
         this.props._toggleModal();
     }
     render(){
-        console.log('foo agenda view render ')
         return (
             <div>
                 <Link to="/login">Login Page</Link>

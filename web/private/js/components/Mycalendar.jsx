@@ -67,7 +67,6 @@ class MyCalendar extends Component {
   }
   
   render(){
-    console.log('foo my calendar render', this.props.events)
     return (
       <div>
         <BigCalendar

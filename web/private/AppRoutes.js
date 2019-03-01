@@ -18,7 +18,6 @@ import AgendaView from '../private/js/views/AgendaView.jsx';
 
 
 const PrivateRoute = ({component:Component, ...rest})=> {
-    console.log('private aqui', rest ,)
     return (
         <Route {...rest} render={(props)=>(
             rest.isLogged === true
@@ -36,12 +35,9 @@ const PrivateRoute = ({component:Component, ...rest})=> {
 class AppRoutes extends Component{
     constructor(){
         super()
-        console.log('props app routes ', this.props)
     }
 
     componentDidMount(){
-        console.log('oi did app routes antes', this.props)
-        //this.props._setLogged(true)
         $.ajax({
             url: '/user/isLogged',
             dataType: 'json',
@@ -51,13 +47,10 @@ class AppRoutes extends Component{
             success: (ans) => { this.response = ans; },
             error: (err) => { this.response = {error : err.responseJSON.error} },
             complete: () => {
-                console.log('foi a res ', this.response);
                 if(this.response.data){
                     this.props._setLogged(true)
-                    console.log('loggado com sucesso', this.props)
                    
                 }else{  
-                    console.log('nao ta logado: ' + this.response.error,'props ', this.props)
                     this.props._setLogged(false)
                 }
                 
@@ -65,7 +58,6 @@ class AppRoutes extends Component{
         });
     }
     render(){
-        console.log('render app routes ', this.props)
         const isLogged = this.props.isLogged;
         if (isLogged == null) {
             return <div><h1>NÃO TAS LOGADO CARA, FOI MAL</h1></div>

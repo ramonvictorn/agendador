@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 
 // css files
 import './css/agenda.css';
+import './css/modal.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // routes
 import AppRoutes from './AppRoutes.js';

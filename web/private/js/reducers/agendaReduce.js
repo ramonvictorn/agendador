@@ -7,11 +7,13 @@ import {
 let dateNow = new Date();
 
 const initialState = {
-  modalShow:'hide',
+  modalShow: false,
   modalType: 'view',
   modalValues: {
-    titleEvent:'O nome da reserva',
-    startEvent : dateNow.toISOString(),
+    title:'',
+    start : new Date(),
+    end: new Date(),
+    agenda:'',
   },
   events : [],
 }
@@ -20,17 +22,20 @@ let newValue;
 const agendaReduce = (state = initialState, action)=>{
   switch(action.type){
     case TOGGLE_MODAL:
-      newValue = state.modalShow == 'hide' ? 'show' : 'hide'
+      newValue = state.modalShow == false ? true : false
       return {...state, modalShow: newValue };
     
     case UPDATE_EVENTS:
       return {...state, events : action.payload.events}
     
     case SET_VALUES_MODAL:
+      console.log('reduce values ', action.payload)
       return {...state, 
         modalValues :{
-          start: action.payload.start,
-          end: action.payload.end,
+          start: action.payload.values.start,
+          end: action.payload.values.end,
+          title: action.payload.values.title,
+          agenda: action.payload.values.agenda,
         }
       }
       
