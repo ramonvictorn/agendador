@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { 
   toggleModal, 
   updateEvents,
+  setValuesModal,
 } from '../actions/agendaAction.js';
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
@@ -20,6 +21,7 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   _toggleModal: () => dispatch(toggleModal),
   _updateEvents: (events) => dispatch(updateEvents(events)),
+  _setValuesModal : (values) => dispatch(setValuesModal(values)),
 });
 
 
@@ -30,6 +32,7 @@ class MyCalendar extends Component {
     this.selectSlot = this.selectSlot.bind(this);
     this.getEvents = this.getEvents.bind(this);
     this.configDate = this.configDate.bind(this);
+    this.onSelectEvent = this.onSelectEvent.bind(this);
   }
   
   componentDidMount(){
@@ -44,7 +47,10 @@ class MyCalendar extends Component {
   selectSlot (slotInfo){
     this.props._toggleModal();
     // this.props._updateEvents();
-    console.log('select slot', slotInfo)
+    console.log('select slot','start ',  slotInfo.start, slotInfo,)
+    this.props._setValuesModal({start : slotInfo.start})
+    this.props._setValuesModal({end : slotInfo.end})
+    
   }
 
   getEvents(){
@@ -63,7 +69,15 @@ class MyCalendar extends Component {
               this.props._updateEvents(events);  
           } 
       }
-  });
+    });
+  }
+  onSelectEvent(event){
+    console.log('select event', event)
+    this.props._setValuesModal({title:event.title})
+    this.props._setValuesModal({start:event.start})
+    this.props._setValuesModal({end:event.end})
+    this.props._setValuesModal({agenda:event.agenda})
+    this.props._toggleModal()
   }
   
   render(){
@@ -78,6 +92,7 @@ class MyCalendar extends Component {
           className='BigCalendar'
           selectable={true}
           onSelectSlot={(slotInfo)=>{console.log('selecionou'); this.selectSlot(slotInfo)}}
+          onSelectEvent={(event)=>{this.onSelectEvent(event)}}
         />
       </div>
     )

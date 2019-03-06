@@ -13,12 +13,13 @@ const Event = require('../Schemas/event');
  * @param {Function} erro - callback de erro
  */
 function insertEvent(data,cb){
+  let response = {}
   save();
 
   function save(){
     var evento = new Event({
         agenda: data.agenda,
-        title:data.login,
+        title:data.title,
         start:data.start,
         end:data.end,
         user:data.user,
@@ -29,7 +30,7 @@ function insertEvent(data,cb){
 
     evento.save(function (err,event) {
       if (err) {
-          console.log('INSERT EVENT MODEL ERROR - ', err, user)
+          console.log('INSERT EVENT MODEL ERROR - ', err, event)
           response.error = {text: 'SAVE_ERROR'};
         }else {
             // saved!

@@ -2,15 +2,18 @@ exports.insertEvent = insertEvent;
 const insertEventModel = require('../models/insertEvent');
 
 function insertEvent(req,res){
+
+    console.log('foo session', req.session.agendador.user._id)
+    console.log('insert controller ', req.body)
     const context = {
         agenda: req.body.agenda,
         title:req.body.title,
-        start:req.body.agenda.start,
-        end:req.body.agenda.end,
-        user:req.session._id,
-        dayStart: req.body.dayStart,
-        dayEnd: req.body.dayEnd,
-        details: req.body.details,
+        start:req.body.start,
+        end:req.body.end,
+        user:req.session.agendador.user._id,
+        dayStart: new Date(req.body.start).getDate(),
+        dayEnd: new Date(req.body.end).getDate(),
+        details: '{}',
     }
     if(!checkParams(req.body)) res.status(400).send({error:'INVALID_PARAMS'})
 
@@ -21,7 +24,7 @@ function insertEvent(req,res){
             }else{
                 res.status(200).send({data: response.data})
             }
-        });
+    });
     // var evento = {};
     // evento.title = req.body.title;
     // evento.start = req.body.start;

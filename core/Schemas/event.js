@@ -7,26 +7,26 @@ const EventSchema = new mongoose.Schema({
     },
     title:{
         type:String,
-        required:true,
+        required:false,
     },
     start:{
         type:Date,
-        required:true,
+        required:false,
         unique:false,
     },
     end:{
         type:Date,
-        required:true,
+        required:false,
         unique:false,
     },
     dayStart:{
         type:Number,
-        required:true,
+        required:false,
         unique:false,
     },
     dayEnd:{
         type:Number,
-        required:true,
+        required:false,
         unique:false,
     },
     user:{
@@ -35,7 +35,7 @@ const EventSchema = new mongoose.Schema({
     },
     details:{
         type:Object,
-        required:true,
+        required:false,
         default:{},
     },
     createdAt:{

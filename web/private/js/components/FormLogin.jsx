@@ -34,6 +34,7 @@ class FormLogin extends Component{
                 if(this.response.data){
                     this.props._setLogged(true)
                     console.log('FormLogin data: loggado com sucesso', this.props)
+                    return <Redirect to='/login'/>
                    
                 }else{  
                     console.log('FormLogin error: ' + this.response.error)

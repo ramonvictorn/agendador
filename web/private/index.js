@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from "react-dom";
 import store from './js/store.js'
 import { Provider } from 'react-redux';
+import PropTypes from "prop-types";
+import { withRouter } from "react-router";
 
 // css files
 import './css/agenda.css';
