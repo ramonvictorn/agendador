@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import { toggleModal } from '../actions/agendaAction.js';
 
+
 class AgendaView extends Component {
     constructor() {
         super();
