@@ -6,7 +6,6 @@ import {
     
 } from 'react-router-dom'; 
 
-import {browserHistory} from 'react-router-dom'
 
 class FormLogin extends Component{
     constructor(){
@@ -35,7 +34,6 @@ class FormLogin extends Component{
                 if(this.response.data){
                     this.props._setLogged(true)
                     console.log('FormLogin data: loggado com sucesso', this.props)
-                    browserHistory.push('/foi')
                    
                 }else{  
                     console.log('FormLogin error: ' + this.response.error)
