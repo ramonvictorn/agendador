@@ -139,4 +139,5 @@ body{
     flex-direction: column;
     align-items: stretch;
     position: absolute;
+    height: 94%!important;
 }

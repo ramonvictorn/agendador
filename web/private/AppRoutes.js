@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import {
     isLogged,
     setLogged, 
+    saveUser,
 } from './js/actions/appActions.js'
 
 
@@ -36,6 +37,7 @@ const PrivateRoute = ({component:Component, ...rest})=> {
 class AppRoutes extends Component{
     constructor(){
         super()
+        this.saveUserOnStore = this.saveUserOnStore.bind(this)
     }
 
     componentDidMount(){
@@ -50,6 +52,7 @@ class AppRoutes extends Component{
             complete: () => {
                 if(this.response.data){
                     this.props._setLogged(true)
+                    this.saveUserOnStore()
                    
                 }else{  
                     this.props._setLogged(false)
@@ -57,6 +60,25 @@ class AppRoutes extends Component{
                 
             }
         });
+    }
+    saveUserOnStore(){
+        console.log('save no app routes')
+        // let response = {}
+        // $.ajax({
+        //     url: '/user/getUser',
+        //     dataType: 'json',
+        //     type: 'post',
+        //     contentType: 'application/json',
+        //     success: (ans) => { response = ans; },
+        //     error: (err) => { response = {error : err.responseJSON.error} },
+        //     complete: () => {
+        //         if(response.data){
+        //             this.props._saveUser(response.data)
+                   
+        //         }
+        //     }
+        // });
+        
     }
     render(){
         const isLogged = this.props.isLogged;
@@ -79,13 +101,15 @@ class AppRoutes extends Component{
 
 // store
 const mapStateToProps = store => ({
-    isLogged: store.appReduce.isLogged
+    isLogged: store.appReduce.isLogged,
+    user: store.appReduce.user
   });
 
 
 const mapDispatchToProps = dispatch => ({
     _isLogged: () => dispatch(isLogged),
     _setLogged: (value) => dispatch(setLogged(value)),
+    _saveUser: (value) => dispatch(saveUser(value))
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(AppRoutes);

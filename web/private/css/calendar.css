@@ -233,3 +233,10 @@ main {
   flex-basis: calc(100%/7);
   width: calc(100%/7);
 }
+
+
+/* resolve scroll */
+
+.rbc-calendar{
+  height: 92%!important;
+}

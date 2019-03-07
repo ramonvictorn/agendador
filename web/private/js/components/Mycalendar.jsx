@@ -82,7 +82,6 @@ class MyCalendar extends Component {
   
   render(){
     return (
-      <div>
         <BigCalendar
           localizer={localizer}
           events={this.props.events}
@@ -94,7 +93,6 @@ class MyCalendar extends Component {
           onSelectSlot={(slotInfo)=>{console.log('selecionou'); this.selectSlot(slotInfo)}}
           onSelectEvent={(event)=>{this.onSelectEvent(event)}}
         />
-      </div>
     )
   }
 }

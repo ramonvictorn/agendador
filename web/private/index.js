@@ -9,6 +9,7 @@ import { withRouter } from "react-router";
 import './css/agenda.css';
 import './css/modal.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/menu.css'
 
 // routes
 import AppRoutes from './AppRoutes.js';

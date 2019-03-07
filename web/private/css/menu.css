@@ -1,76 +1,53 @@
-/*==Reset CSS==*/
-* {
-  margin: 0;
-  padding: 0;
+
+.headerMenu {
+  height: 50px;
+  background:
+  linear-gradient(red, transparent),
+  linear-gradient(to top left, lime, transparent),
+  linear-gradient(to top right, blue, transparent);
+  background-blend-mode: screen;
 }
 
-/*==Style cơ bản cho website==*/
-body {
-  font-family: sans-serif;
-  color: #333;
-}
-
-#menu{
-  opacity: 1;
-  display: block;
-}
-/*==Style cho menu===*/
-#menu ul {
-  background: #1F568B;
-  list-style-type: none;
-  text-align: center;
-}
-#menu li {
-  color: #f1f1f1;
-  display: inline-block;
-  width: 120px;
-  height: 40px;
-  line-height: 40px;
-  margin-left: -5px;
-}
-#menu a {
-  text-decoration: none;
-  color: #fff;
-  display: block;
-}
-#menu a:hover {
-  background: #F1F1F1;
-  color: #333;
-}
-
-/*==Dropdown Menu==*/
-.sub-menu {
-  display: none;
-  position: absolute;
-}
-#menu li {
+.menu {
   position: relative;
-}
-#menu li:hover .sub-menu {
-  display: block;
-  z-index: 6;
-}
-.sub-menu li {
-  margin-left: 0 !important;
+  height: 100%;
+  display: table;
+  margin: 0 auto;
+  
 }
 
-/*==Menu cấp 3==*/
-.sub-menu > ul {
-  display: none !mportant;
+.linkStyle{
+  color: white;
+  height: 100%;
+  vertical-align: middle;
+  display: table-cell;
+  padding: 0px 25px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: 'Raleway-Medium';
+  font-size: 1.3em;
 }
 
-
-.perfil{
+.userMenu {
+  width: 150px;
+  height: 50px;
+  max-width: 250px;
   float: right;
+  overflow: hidden;
 }
 
-.perfil img{
-  width: 34px;
-  height: 28px;
+ .userMenu h1 {
+  max-width: 10px;
+  max-height: 10px;
+  font-size: 15px;
+  color: white;
+  float: left;
+  margin: 7px;
 }
 
-.perfil:hover{
-  background-color: red;
-  cursor: pointer;
-}
-
+.userImg{
+  max-width: 52px;
+  max-height: 50px;
+  border: white;
+  float: right
+} 

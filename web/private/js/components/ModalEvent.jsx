@@ -55,7 +55,7 @@ class ModalEvent extends Component {
           dataType: 'json',
           type: 'POST',
           contentType: 'application/json',
-          success: (ans) => { serverAns = ans; },
+          success: (ans) => { serverAns = ans; },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
           error: (err) => { serverAns = {err : err.responseJSON} },
           complete: () => {
               if(!serverAns.err){
@@ -68,7 +68,7 @@ class ModalEvent extends Component {
 
     render(){
         if(this.props.modalType === 'view'){
-            return (
+            return (                                                                                                                                                            
                     <Modal
                         show={this.props.modalShow}
                         onHide={()=>this.props._toggleModal()}

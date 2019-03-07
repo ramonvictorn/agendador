@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import MyCalendar from '../components/Mycalendar.jsx';
 import ModalEvent from '../components/ModalEvent.jsx';
+import HeaderMenu from '../components/HeaderMenu.jsx';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import { toggleModal } from '../actions/agendaAction.js';
@@ -19,7 +20,7 @@ class AgendaView extends Component {
             type:'POST',
             context: 'document',
         }).done(function(result) {
-            console.log('done ajax get events', result)
+            console.log('AGENDA VIEW - getEvents Done result ->', result)
           });
     }
 
@@ -28,11 +29,12 @@ class AgendaView extends Component {
     }
     render(){
         return (
-            <div>
-                <Link to="/login">Login Page</Link>
+            <React.Fragment>
+                <HeaderMenu></HeaderMenu>
                 <ModalEvent></ModalEvent>
                 <MyCalendar/>
-            </div>
+            </React.Fragment>
+            
         )
     }
         
@@ -42,9 +44,7 @@ const mapStateToProps = store => ({
     modalShow: store.agendaReduce.modalShow
   });
 
-
-  const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
     _toggleModal: () => dispatch(toggleModal),
-
 });
   export default connect(mapStateToProps,mapDispatchToProps)(AgendaView);
