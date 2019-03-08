@@ -92,6 +92,9 @@ class MyCalendar extends Component {
           selectable={true}
           onSelectSlot={(slotInfo)=>{console.log('selecionou'); this.selectSlot(slotInfo)}}
           onSelectEvent={(event)=>{this.onSelectEvent(event)}}
+          min={
+            new Date()
+          }
         />
     )
   }
