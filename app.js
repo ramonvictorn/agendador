@@ -90,7 +90,7 @@ routes.init(app);
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{res.render('index.ejs', {scripts:['/js/index.js',]})});
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3006;
 app.listen(port);
 
 console.log('App is listening on port ' + port);
