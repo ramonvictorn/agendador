@@ -1,23 +1,20 @@
 import React, {Component} from 'react';
+import {Modal, Button, Form, Row,Col} from 'react-bootstrap';
 import { connect } from 'react-redux';
+import DatePicker from "react-datepicker";
 import { 
     toggleModal,
     setValuesModal,
     updateEvents,
     setModalType,
 } from '../actions/agendaAction.js'
-import {Modal, Button, Form, Row,Col} from 'react-bootstrap';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { View } from 'fullcalendar';
-import ModalView from '../components/ModalView.jsx'
-import ModalEdit from '../components/ModalEdit.jsx'
 
-class ModalEvent extends Component {
-    constructor({modalShow}){
-        super();
+class ModalEdit extends Component {
+    constructor(){
+        super()
         this.getValues = this.getValues.bind(this);
         this.insertEvent = this.insertEvent.bind(this);
+        this.getEvents = this.getEvents.bind(this);
     }
     getValues(value,type){
         const eventObj = {
@@ -46,45 +43,43 @@ class ModalEvent extends Component {
             }
         });
     }
-
-    render(){
-        console.log('foo type ', this.props.modalType);
-        let modal;
-        let modalType = this.props.modalType;
-        if(modalType == 'view'){
-            modal = <ModalView></ModalView>
-        }else{
-            modal = <ModalEdit></ModalEdit>
-        }
-        return (          
-            <React.Fragment>
-                {modal}
-            </React.Fragment>                                                                                                                                                  
-        )
+    getEvents(){
+        let serverAns;
+        $.ajax({
+          url: '/events/getEvents',
+          dataType: 'json',
+          type: 'POST',
+          contentType: 'application/json',
+          success: (ans) => { serverAns = ans; },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+          error: (err) => { serverAns = {err : err.responseJSON} },
+          complete: () => {
+              if(!serverAns.err){
+                  const events = serverAns.data ? serverAns.data : [];
+                  this.props._updateEvents(events);  
+              } 
+          }
+        });
     }
-}
-
-const mapStateToProps = store => ({
-    modalShow: store.agendaReduce.modalShow,
-    modalValues : store.agendaReduce.modalValues,
-    modalType : store.agendaReduce.modalType,
-  });
-
-const mapDispatchToProps = dispatch => ({
-    _toggleModal: () => dispatch(toggleModal),
-    _setValuesModal : (values) => dispatch(setValuesModal(values)),
-    _updateEvents: (events) => dispatch(updateEvents(events)),
-    _setModalType: (value) => dispatch(setModalType(value)),
-});
-
-
-// export default ModalEvent;
-export default connect(mapStateToProps,mapDispatchToProps)(ModalEvent);
-
-
-{/* <Modal.Header closeButton >
+    render(){
+        console.log('render ModalEdit -> props show', this.props.modalShow)
+        let title;
+        if(this.props.modalType == 'edit'){
+            title = 'Editar'
+        }else{
+            title = "Cadastrar"
+        }
+        return(
+            <React.Fragment>
+                 <Modal
+                        show={this.props.modalShow}
+                        onHide={()=>{console.log('hide da modal edit'); if(this.props.modalShow == true){this.props._toggleModal()}}}
+                        size="lg"
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered
+                    >
+                        <Modal.Header closeButton >
                             <Modal.Title id="contained-modal-title-vcenter">
-                                Criar reserva
+                                {title} reserva
                             </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
@@ -110,7 +105,7 @@ export default connect(mapStateToProps,mapDispatchToProps)(ModalEvent);
                                         <Form.Label>Inicio </Form.Label>
                                         <DatePicker
                                         className='picker form-control'
-                                        selected={this.props.modalValues.start}
+                                        selected={new Date(this.props.modalValues.start)}
                                         onChange={(value)=>{this.getValues(value,'start')}}
                                         showTimeSelect
                                         timeFormat="HH:mm"
@@ -125,7 +120,7 @@ export default connect(mapStateToProps,mapDispatchToProps)(ModalEvent);
                                         <DatePicker
                                         className='picker form-control'
                                         
-                                        selected={this.props.modalValues.end}
+                                        selected={new Date(this.props.modalValues.end)}
                                         onChange={(value)=>{this.getValues(value,'end')}}
                                         showTimeSelect
                                         timeFormat="HH:mm"
@@ -138,6 +133,29 @@ export default connect(mapStateToProps,mapDispatchToProps)(ModalEvent);
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button onClick={()=>this.props._toggleModal()} >Cancel</Button>
+                            {/* <Button onClick={()=>this.props._toggleModal()} >Cancel</Button> */}
                             <Button onClick={()=>this.insertEvent(this.props.modalValues)} >Save</Button>
-                        </Modal.Footer> */}
+                        </Modal.Footer>
+                    </Modal> 
+            </React.Fragment>
+        )
+    }
+}
+
+
+  const mapStateToProps = store => ({
+    modalShow: store.agendaReduce.modalShow,
+    modalValues : store.agendaReduce.modalValues,
+    modalType : store.agendaReduce.modalType,
+  });
+
+const mapDispatchToProps = dispatch => ({
+    _toggleModal: () => dispatch(toggleModal()),
+    _setValuesModal : (values) => dispatch(setValuesModal(values)),
+    _updateEvents: (events) => dispatch(updateEvents(events)),
+    _setModalType: (value) => dispatch(setModalType(value)),
+});
+
+
+// export default ModalEvent;
+export default connect(mapStateToProps,mapDispatchToProps)(ModalEdit);

@@ -4,6 +4,7 @@ import {
   toggleModal, 
   updateEvents,
   setValuesModal,
+  setModalType,
 } from '../actions/agendaAction.js';
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
@@ -15,13 +16,15 @@ const localizer = BigCalendar.momentLocalizer(moment)
 const mapStateToProps = store => ({
   modalShow: store.agendaReduce.modalShow,
   events:store.agendaReduce.events,
+  user: store.appReduce.user,
 });
 
 
 const mapDispatchToProps = dispatch => ({
-  _toggleModal: () => dispatch(toggleModal),
+  _toggleModal: () => dispatch(toggleModal()),
   _updateEvents: (events) => dispatch(updateEvents(events)),
   _setValuesModal : (values) => dispatch(setValuesModal(values)),
+  _setModalType : (value) => dispatch(setModalType(value))
 });
 
 
@@ -45,12 +48,17 @@ class MyCalendar extends Component {
   }
   
   selectSlot (slotInfo){
-    this.props._toggleModal();
-    // this.props._updateEvents();
-    console.log('select slot','start ',  slotInfo.start, slotInfo,)
-    this.props._setValuesModal({start : slotInfo.start})
-    this.props._setValuesModal({end : slotInfo.end})
-    
+    console.log('select slot props ', this.props.modalShow, slotInfo)
+    if(this.props.modalShow == false){
+      console.log('MyCalendar - SelectSlot false')
+      this.props._toggleModal();
+      this.props._setValuesModal({start : slotInfo.start})
+      this.props._setValuesModal({end : slotInfo.end})
+      this.props._setModalType('create');
+    }else{
+      console.log('MyCalendar - Select Slot true entao n faaz nada')
+    }
+
   }
 
   getEvents(){
@@ -72,12 +80,23 @@ class MyCalendar extends Component {
     });
   }
   onSelectEvent(event){
-    console.log('select event', event)
-    this.props._setValuesModal({title:event.title})
-    this.props._setValuesModal({start:event.start})
-    this.props._setValuesModal({end:event.end})
-    this.props._setValuesModal({agenda:event.agenda})
-    this.props._toggleModal()
+    console.log('MyCalendar - onSelectEvent')
+    if(this.props.modalShow == false){
+      this.props._toggleModal()
+      this.props._setValuesModal({title:event.title})
+      this.props._setValuesModal({start:event.start})
+      this.props._setValuesModal({end:event.end})
+      this.props._setValuesModal({agenda:event.agenda})
+      this.props._setValuesModal({idUser:event.user})
+      if(event.user == this.props.user._id){
+        this.props._setModalType('edit');
+      }else{
+        this.props._setModalType('view');
+      }
+         
+    }else{
+      console.log('ja ta aberta velho, nem tenta')
+    }
   }
   
   render(){
@@ -90,11 +109,11 @@ class MyCalendar extends Component {
           defaultView='week'
           className='BigCalendar'
           selectable={true}
-          onSelectSlot={(slotInfo)=>{console.log('selecionou'); this.selectSlot(slotInfo)}}
+          ignoreEvents={true}
+          onSelectSlot={(slotInfo)=>{this.selectSlot(slotInfo)}}
           onSelectEvent={(event)=>{this.onSelectEvent(event)}}
-          min={
-            new Date()
-          }
+          onSelecting={(selected)=>{console.log('foo on selecting', selected)}}
+          selected={{}}
         />
     )
   }

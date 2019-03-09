@@ -6,7 +6,7 @@ function getUser(data,cb){
   let response = {};
   User.find({"_id": data.idUser}, 
       function (err, docs) {
-          console.log(docs)
+          //console.log(docs)
           if(err){
               response.error = err;
           } else{

@@ -19,7 +19,7 @@ const EventsSchema = require('../Schemas/event')
  * @param {function} erro é executado caso ocorra erro na query
  */
 function getEvents(cb,erro){
-    console.log('model getEvents -> function getEvents');
+    //console.log('model getEvents -> function getEvents');
     EventsSchema.find({}, function(err,docs){
         if(err){
             console.log('Events_Not_Found')

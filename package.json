@@ -40,8 +40,8 @@
     "webpack-cli": "^3.2.1"
   },
   "scripts": {
-    "build": "webpack --mode development",
-    "watch": "webpack --watch --info-verbosity verbose --mode production",
+    "build": "webpack --mode development --watch ",
+    "watch": "webpack --watch --info-verbosity verbose",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-dev": "NODE_ENV=development node app.js",
     "start-prod": "NODE_ENV=production node app.js"

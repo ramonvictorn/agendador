@@ -7,10 +7,10 @@ const getUserModel = require('../models/getUser.js')
  */
 function getUser(req,res){
     let contextData = {}
-    if(req.session.agendador.user.role == "user"){
+    if(req.body.idUser == undefined){
         contextData.idUser =  req.session.agendador.user._id
     }else{
-        contextData.idUser = req.body.idUser
+        contextData.idUser = req.body.idUser;
     }
     getUserModel(contextData, (response)=>{
         if(response.error){
