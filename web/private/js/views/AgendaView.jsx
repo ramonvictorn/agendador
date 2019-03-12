@@ -7,8 +7,10 @@ import { connect } from 'react-redux';
 
 
 class AgendaView extends Component {
-    constructor() {
-        super();     
+    constructor({match,history}) {
+        super(); 
+        this.history = history;
+        
     }
 
     getEvents(){

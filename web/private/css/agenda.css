@@ -141,3 +141,17 @@ body{
     position: absolute;
     height: 94%!important;
 }
+
+.divCenter{
+    position: relative;
+    height: 100%;
+    display: table;
+    margin: 0 auto;
+    top: 35vh;
+}
+
+#dropdown-basic-button{
+    width: 500px;
+    border-radius: 24px;
+    height: 104px;
+}

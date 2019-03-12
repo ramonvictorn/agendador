@@ -48,15 +48,15 @@ class MyCalendar extends Component {
   }
   
   selectSlot (slotInfo){
-    console.log('select slot props ', this.props.modalShow, slotInfo)
+    console.log('Myselect slot props ', slotInfo)
     if(this.props.modalShow == false){
-      console.log('MyCalendar - SelectSlot false')
+      // console.log('MyCalendar - SelectSlot false')
       this.props._toggleModal();
       this.props._setValuesModal({start : slotInfo.start})
       this.props._setValuesModal({end : slotInfo.end})
       this.props._setModalType('create');
     }else{
-      console.log('MyCalendar - Select Slot true entao n faaz nada')
+      // console.log('MyCalendar - Select Slot true entao n faaz nada')
     }
 
   }
@@ -95,11 +95,13 @@ class MyCalendar extends Component {
       }
          
     }else{
-      console.log('ja ta aberta velho, nem tenta')
+      // console.log('ja ta aberta velho, nem tenta')
     }
   }
   
   render(){
+    let a = {}
+    let selected = {}
     return (
         <BigCalendar
           localizer={localizer}
@@ -109,11 +111,10 @@ class MyCalendar extends Component {
           defaultView='week'
           className='BigCalendar'
           selectable={true}
-          ignoreEvents={true}
           onSelectSlot={(slotInfo)=>{this.selectSlot(slotInfo)}}
           onSelectEvent={(event)=>{this.onSelectEvent(event)}}
-          onSelecting={(selected)=>{console.log('foo on selecting', selected)}}
-          selected={{}}
+          selected={a}
+          onSelecting={(selected,a,b)=>{console.log('My foo on selecting',selected, a,b); return true}}
         />
     )
   }

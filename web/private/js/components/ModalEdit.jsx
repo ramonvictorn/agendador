@@ -39,6 +39,7 @@ class ModalEdit extends Component {
                 if(!serverAns.err){
                     console.log('ajax insert event') 
                     this.getEvents()
+                    this.props._toggleModal()
                 } 
             }
         });
@@ -92,10 +93,9 @@ class ModalEdit extends Component {
     
                                     <Form.Group as={Col} controlId="formGridState">
                                         <Form.Label>Sala</Form.Label>
-                                        <Form.Control as="select" value={this.props.modalValues.agenda} onChange={(e)=>this.getValues(e.target.value,'agenda')}>
-                                            <option value={'null'}>Escolher...</option>
+                                        <Form.Control as="select" title=" Escolha uma agenda:" value={this.props.modalValues.agenda} onChange={(e)=>this.getValues(e.target.value,'agenda')}>
                                             <option value={501}>501 - Reunião.</option>
-                                            <option value={500}>500 - Estudio</option>
+                                            <option  disabled value={500}>500 - Estudio</option>
                                         </Form.Control>
                                     </Form.Group>
                                 </Form.Row>
@@ -104,6 +104,7 @@ class ModalEdit extends Component {
                                     <Form.Group as={Col} controlId="formGridEmail">
                                         <Form.Label>Inicio </Form.Label>
                                         <DatePicker
+                                        readOnly={true}
                                         className='picker form-control'
                                         selected={new Date(this.props.modalValues.start)}
                                         onChange={(value)=>{this.getValues(value,'start')}}
@@ -119,7 +120,7 @@ class ModalEdit extends Component {
                                         <Form.Label>Fim</Form.Label>
                                         <DatePicker
                                         className='picker form-control'
-                                        
+                                        readOnly={true}
                                         selected={new Date(this.props.modalValues.end)}
                                         onChange={(value)=>{this.getValues(value,'end')}}
                                         showTimeSelect
