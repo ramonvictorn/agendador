@@ -13,6 +13,7 @@ const insertEventController = require('../controllers/insertEvent');
 const isLoggedController = require('../controllers/isLogged.js')
 const getUserController = require('../controllers/getUser.js')
 
+const logoutController = require('../controllers/logout.js')
 /**  
 *
 * @desc Routes and controllers for API
@@ -26,6 +27,7 @@ function init(app){
     //app.get('*',  renderLoginController.login);
     app.post('/user/isLogged', isLoggedController)
     app.post('/user/login', loginController.login);
+    app.post('/user/logout', logoutController);
     // app.post('/user/login', (req,res)=>{
     //     console.log('to no routes', req.body)
     // });

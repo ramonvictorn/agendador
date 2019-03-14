@@ -21,7 +21,7 @@ function login(req,res){
                 console.log('usuario sem sessao iniciada, criando...', response.data)
                 req.session.agendador = {};
                 req.session.agendador.user = response.data;
-                req.session.cookie.expires = new Date(Date.now() + 3600000)
+                req.session.cookie.expires = new Date(Date.now() + 86400000)
             }
             res.status(200).send({data:response.data});
         }

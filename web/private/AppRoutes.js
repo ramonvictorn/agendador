@@ -18,7 +18,7 @@ import LoginView from '../private/js/views/LoginView.jsx'
 import NoMatch404 from '../private/js/views/NoMatch404.jsx';
 import AgendaView from '../private/js/views/AgendaView.jsx';
 import AgendaChoise from '../private/js/views/AgendaChoise.jsx'
-
+import Administrative from '../private/js/views/Administrative.jsx'
 
 const PrivateRoute = ({component:Component, ...rest})=> {
     return (
@@ -93,6 +93,7 @@ class AppRoutes extends Component{
                     <PrivateRoute path='/agenda/:idAgenda' isLogged={this.props.isLogged} component={AgendaView}/>
                     <PrivateRoute path='/agenda' isLogged={this.props.isLogged} component={AgendaChoise}/>
                     <PrivateRoute path='/choiseAgenda' isLogged={this.props.isLogged} component={AgendaChoise}/>
+                    <PrivateRoute path='/administrative/' isLogged={this.props.isLogged} component={Administrative}/>
                     {/* <Route path={'/'} component={AgendaView}/> */}
                     <Route component={NoMatch404}/>
                 </Switch>

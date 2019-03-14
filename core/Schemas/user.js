@@ -23,7 +23,6 @@ const UserSchema = new mongoose.Schema({
     details:{
         type:Object,
         required:true,
-        default:'{url:"lantec"}',
     },
     schedule:{
         type:Array,

@@ -51,7 +51,7 @@ function register(data, cb){
               response.error = {text: 'SAVE_ERROR'};
             }else {
                 // saved!
-                //console.log('REGISTER USER MODEL - SAVE SUCESS');
+                console.log('REGISTER USER MODEL - SAVE SUCESS');
                 response.data = user
             }
             cb(response);

@@ -3,6 +3,7 @@ import {
   UPDATE_EVENTS, 
   SET_VALUES_MODAL,
   SET_MODAL_TYPE,
+  UPDATE_ORGANIZE_EVENTS,
 } from '../actions/agendaAction.js';
 
 let dateNow = new Date();
@@ -19,6 +20,7 @@ const initialState = {
     idUser: 'null',
   },
   events : [],
+  organizeEvents : {},
 }
 
 let newValue;
@@ -30,8 +32,13 @@ const agendaReduce = (state = initialState, action)=>{
       return {...state, modalShow: newValue };
     
     case UPDATE_EVENTS:
+      console.log('update aqui',action.payload)
       return {...state, events : action.payload.events}
     
+    case UPDATE_ORGANIZE_EVENTS:
+      console.log('update organize events',action.payload)
+      return{...state, organizeEvents: action.payload.events} 
+      
     case SET_VALUES_MODAL:
       //console.log('reduce values ', action.payload.values, state.modalValues.start)
       return {...state, 

@@ -29,7 +29,8 @@
 }
 
 .userMenu {
-  width: 150px;
+  cursor: pointer;
+  width: 111px;
   height: 50px;
   max-width: 250px;
   float: right;
@@ -51,3 +52,20 @@
   border: white;
   float: right
 } 
+
+
+.circle {
+  background-color: #aaa;
+  border-radius: 50%;
+  width: 52px;
+  height: 47px;
+  overflow: hidden;
+  position: relative;
+  float: right
+}
+
+.circle img {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
