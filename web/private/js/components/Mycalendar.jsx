@@ -56,14 +56,16 @@ class MyCalendar extends Component {
   selectSlot (slotInfo){
     console.log('Myselect slot props ', slotInfo)
     if(this.props.modalShow == false){
-      console.log('MyCalendar - SelectSlot false',this.props.organizeEvents['2019'])
-      if(this.props.organizeEvents['2019']['03']['15']['03'] != true){
-        console.log('deu true')
-      }
-      // this.props._toggleModal();
-      // this.props._setValuesModal({start : slotInfo.start})
-      // this.props._setValuesModal({end : slotInfo.end})
-      // this.props._setModalType('create');
+      console.log('MyCalendar - SelectSlot false',this.props.organizeEvents)
+      // if(this.props.organizeEvents['2019']['03']['15']['03'] != true){
+      //   console.log('deu true então tem evento')
+      // }else{
+      //   console.log('pode criar q n tem evento')
+      // }
+      this.props._toggleModal();
+      this.props._setValuesModal({start : slotInfo.start})
+      this.props._setValuesModal({end : slotInfo.end})
+      this.props._setModalType('create');
     }else{
       // console.log('MyCalendar - Select Slot true entao n faaz nada')
     }
@@ -117,24 +119,61 @@ class MyCalendar extends Component {
   }
   // set in store events[year][month][day][hour][minutes]
   organizarEvents(){
+    console.log('organize events')
     var events = this.props.events;
     let organizedEvents = {};
-    organizedEvents['2019'] = {}
-    organizedEvents['2019']['03'] = {}
-    organizedEvents['2019']['03']['15'] = [];
-    organizedEvents['2019']['03']['15'][3] = true;
-    organizedEvents['2019']['03']['15'][4] = true;
-    organizedEvents['2019']['03']['15'][5] = true;
-    organizedEvents['2019']['03']['15'][6] = true;
-    organizedEvents['2019']['03']['15'][7] = true;
-    organizedEvents['2019']['03']['15'][8] = true;
+    // let diaI,mesI,anoI,horaI;
+    // let diaF,mesF,anoF,horaF;
+    events.map((ele)=>{
+      console.log('map em cada', ele)
+
+      //create year
+      if(organizedEvents[ele.year] != undefined){
+
+        
+      }else{
+        organizedEvents[ele.year] = {}
+      }
+
+      //create month
+      if(organizedEvents[ele.year][ele.month] != undefined){
+
+        
+      }else{
+        organizedEvents[ele.year][ele.month] = {}
+      }
+      
+      //create day
+      if(organizedEvents[ele.year][ele.month][ele.dayStart] != undefined){
+
+        
+      }else{
+        organizedEvents[ele.year][ele.month][ele.dayStart] = []
+      }
+
+      //create array slots
+      if(organizedEvents[ele.year][ele.month][ele.dayStart][0] != true){
+        console.log('nao tem no day')
+      }
+      
+
+    })
+    // organizedEvents['2019'] = {}
+    // organizedEvents['2019']['03'] = {}
+    // organizedEvents['2019']['03']['15'] = [];
+    // organizedEvents['2019']['03']['15'][3] = true;
+    // organizedEvents['2019']['03']['15'][4] = true;
+    // organizedEvents['2019']['03']['15'][5] = true;
+    // organizedEvents['2019']['03']['15'][6] = true;
+    // organizedEvents['2019']['03']['15'][7] = true;
+    // organizedEvents['2019']['03']['15'][8] = true;
     this.props._updateOrganizeEvents(organizedEvents)
-    console.log('organizedEvents final ' ,organizedEvents , 'dia 15 ', organizedEvents['2019']['03']['15'])
+    // console.log('organizedEvents final ' ,organizedEvents , 'dia 15 ', organizedEvents['2019']['03']['15'])
 
   }
 
   onSelecting(selected){
-    console.log('selected ', selected)
+    // console.log('selected ', selected)
     return true
   }
   render(){

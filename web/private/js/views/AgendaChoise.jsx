@@ -26,7 +26,7 @@ class AgendaChoise extends Component {
                 
                     <DropdownButton onSelect={(eventKey,event)=>{this.redirectToAgenda(eventKey,event)}} id="dropdown-basic-button" title=" Escolha uma agenda:" className={'divCenter'}>
                         <Dropdown.Item eventKey={'501'}>501 - Sala de reunião</Dropdown.Item>
-                        <Dropdown.Item eventKey={'500'}>500 - Estúdio</Dropdown.Item>
+                        <Dropdown.Item disabled eventKey={'500'}>500 - Estúdio</Dropdown.Item>
                     </DropdownButton>
                 
                 

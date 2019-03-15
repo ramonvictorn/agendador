@@ -25,6 +25,8 @@ function insertEvent(data,cb){
         user:data.user,
         dayStart: data.dayStart,
         dayEnd: data.dayEnd,
+        year: data.year,
+        month: data.month,
         details: data.details,
     });
 

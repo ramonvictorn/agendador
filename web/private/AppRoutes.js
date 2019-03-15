@@ -20,6 +20,9 @@ import AgendaView from '../private/js/views/AgendaView.jsx';
 import AgendaChoise from '../private/js/views/AgendaChoise.jsx'
 import Administrative from '../private/js/views/Administrative.jsx'
 
+
+import HeaderMenu from '../private/js/components/HeaderMenu.jsx'
+
 const PrivateRoute = ({component:Component, ...rest})=> {
     return (
         <Route {...rest} render={(props)=>(
@@ -94,8 +97,10 @@ class AppRoutes extends Component{
                     <PrivateRoute path='/agenda' isLogged={this.props.isLogged} component={AgendaChoise}/>
                     <PrivateRoute path='/choiseAgenda' isLogged={this.props.isLogged} component={AgendaChoise}/>
                     <PrivateRoute path='/administrative/' isLogged={this.props.isLogged} component={Administrative}/>
-                    {/* <Route path={'/'} component={AgendaView}/> */}
+                    <PrivateRoute exact path='/' isLogged={this.props.isLogged} component={AgendaChoise}/>
                     <Route component={NoMatch404}/>
+                    {/* <Route path={'/'} component={AgendaView}/> */}
+                    {/* <PrivateRoute path='/' isLogged={this.props.isLogged} component={AgendaChoise}/> */}
                 </Switch>
             </Router>
         )

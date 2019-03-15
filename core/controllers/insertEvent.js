@@ -10,6 +10,8 @@ function insertEvent(req,res){
         user:req.session.agendador.user._id,
         dayStart: new Date(req.body.start).getDate(),
         dayEnd: new Date(req.body.end).getDate(),
+        year : new Date(req.body.start).getFullYear(),
+        month : new Date(req.body.start).getMonth(),
         details: '{}',
     }
     if(!checkParams(req.body)) res.status(400).send({error:'INVALID_PARAMS'})
