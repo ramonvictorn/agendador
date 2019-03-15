@@ -22,6 +22,7 @@ class UserMenu extends Component {
             complete: () => {
                 if(serverAns.err == undefined){
                     this.props._setLogged(false);
+                    this.props._saveUser(null)
                 }
             }
         });
