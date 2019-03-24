@@ -11,7 +11,7 @@ function insertEvent(req,res){
         dayStart: new Date(req.body.start).getDate(),
         dayEnd: new Date(req.body.end).getDate(),
         year : new Date(req.body.start).getFullYear(),
-        month : new Date(req.body.start).getMonth(),
+        month : new Date(req.body.start).getMonth()+1,
         details: '{}',
     }
     if(!checkParams(req.body)) res.status(400).send({error:'INVALID_PARAMS'})
