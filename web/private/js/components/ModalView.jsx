@@ -11,7 +11,7 @@ class ModalView extends Component {
         super()
     }
     render(){
-        console.log('render ModalView props show ',this.props.modalShow)
+        console.log('render ModalView props show ',this.props)
         let start = (this.props.modalValues.start).toString()
         let end = (this.props.modalValues.end).toString()
         let title = this.props.modalValues.title;

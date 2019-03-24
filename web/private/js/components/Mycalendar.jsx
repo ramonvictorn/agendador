@@ -63,6 +63,7 @@ class MyCalendar extends Component {
     HourFinish = slotInfo.end.getHours();
     minutesStart = slotInfo.start.getMinutes();
     minutesFinish = slotInfo.end.getMinutes();
+    let can = true;
     let used = this.calcSlot(slotInfo.start,slotInfo.end);
     // console.log('Myselect slot props ', 'year,month,hourStart,HourFinish, minutesStart,minutesFinish; ', year,month,hourStart,HourFinish, minutesStart,minutesFinish)
     if(this.props.modalShow == false){
@@ -78,35 +79,43 @@ class MyCalendar extends Component {
               console.log('foo params for ', 'used.inicial ', used.inicial, '(used.inicial+used.linkeds-1) ', (used.inicial+used.linkeds-1))
               for(var i = used.inicial; i<= (used.inicial+used.linkeds-1); i++){
                 if(this.props.organizeEvents[year][month][day][i] != undefined){
-                  console.log('JA TEM EVENTO AQUI')
-                  alert('Selecione outro horário, já existe reserva')
-                  break
-
-                }else{
-                  //pode abrir a modal
-                  this.props._toggleModal();
-                  this.props._setValuesModal({start : slotInfo.start})
-                  this.props._setValuesModal({end : slotInfo.end})
-                  this.props._setModalType('create');
+                    console.log('JA TEM EVENTO AQUI')
+                    can = false;
+                    alert('Selecione outro horário, já existe reserva')
+                    break
+                  }
                 }
-              }
+
+                  //pode abrir a modal
+                  if(can == true){
+                    console.log('toggle 4')
+                    this.props._setValuesModal({start : slotInfo.start})
+                    this.props._setValuesModal({end : slotInfo.end})
+                    this.props._setModalType('create');
+                    this.props._toggleModal();
+                  }
+                
+              
             }else{
-              this.props._toggleModal();
+              console.log('toggle 3')
               this.props._setValuesModal({start : slotInfo.start})
               this.props._setValuesModal({end : slotInfo.end})
               this.props._setModalType('create');
+              this.props._toggleModal();
             }
           }else{
-            this.props._toggleModal();
+            console.log('toggle 2')
             this.props._setValuesModal({start : slotInfo.start})
             this.props._setValuesModal({end : slotInfo.end})
             this.props._setModalType('create');
+            this.props._toggleModal();
           }
         }else{
-          this.props._toggleModal();
+          console.log('toggle 1')
           this.props._setValuesModal({start : slotInfo.start})
           this.props._setValuesModal({end : slotInfo.end})
           this.props._setModalType('create');
+          this.props._toggleModal();
         }
 
       
@@ -214,7 +223,7 @@ class MyCalendar extends Component {
 
   // retorna slot inicial e linkeds
   calcSlot(start,end){
-    console.log('Calc slot')
+    //  console.log('Calc slot calendar')
     let startParam = new Date(start)
     let endParam = new Date(end)
     let calculed = {};
@@ -247,7 +256,7 @@ class MyCalendar extends Component {
       inicialSlot = (hourStart*2);
       linkedSlots = (hourEnd - hourStart)*2;
     }
-    console.log('inicialSlot ', inicialSlot, linkedSlots )
+    // console.log('inicialSlot ', inicialSlot, linkedSlots )
     calculed['inicial'] = inicialSlot; //Ok
     calculed['linkeds'] = linkedSlots;
     return calculed

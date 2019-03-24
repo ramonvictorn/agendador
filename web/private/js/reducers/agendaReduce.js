@@ -18,6 +18,8 @@ const initialState = {
     agenda:'null',
     idEvent: 'null',
     idUser: 'null',
+    slotsExclude :null,
+    slotsExcludeEnd: null,
   },
   events : [],
   organizeEvents : {},
@@ -28,7 +30,7 @@ const agendaReduce = (state = initialState, action)=>{
   switch(action.type){
     case TOGGLE_MODAL:
       console.log('agendaReduce toggle aqui antes ', state.modalShow)
-      newValue = state.modalShow == false ? true : false
+      state.modalShow == false ?  newValue = true : newValue = false
       return {...state, modalShow: newValue };
     
     case UPDATE_EVENTS:
@@ -40,7 +42,7 @@ const agendaReduce = (state = initialState, action)=>{
       return{...state, organizeEvents: action.payload.events} 
       
     case SET_VALUES_MODAL:
-      //console.log('reduce values ', action.payload.values, state.modalValues.start)
+      console.log('reduce values modal', action.payload.values)
       return {...state, 
         modalValues :{
           start: action.payload.values.start != undefined ? action.payload.values.start : state.modalValues.start,
@@ -48,10 +50,12 @@ const agendaReduce = (state = initialState, action)=>{
           title:  action.payload.values.title != undefined ? action.payload.values.title : state.modalValues.title,
           agenda:  action.payload.values.agenda != undefined ? action.payload.values.agenda : state.modalValues.agenda,
           idUser:  action.payload.values.idUser != undefined ? action.payload.values.idUser : state.modalValues.idUser,
+          slotsExclude : action.payload.values.slotsExclude != undefined ? action.payload.values.slotsExclude : state.modalValues.slotsExclude,
+          slotsExcludeEnd : action.payload.values.slotsExcludeEnd != undefined ? action.payload.values.slotsExcludeEnd : state.modalValues.slotsExcludeEnd,
         }
       }
     case SET_MODAL_TYPE:
-      console.log('set modal type',action.payload)
+      console.log('agenda Reduce -> set modal type',action.payload)
       return{...state,
         modalType:action.payload.value
       }    
