@@ -41,7 +41,8 @@ class MyCalendar extends Component {
     this.onSelectEvent = this.onSelectEvent.bind(this);
     this.setStartTime = this.setStartTime.bind(this);
     this.organizarEvents = this.organizarEvents.bind(this);
-    this.onSelecting = this.onSelecting.bind(this)
+    this.onSelecting = this.onSelecting.bind(this);
+    this.calcSlot = this.calcSlot.bind(this)
   }
   
   componentDidMount(){
@@ -119,57 +120,89 @@ class MyCalendar extends Component {
   }
   // set in store events[year][month][day][hour][minutes]
   organizarEvents(){
-    console.log('organize events')
     var events = this.props.events;
     let organizedEvents = {};
     // let diaI,mesI,anoI,horaI;
     // let diaF,mesF,anoF,horaF;
     events.map((ele)=>{
-      console.log('map em cada', ele)
-
       //create year
-      if(organizedEvents[ele.year] != undefined){
-
-        
+      if(organizedEvents[ele.year] != undefined){ 
       }else{
         organizedEvents[ele.year] = {}
       }
-
       //create month
       if(organizedEvents[ele.year][ele.month] != undefined){
-
-        
       }else{
         organizedEvents[ele.year][ele.month] = {}
       }
-      
       //create day
       if(organizedEvents[ele.year][ele.month][ele.dayStart] != undefined){
-
-        
       }else{
         organizedEvents[ele.year][ele.month][ele.dayStart] = []
       }
-
       //create array slots
-      if(organizedEvents[ele.year][ele.month][ele.dayStart][0] != true){
-        console.log('nao tem no day')
+      let slots = this.calcSlot(ele.start,ele.end)
+      // console.log('before', organizedEvents[ele.year][ele.month][ele.dayStart][slots['inicial']])
+      if(organizedEvents[ele.year][ele.month][ele.dayStart][slots['inicial']] == undefined){
+        organizedEvents[ele.year][ele.month][ele.dayStart][slots['inicial']] = ele;
+        // console.log('linkeds = ',slots['linkeds'], "slots['inicial']", slots['inicial'])
+        // console.log(slots['inicial'] + slots['linkeds'] - 1)
+        for(var i = 1; i < slots['linkeds']; i++){
+          let calc = slots['inicial'] + i
+          organizedEvents[ele.year][ele.month][ele.dayStart][calc] = {linked:slots['inicial']};
+        }
       }
       
 
     })
-    // organizedEvents['2019'] = {}
-    // organizedEvents['2019']['03'] = {}
-    // organizedEvents['2019']['03']['15'] = [];
-    // organizedEvents['2019']['03']['15'][3] = true;
-    // organizedEvents['2019']['03']['15'][4] = true;
-    // organizedEvents['2019']['03']['15'][5] = true;
-    // organizedEvents['2019']['03']['15'][6] = true;
-    // organizedEvents['2019']['03']['15'][7] = true;
-    // organizedEvents['2019']['03']['15'][8] = true;
     this.props._updateOrganizeEvents(organizedEvents)
-    // console.log('organizedEvents final ' ,organizedEvents , 'dia 15 ', organizedEvents['2019']['03']['15'])
+    console.log('fim do organize ', organizedEvents)
+  }
 
+  calcSlot(start,end){
+    let startParam = new Date(start)
+    let endParam = new Date(end)
+    let useds = [];
+    let calc = startParam.getHours() * 2
+    startParam.getMinutes() >= 1 ? calc =  calc + 1 : calc = calc
+    useds[calc] = true;
+    let used = {}
+    used['inicial'] = calc
+
+    //calc links slots
+    let hourStart = startParam.getHours()
+    let MinuteStart = startParam.getMinutes()
+    let hourEnd = endParam.getHours()
+    let MinuteEnd = endParam.getMinutes()
+
+    let slotHour = 0;
+    let slotMinutes = 0
+    if(hourEnd - hourStart <= 0){
+      slotHour = 0;
+      slotMinutes = 1;
+      //dura menos de 30min
+    }else{
+      //dura mais de 30 min
+      //simulacao 16:30     || 19:00
+      if(MinuteEnd == 30 || MinuteStart == 30){
+        slotHour =  hourEnd - hourStart; //3
+        MinuteEnd == 30 ? slotHour = slotHour +1: ''
+        MinuteStart == 30 ? slotHour = slotHour +1: '' //4
+        if(MinuteEnd == 30 && MinuteStart == 30){
+          slotHour =  (hourEnd - hourStart)*2;
+        }else{
+          slotHour =  ((hourEnd - hourStart)*2) - 1;
+        }
+      }else{
+        slotHour = (hourEnd - hourStart)*2
+      }
+      // slotMinutes = MinuteEnd >= 30 ? slotMinutes = 1 : slotMinutes = 0;
+      // slotMinutes = MinuteStart >= 30 ? slotMinutes = slotMinutes + 1 : slotMinutes = 0
+    }
+    // console.log('slots during event = ', slotHour+slotMinutes, 'no evento ', hourStart)
+    
+    used['linkeds'] =  slotHour+slotMinutes
+    return used;
   }
 
   onSelecting(selected){
