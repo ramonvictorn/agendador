@@ -9,6 +9,10 @@ import {
     setModalType,
 } from '../actions/agendaAction.js'
 
+import log from '../../../../utils/logger.js'
+import logar from '../../../../utils/teste.js'
+import slotFunctions from '../../../../utils/slotFunctios.js'
+
 class ModalEdit extends Component {
     constructor(){
         super()
@@ -20,6 +24,10 @@ class ModalEdit extends Component {
         this.calcSlot = this.calcSlot.bind(this);
         this.calcHour = this.calcHour.bind(this);
         this.defineEndOnModal = this.defineEndOnModal.bind(this);
+        this.deleteEvent = this.deleteEvent.bind(this)
+        new log()
+        new logar()
+        console.log('ramon teste' ,slotFunctions.getSlots())
     }
     getValues(value,type){
         const eventObj = {
@@ -69,7 +77,7 @@ class ModalEdit extends Component {
     // block some slot on end event
     defineEndOnModal(trocou){
         // let value = new Date(this.props.modalValues.start)
-        let value = trocou
+        let value = new Date(trocou)
         console.log('value é ',value ,this.props.modalValues.start)
         let inicial;
         let year = value.getFullYear();
@@ -91,14 +99,18 @@ class ModalEdit extends Component {
             inicial = value.getHours()*2
         }
         console.log('inicial slot is ',inicial)
-
-        for(var i = inicial; i<=  48; i++)  
-        if(this.props.organizeEvents[year][month][day][i] != undefined){
-            // console.log('tem evento no meio i-> ',i, this.props.organizeEvents[year][month][day][i])
-            lastToFinish = i +1
-            break
-        }else{
-            lastToFinish = 48;
+        for(var i = inicial; i<=  48; i++){
+            // if(this.props.organizeEvents[year][month][day][i] != undefined){ versao with bug undefined day
+            // if((((this.props.organizeEvents[year])||{})[month]||{})[day]||{} !=undefined){ version 2
+            if(Object.keys((((this.props.organizeEvents[year])||{})[month]||{})[day]||{}).length >= 1 ){
+                // console.log('tem evento no meio i-> ',i, this.props.organizeEvents[year][month][day][i])
+                // console.log('ramon' , (((this.props.organizeEvents[year])||{})[month]||{})[day]||{})
+                console.log('teste leng ', Object.keys((((this.props.organizeEvents[year])||{})[month]||{})[day]||{}).length)
+                lastToFinish = i +1
+                break
+            }else{
+                lastToFinish = 48;
+            }
         }
         // console.log('lastToFinish ',lastToFinish)
         for(var t = lastToFinish; t <= 48; t++){
@@ -111,7 +123,10 @@ class ModalEdit extends Component {
         }
         // console.log('block end ', lastToFinish , arrayBlock)
         this.props._setValuesModal({slotsExcludeEnd: arrayBlock})
-       
+        // let temp = new Date(value.setMinutes(value.getMinutes()+30))
+        // console.log('temp 1 ', new Date(value.setMinutes(value.getMinutes()+30)))
+        // this.props._setValuesModal({end: value})
+       return null;
         
     }
 
@@ -204,6 +219,29 @@ class ModalEdit extends Component {
         calculed['linkeds'] = linkedSlots;
         return calculed
     }
+
+    deleteEvent(id){
+        console.log('deleteEvent')
+        let serverAns = {}
+        let data = {id:this.props.modalValues.idEvent}
+        $.ajax({
+            url: '/events/deleteEvent',
+            dataType: 'json',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: (ans) => { serverAns = ans; },
+            error: (err) => { serverAns = {err : err.responseJSON} },
+            complete: () => {
+                if(!serverAns.err){
+                    console.log('ajax delete event') 
+                    this.getEvents()
+                    // this.props._toggleModal()
+                } 
+            }
+        });
+
+    }
     componentDidMount(){
         console.log('componentDidMount ModalEdit')
         this.slotsOnModalPicket()
@@ -292,7 +330,7 @@ class ModalEdit extends Component {
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
-                            {/* <Button onClick={()=>this.props._toggleModal()} >Cancel</Button> */}
+                            <Button onClick={()=>this.deleteEvent()} >Deletar Evento</Button>
                             <Button onClick={()=>this.insertEvent(this.props.modalValues)} >Save</Button>
                         </Modal.Footer>
                     </Modal> 

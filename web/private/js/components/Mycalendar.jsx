@@ -162,6 +162,7 @@ class MyCalendar extends Component {
       this.props._setValuesModal({end:event.end})
       this.props._setValuesModal({agenda:event.agenda})
       this.props._setValuesModal({idUser:event.user})
+      this.props._setValuesModal({idEvent:event._id})
       if(event.user == this.props.user._id){
         this.props._setModalType('edit');
       }else{

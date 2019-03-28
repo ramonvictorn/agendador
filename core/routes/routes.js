@@ -12,6 +12,7 @@ const getEventsController = require('../controllers/getEvents');
 const insertEventController = require('../controllers/insertEvent');
 const isLoggedController = require('../controllers/isLogged.js')
 const getUserController = require('../controllers/getUser.js')
+const deleteEventController = require('../controllers/DeleteEvent.js')
 
 const logoutController = require('../controllers/logout.js')
 /**  
@@ -37,6 +38,7 @@ function init(app){
     app.post('/events/insertEvent', insertEventController.insertEvent)
     app.post('/user/registerUser', registerUserController.register)
     app.post('/user/getUser',getUserController)
+    app.post('/events/deleteEvent',deleteEventController)
 }
 
 

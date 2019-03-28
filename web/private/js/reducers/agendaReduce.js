@@ -20,6 +20,7 @@ const initialState = {
     idUser: 'null',
     slotsExclude :null,
     slotsExcludeEnd: null,
+    idEvent:null
   },
   events : [],
   organizeEvents : {},
@@ -52,6 +53,7 @@ const agendaReduce = (state = initialState, action)=>{
           idUser:  action.payload.values.idUser != undefined ? action.payload.values.idUser : state.modalValues.idUser,
           slotsExclude : action.payload.values.slotsExclude != undefined ? action.payload.values.slotsExclude : state.modalValues.slotsExclude,
           slotsExcludeEnd : action.payload.values.slotsExcludeEnd != undefined ? action.payload.values.slotsExcludeEnd : state.modalValues.slotsExcludeEnd,
+          idEvent:  action.payload.values.idEvent != undefined ? action.payload.values.idEvent : state.modalValues.idEvent,
         }
       }
     case SET_MODAL_TYPE:
