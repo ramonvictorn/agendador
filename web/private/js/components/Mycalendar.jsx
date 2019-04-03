@@ -9,7 +9,7 @@ import {
 } from '../actions/agendaAction.js';
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
-
+import arrayFunctions from '../../../../utils/slotFunctios.js'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 const localizer = BigCalendar.momentLocalizer(moment) 
 
@@ -19,6 +19,7 @@ const mapStateToProps = store => ({
   events:store.agendaReduce.events,
   user: store.appReduce.user,
   organizeEvents: store.agendaReduce.organizeEvents,
+  modalValues : store.agendaReduce.modalValues,
 });
 
 
@@ -30,8 +31,6 @@ const mapDispatchToProps = dispatch => ({
   _updateOrganizeEvents:(events) =>dispatch(updateOrganizeEvents(events))
 });
 
-
-// const MyCalendar = ({click, events}) => {
 class MyCalendar extends Component {
   constructor(){
     super()
@@ -40,9 +39,8 @@ class MyCalendar extends Component {
     this.configDate = this.configDate.bind(this);
     this.onSelectEvent = this.onSelectEvent.bind(this);
     this.setStartTime = this.setStartTime.bind(this);
-    this.organizarEvents = this.organizarEvents.bind(this);
     this.onSelecting = this.onSelecting.bind(this);
-    this.calcSlot = this.calcSlot.bind(this)
+    this.openModal =  this.openModal.bind(this);
   }
   
   componentDidMount(){
@@ -53,7 +51,14 @@ class MyCalendar extends Component {
     var newDate = new Date (date);
     return newDate;
   }
-  
+  openModal(type,slotInfo){
+    this.props._setValuesModal({start : slotInfo.start})
+    this.props._setValuesModal({end : slotInfo.end})
+    let startBlock = arrayFunctions.blockSlotsStart(this.props.modalValues.start,this.props.organizeEvents)
+    this.props._setValuesModal({slotsExcludeStart:startBlock})
+    this.props._setModalType(type);
+    this.props._toggleModal();
+  }
   selectSlot (slotInfo){
     let year,month,hourStart,HourFinish, minutesStart,minutesFinish,day;
     year = slotInfo.start.getFullYear();
@@ -64,71 +69,32 @@ class MyCalendar extends Component {
     minutesStart = slotInfo.start.getMinutes();
     minutesFinish = slotInfo.end.getMinutes();
     let can = true;
-    let used = this.calcSlot(slotInfo.start,slotInfo.end);
-    // console.log('Myselect slot props ', 'year,month,hourStart,HourFinish, minutesStart,minutesFinish; ', year,month,hourStart,HourFinish, minutesStart,minutesFinish)
+    let used = arrayFunctions.getSlots(slotInfo.start,slotInfo.end);
     if(this.props.modalShow == false){
-      console.log('MyCalendar - SelectSlot false',used)
-      //verify if is free
-      // console.log('params para o for ','used.inicial ', used.inicial, '(used.inicial+used.linked-1)', used.inicial, used.linkeds)
-        
-        // console.log('for in selec ', this.props.organizeEvents[year][month][day][used.inicial])
         if(this.props.organizeEvents[year]){
           if(this.props.organizeEvents[year][month]){
             if(this.props.organizeEvents[year][month][day]){
               //dia existe, varrer slots
-              console.log('foo params for ', 'used.inicial ', used.inicial, '(used.inicial+used.linkeds-1) ', (used.inicial+used.linkeds-1))
               for(var i = used.inicial; i<= (used.inicial+used.linkeds-1); i++){
                 if(this.props.organizeEvents[year][month][day][i] != undefined){
-                    console.log('JA TEM EVENTO AQUI')
                     can = false;
                     alert('Selecione outro horário, já existe reserva')
                     break
                   }
                 }
-
                   //pode abrir a modal
                   if(can == true){
-                    console.log('toggle 4')
-                    this.props._setValuesModal({start : slotInfo.start})
-                    this.props._setValuesModal({end : slotInfo.end})
-                    this.props._setModalType('create');
-                    this.props._toggleModal();
+                    this.openModal('create',slotInfo)
                   }
-                
-              
             }else{
-              console.log('toggle 3')
-              this.props._setValuesModal({start : slotInfo.start})
-              this.props._setValuesModal({end : slotInfo.end})
-              this.props._setModalType('create');
-              this.props._toggleModal();
+              this.openModal('create',slotInfo)
             }
           }else{
-            console.log('toggle 2')
-            this.props._setValuesModal({start : slotInfo.start})
-            this.props._setValuesModal({end : slotInfo.end})
-            this.props._setModalType('create');
-            this.props._toggleModal();
+            this.openModal('create',slotInfo)
           }
         }else{
-          console.log('toggle 1')
-          this.props._setValuesModal({start : slotInfo.start})
-          this.props._setValuesModal({end : slotInfo.end})
-          this.props._setModalType('create');
-          this.props._toggleModal();
+          this.openModal('create',slotInfo)
         }
-
-      
-      // this.props.organizeEvents[year][month][day]
-      // if(this.props.organizeEvents['2019']['03']['15']['03'] != true){
-      //   console.log('deu true então tem evento')
-      // }else{
-      //   console.log('pode criar q n tem evento')
-      // }
-      // this.props._toggleModal();
-      // this.props._setValuesModal({start : slotInfo.start})
-      // this.props._setValuesModal({end : slotInfo.end})
-      // this.props._setModalType('create');
     }else{
       // console.log('MyCalendar - Select Slot true entao n faaz nada')
     }
@@ -148,7 +114,9 @@ class MyCalendar extends Component {
           if(!serverAns.err){
               const events = serverAns.data ? serverAns.data : [];
               this.props._updateEvents(events);  
-              this.organizarEvents()
+              this.props._updateOrganizeEvents(arrayFunctions.organizeEvents(this.props.events))
+          }else{
+            alert('ERROR MY CALENDAR - getEvents')
           } 
       }
     });
@@ -180,128 +148,6 @@ class MyCalendar extends Component {
     var month = dateNow.getMonth();
     var year = dateNow.getFullYear()
     return new Date(year,month,day,hour,0,0);
-  }
-  // set in store events[year][month][day][hour][minutes]
-  organizarEvents(){
-    var events = this.props.events;
-    let organizedEvents = {};
-    // let diaI,mesI,anoI,horaI;
-    // let diaF,mesF,anoF,horaF;
-    events.map((ele)=>{
-      //create year
-      if(organizedEvents[ele.year] != undefined){ 
-      }else{
-        organizedEvents[ele.year] = {}
-      }
-      //create month
-      if(organizedEvents[ele.year][ele.month] != undefined){
-      }else{
-        organizedEvents[ele.year][ele.month] = {}
-      }
-      //create day
-      if(organizedEvents[ele.year][ele.month][ele.dayStart] != undefined){
-      }else{
-        organizedEvents[ele.year][ele.month][ele.dayStart] = []
-      }
-      //create array slots
-      let slots = this.calcSlot(ele.start,ele.end)
-      // console.log('before', organizedEvents[ele.year][ele.month][ele.dayStart][slots['inicial']])
-      if(organizedEvents[ele.year][ele.month][ele.dayStart][slots['inicial']] == undefined){
-        organizedEvents[ele.year][ele.month][ele.dayStart][slots['inicial']] = ele;
-        // console.log('linkeds = ',slots['linkeds'], "slots['inicial']", slots['inicial'])
-        // console.log(slots['inicial'] + slots['linkeds'] - 1)
-        for(var i = 1; i < slots['linkeds']; i++){
-          let calc = slots['inicial'] + i
-          organizedEvents[ele.year][ele.month][ele.dayStart][calc] = {linked:slots['inicial']};
-        }
-      }
-      
-
-    })
-    this.props._updateOrganizeEvents(organizedEvents)
-    console.log('fim do organize ', organizedEvents)
-  }
-
-  // retorna slot inicial e linkeds
-  calcSlot(start,end){
-    //  console.log('Calc slot calendar')
-    let startParam = new Date(start)
-    let endParam = new Date(end)
-    let calculed = {};
-
-    //calc links slots
-    let inicialSlot; //slot inicial do evento
-    let linkedSlots;; //total de slot que o evento usa
-    let slotHour = 0;
-    let slotMinutes = 0;
-    let hourStart = startParam.getHours()
-    let MinuteStart = startParam.getMinutes()
-    let hourEnd = endParam.getHours()
-    let MinuteEnd = endParam.getMinutes()
-
-
-    if(MinuteStart != 0 || MinuteEnd != 0){
-      if(MinuteStart != 0){
-        inicialSlot = (hourStart*2) + 1;
-        linkedSlots = ((hourEnd - hourStart)*2) - 1;
-      }
-      if(MinuteEnd != 0){
-        inicialSlot == undefined ? inicialSlot = (hourStart*2) : '';
-        linkedSlots == undefined 
-        ? linkedSlots = ((hourEnd - hourStart)*2) + 1
-        : linkedSlots = linkedSlots + 1
-      }
-      
-
-    }else{
-      inicialSlot = (hourStart*2);
-      linkedSlots = (hourEnd - hourStart)*2;
-    }
-    // console.log('inicialSlot ', inicialSlot, linkedSlots )
-    calculed['inicial'] = inicialSlot; //Ok
-    calculed['linkeds'] = linkedSlots;
-    return calculed
-    // let useds = [];
-    // let calc = startParam.getHours() * 2
-    // startParam.getMinutes() >= 1 ? calc =  calc + 1 : calc = calc
-    // useds[calc] = true;
-    // let used = {}
-    // used['inicial'] = calc
-
-    // //calc links slots
-    // let hourStart = startParam.getHours()
-    // let MinuteStart = startParam.getMinutes()
-    // let hourEnd = endParam.getHours()
-    // let MinuteEnd = endParam.getMinutes()
-
-    // let slotHour = 0;
-    // let slotMinutes = 0
-    // if(hourEnd - hourStart <= 0){
-    //   slotHour = 0;
-    //   slotMinutes = 1;
-    //   //dura menos de 30min
-    // }else{
-    //   //dura mais de 30 min
-    //   //simulacao 16:30     || 19:00
-    //   if(MinuteEnd == 30 || MinuteStart == 30){
-    //     slotHour =  hourEnd - hourStart; //3
-    //     MinuteEnd == 30 ? slotHour = slotHour +1: ''
-    //     MinuteStart == 30 ? slotHour = slotHour +1: '' //4
-    //     if(MinuteEnd == 30 && MinuteStart == 30){
-    //       slotHour =  (hourEnd - hourStart)*2;
-    //     }else{
-    //       slotHour =  ((hourEnd - hourStart)*2) - 1;
-    //     }
-    //   }else{
-    //     slotHour = (hourEnd - hourStart)*2
-    //   }
-    //   // slotMinutes = MinuteEnd >= 30 ? slotMinutes = 1 : slotMinutes = 0;
-    //   // slotMinutes = MinuteStart >= 30 ? slotMinutes = slotMinutes + 1 : slotMinutes = 0
-    // }
-    // // console.log('slots during event = ', slotHour+slotMinutes, 'no evento ', hourStart)
-    
-    // used['linkeds'] =  slotHour+slotMinutes
-    // return used;
   }
 
   onSelecting(selected){

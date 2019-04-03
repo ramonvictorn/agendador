@@ -18,7 +18,6 @@ class ModalEvent extends Component {
         super();
     }
     render(){
-        console.log('ModalEvent -> render - props ', this.props);
         let modal;
         if(this.props.modalShow ==true){
             let modalType = this.props.modalType;

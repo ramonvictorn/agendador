@@ -66,7 +66,7 @@ class AppRoutes extends Component{
         });
     }
     saveUserOnStore(){
-        console.log('save no app routes')
+        
         // let response = {}
         // $.ajax({
         //     url: '/user/getUser',
