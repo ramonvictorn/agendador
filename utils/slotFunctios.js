@@ -98,7 +98,7 @@ function organizeEvents(events){
 }
 
 function blockSlotsStart(start,organizeEvents){
-  console.log('blockSlotsStart-> start  ',start, organizeEvents)
+  // console.log('blockSlotsStart-> start  ',start, organizeEvents)
   let slotsArray = []
   let year = start.getFullYear()
   let month = start.getMonth() + 1
@@ -109,26 +109,27 @@ function blockSlotsStart(start,organizeEvents){
           slotsArray.push(a)
       }
   }
-  console.log('blockSlotsStart-> fim ','slotsArray ', slotsArray,'getTimeSlot(slotsArray) ',getTimeSlot(slotsArray) )
+  // console.log('blockSlotsStart-> fim ','slotsArray ', slotsArray,'getTimeSlot(slotsArray) ',getTimeSlot(slotsArray) )
   return getTimeSlot(slotsArray)
 }
 
 function blockSlotsEnd(start,end,organizeEvents){
-  console.log('blockSlotsEnd-> start  ',start,  'end', end,  organizeEvents)
   let slotsArray = []
   let year = start.getFullYear()
   let month = start.getMonth() + 1
   let day = start.getDate();
   let slots = getSlots(start,end)
-  console.log('foo slots ', slots)
-  let length = (slots['inicial'] + slots['linkeds'])-1
   let dayEvents = (((organizeEvents[year] || {})[month]|| {})[day] ||{});
-  for(var a = slots['inicial']; a<=length; a++){
-      if(dayEvents[a] != undefined && dayEvents[a] != null ){
+  let length = (slots['linkeds'] + slots['inicial'])
+  for(var a = 0; a<=48; a++){
+    if(a >= length+1 && dayEvents[a] != undefined &&  dayEvents[a] != null ){ 
+      slotsArray = arrayFull(a,48);
+      break
+    }
+    if(dayEvents[a] != undefined &&  dayEvents[a] != null ){
           slotsArray.push(a)
       }
   }
-  console.log('blockSlotsEnd-> fim ','slotsArray lenght ',length, slotsArray,'getTimeSlot(slotsArray) ',getTimeSlot(slotsArray) )
   return getTimeSlot(slotsArray)
 }
 
@@ -141,3 +142,12 @@ arrayFunctions = {
 }
 
 module.exports = arrayFunctions
+
+
+function arrayFull(inicial,final){
+  var array = []
+  for(var a = inicial; a <= final; a++){
+    array.push(a)
+  }
+  return array;
+}

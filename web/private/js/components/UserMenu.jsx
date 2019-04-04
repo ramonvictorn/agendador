@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {
-    saveUser,
     setLogged,
     isLogged,
-} from '../actions/appActions.js'
+} from '../actions/appActions.js';
+import {
+    saveUser
+} from  '../actions/usersActions.js';
 class UserMenu extends Component {
     constructor(){
         super()
@@ -29,6 +31,10 @@ class UserMenu extends Component {
     }
     
     render(){
+        console.log('user menu render',this.props.users)
+        if(this.props.users){
+
+        }
         if(this.props.user == null){
             let response = {}
             $.ajax({
@@ -65,7 +71,7 @@ class UserMenu extends Component {
 
 
 const mapStateToProps = store => ({
-    user: store.appReduce.user,
+    users: store.usersReduce.users,
     isLogged: store.appReduce.isLogged,
   });
 

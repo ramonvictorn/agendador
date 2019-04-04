@@ -113,11 +113,11 @@ class ModalEdit extends Component {
        // this.blockSlotsStart()
     }
     onChangePicket(value,type){
-        // console.log('onChangePicket', value, type)
         this.props._setValuesModal({start:value})
-        let startBlock = arrayFunctions.blockSlotsStart(this.props.modalValues.start,this.props.organizeEvents)
+        let startBlock = arrayFunctions.blockSlotsStart(value,this.props.organizeEvents)
         this.props._setValuesModal({slotsExcludeStart:startBlock})
-        arrayFunctions.blockSlotsEnd(this.props.modalValues.start, this.props.modalValues.end,this.props.organizeEvents)
+        let endBLock = arrayFunctions.blockSlotsEnd(value, this.props.modalValues.end,this.props.organizeEvents)
+        this.props._setValuesModal({slotsExcludeEnd:endBLock})
     }
     render(){
         
@@ -173,7 +173,7 @@ class ModalEdit extends Component {
                                         dateFormat="MMMM d, yyyy h:mm aa"
                                         timeCaption="Hora"
                                         minTime={new Date(new Date(((new Date().setHours(7)))).setMinutes(0))}
-                                        maxTime={new Date(new Date(((new Date().setHours(22)))).setMinutes(0))}
+                                        maxTime={new Date(new Date(((new Date().setHours(21)))).setMinutes(30))}
                                         // excludeTimes={[new Date(new Date(((new Date().setHours(10)))).setMinutes(0))]}
                                         excludeTimes={this.props.modalValues.slotsExcludeStart}
                                     />
@@ -191,7 +191,7 @@ class ModalEdit extends Component {
                                         timeIntervals={30}
                                         dateFormat="MMMM d, yyyy h:mm aa"
                                         timeCaption="Hora"
-                                        minTime={new Date(new Date(((new Date().setHours(7)))).setMinutes(0))}
+                                        minTime={new Date(new Date(((new Date().setHours(7)))).setMinutes(30))}
                                         maxTime={new Date(new Date(((new Date().setHours(22)))).setMinutes(0))}
                                         excludeTimes={this.props.modalValues.slotsExcludeEnd}
                                     />

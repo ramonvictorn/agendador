@@ -10,6 +10,7 @@ import {
     isLogged,
     setLogged, 
     saveUser,
+    saveMyId,
 } from './js/actions/appActions.js'
 
 
@@ -118,7 +119,8 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
     _isLogged: () => dispatch(isLogged),
     _setLogged: (value) => dispatch(setLogged(value)),
-    _saveUser: (value) => dispatch(saveUser(value))
+    // _saveUser: (value) => dispatch(saveUser(value))
+    _saveMyId:(value) => dispatch(saveMyId(value)),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(AppRoutes);

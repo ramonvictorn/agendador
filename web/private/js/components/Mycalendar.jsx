@@ -58,6 +58,8 @@ class MyCalendar extends Component {
     this.props._setValuesModal({slotsExcludeStart:startBlock})
     this.props._setModalType(type);
     this.props._toggleModal();
+    let endBLock = arrayFunctions.blockSlotsEnd(this.props.modalValues.start, this.props.modalValues.end,this.props.organizeEvents)
+    this.props._setValuesModal({slotsExcludeEnd:endBLock})
   }
   selectSlot (slotInfo){
     let year,month,hourStart,HourFinish, minutesStart,minutesFinish,day;
