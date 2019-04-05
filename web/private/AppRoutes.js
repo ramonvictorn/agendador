@@ -1,17 +1,20 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux';
 import {
     BrowserRouter as Router, 
     Route, 
     Switch,
     Redirect
 } from 'react-router-dom'; 
-import { connect } from 'react-redux';
 import {
     isLogged,
     setLogged, 
-    saveUser,
     saveMyId,
 } from './js/actions/appActions.js'
+
+import {
+    saveUser,
+} from './js/actions/usersActions.js'
 
 
 // views
@@ -42,7 +45,7 @@ const PrivateRoute = ({component:Component, ...rest})=> {
 class AppRoutes extends Component{
     constructor(){
         super()
-        this.saveUserOnStore = this.saveUserOnStore.bind(this)
+        this.getMyUser = this.getMyUser.bind(this);
     }
 
     componentDidMount(){
@@ -56,40 +59,38 @@ class AppRoutes extends Component{
             error: (err) => { this.response = {error : err.responseJSON.error} },
             complete: () => {
                 if(this.response.data){
-                    this.props._setLogged(true)
-                    this.saveUserOnStore()
-                   
+                    console.log('setLogged para true')
+                    this.props._setLogged(true);
+                    this.getMyUser();       
                 }else{  
+                    console.log('setLogged para false')
                     this.props._setLogged(false)
                 }
                 
             }
         });
     }
-    saveUserOnStore(){
-        
-        // let response = {}
-        // $.ajax({
-        //     url: '/user/getUser',
-        //     dataType: 'json',
-        //     type: 'post',
-        //     contentType: 'application/json',
-        //     success: (ans) => { response = ans; },
-        //     error: (err) => { response = {error : err.responseJSON.error} },
-        //     complete: () => {
-        //         if(response.data){
-        //             this.props._saveUser(response.data)
-                   
-        //         }
-        //     }
-        // });
-        
+    getMyUser(){
+        let response;
+        $.ajax({
+            url: '/user/getUser',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/json',
+            success: (ans) => { response = ans; },
+            error: (err) => { response = {error : err.responseJSON.error} },
+            complete: () => {
+               this.props._saveMyId(response.data._id)
+               this.props._saveUser(response.data)
+            }
+        });
     }
     render(){
         const isLogged = this.props.isLogged;
         if (isLogged == null) {
             return <div></div>
         }
+        console.log('render  appRoutes props- > ', this.props)
         return(
             <Router>    
                 <Switch>
@@ -112,15 +113,16 @@ class AppRoutes extends Component{
 // store
 const mapStateToProps = store => ({
     isLogged: store.appReduce.isLogged,
-    user: store.appReduce.user
+    myId: store.appReduce.myUser,
+    users:store.usersReduce.users,
   });
 
 
 const mapDispatchToProps = dispatch => ({
     _isLogged: () => dispatch(isLogged),
     _setLogged: (value) => dispatch(setLogged(value)),
-    // _saveUser: (value) => dispatch(saveUser(value))
-    _saveMyId:(value) => dispatch(saveMyId(value)),
+    _saveMyId: (values) => dispatch(saveMyId(values)),
+    _saveUser:(value) => dispatch(saveUser(value))
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(AppRoutes);

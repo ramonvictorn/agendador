@@ -4,18 +4,21 @@ import {
 
 
 const initialState = {
-    users:{}
+    users : {}
 }
 
 const usersReduce = (state = initialState, action)=>{
     switch(action.type){
         case SAVE_USER:
-        console.log('case SAVE_USER: ', action.payload)
-            state.users[action.payload.value._id] = {
-                img: action.payload.value.details.urlUser,
-                name:action.payload.value.name,
-            }
-            return {...state, users: state.users };
+        // state.users['ramon'] = 'ssds090909090dsds';
+        var a = Object.assign({}, state.uses);
+        a[action.payload.value._id] = {
+            name:action.payload.value.name,
+            img: action.payload.value.details.urlUser,
+        };
+        console.log(' a é esse ', a);
+        console.log('state é ', state.users)
+            return {...state, users: a};
         default:
             return state;
         }

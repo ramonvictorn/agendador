@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {setLogged} from '../actions/appActions.js'
+import {
+    setLogged,
+    saveMyId,
+} from '../actions/appActions.js'
 import {
     Redirect,
-    
-} from 'react-router-dom'; 
+} from 'react-router-dom';
+
+import {
+    saveUser
+} from  '../actions/usersActions.js';
 
 
 class FormLogin extends Component{
@@ -14,7 +20,8 @@ class FormLogin extends Component{
         this.getValues = this.getValues.bind(this);
         this.ajaxLogin = this.ajaxLogin.bind(this);
         this.response  = {};
-        this.onKeyPress = this.onKeyPress.bind(this)
+        this.onKeyPress = this.onKeyPress.bind(this);
+        this.getMyUser = this.getMyUser.bind(this)
     }
     getValues(){
         this.formValues.login = $('#login').val();
@@ -32,12 +39,12 @@ class FormLogin extends Component{
                 success: (ans) => { this.response = ans; },
                 error: (err) => { this.response = {error : err.responseJSON.error} },
                 complete: () => {
-                    console.log('foi a res ', this.response);
+                    // console.log('foi a res ', this.response);
                     if(this.response.data){
                         this.props._setLogged(true)
                         console.log('FormLogin data: loggado com sucesso', this.props)
+                        this.getMyUser();     
                         return <Redirect to='/login'/>
-                       
                     }else{  
                         console.log('FormLogin error: ' + this.response.error)
                         alert('dados incorretos')
@@ -48,6 +55,21 @@ class FormLogin extends Component{
         }else{
             alert('Preencha todos os campos para fazer login!')
         }
+    }
+    getMyUser(){
+        let response;
+        $.ajax({
+            url: '/user/getUser',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/json',
+            success: (ans) => { response = ans; },
+            error: (err) => { response = {error : err.responseJSON.error} },
+            complete: () => {
+               this.props._saveMyId(response.data._id)
+               this.props._saveUser(response.data)
+            }
+        });
     }
     onKeyPress(event){
         if(event.charCode == 13){
@@ -80,6 +102,8 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
     _setLogged: (value) => dispatch(setLogged(value)),
+    _saveMyId: (values) => dispatch(saveMyId(values)),
+    _saveUser:(value) => dispatch(saveUser(value))
   });
 
 export default connect(mapStateToProps,mapDispatchToProps)(FormLogin);

@@ -2,7 +2,6 @@ import {
     IS_LOGGED,
     SET_LOGGED,
     SAVE_MY_ID,
-    // SAVE_USER,
   } from '../actions/appActions.js';
   
 const initialState = {
@@ -16,10 +15,8 @@ const appReduce = (state = initialState, action)=>{
       return {...state};
     case SET_LOGGED:
       return {...state, isLogged: action.payload.value}
-    // case SAVE_USER:
-    //   return {...state, user: action.payload.value}
     case SAVE_MY_ID:
-      return{...state, myUser:action.payload.id}
+      return{...state, myUser:action.payload.value}
     default:
       return state;
   }

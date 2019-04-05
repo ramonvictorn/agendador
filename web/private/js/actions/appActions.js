@@ -8,10 +8,11 @@ export const isLogged = {
   payload : {}
 };
 
-export const saveMyId = {
-  type: SAVE_MY_ID,
-  payload : {}
-};
+
+export const saveMyId = value =>({
+  type:SAVE_MY_ID,
+  payload : {value},
+})
 
 // export const setLogged = ()  = ({
 //   type: SET_LOGGED,
