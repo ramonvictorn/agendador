@@ -43,7 +43,8 @@ class ModalEdit extends Component {
             error: (err) => { serverAns = {err : err.responseJSON} },
             complete: () => {
                 if(!serverAns.err){
-                    this.getEvents()
+                    this.getEvents();
+                    this.props._toggleModal()
                 } 
             }
         });

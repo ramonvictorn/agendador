@@ -6,9 +6,34 @@ import {
     toggleModal,
 } from '../actions/agendaAction.js'
 
+import {
+    saveUser,
+} from '../actions/usersActions.js'
+
 class ModalView extends Component {
     constructor(){
-        super()
+        super();
+        this.getUser = this.getUser.bind(this);
+    }
+    getUser(id){
+        let response;
+        let context = {
+            idUser :  id,
+        }
+        $.ajax({
+                url: '/user/getUser',
+                dataType: 'json',
+                data: JSON.stringify(context),
+                type: 'post',
+                contentType: 'application/json',
+                success: (ans) => { response = ans; },
+                error: (err) => { response = {error : err.responseJSON.error} },
+                complete: () => {
+                    console.log('response do getUSer!',response.data)
+                    this.props._saveUser(response.data)
+                }
+            });
+
     }
     render(){
         let start = (this.props.modalValues.start).toString()
@@ -16,6 +41,14 @@ class ModalView extends Component {
         let title = this.props.modalValues.title;
         let agenda = this.props.modalValues.agenda;
         let user = this.props.modalValues.idUser;
+        let usuario = this.props.users;
+        if(this.props.users[this.props.modalValues.idUser] == undefined){
+            console.log('Nao tem esse user na store')
+            this.getUser(this.props.modalValues.idUser)
+        }else{
+            console.log('ja tem esse user na store ', this.props.users[this.props.modalValues.idUser])
+            user = this.props.users[this.props.modalValues.idUser].name;
+        }
         return(
             <React.Fragment>
                 <Modal
@@ -55,9 +88,11 @@ class ModalView extends Component {
 const mapStateToProps = store => ({
     modalValues : store.agendaReduce.modalValues,
     modalShow : store.agendaReduce.modalShow,
+    users : store.usersReduce.users,
   });
 
   const mapDispatchToProps = dispatch => ({
     _toggleModal: () => dispatch(toggleModal()),
+    _saveUser:(user) => dispatch(saveUser(user))
 });
 export default connect(mapStateToProps,mapDispatchToProps)(ModalView);

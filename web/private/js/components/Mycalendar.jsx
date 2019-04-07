@@ -17,7 +17,7 @@ const localizer = BigCalendar.momentLocalizer(moment)
 const mapStateToProps = store => ({
   modalShow: store.agendaReduce.modalShow,
   events:store.agendaReduce.events,
-  user: store.appReduce.user,
+  myUser: store.appReduce.myUser,
   organizeEvents: store.agendaReduce.organizeEvents,
   modalValues : store.agendaReduce.modalValues,
 });
@@ -133,7 +133,7 @@ class MyCalendar extends Component {
       this.props._setValuesModal({agenda:event.agenda})
       this.props._setValuesModal({idUser:event.user})
       this.props._setValuesModal({idEvent:event._id})
-      if(event.user == this.props.user._id){
+      if(event.user == this.props.myUser){
         this.props._setModalType('edit');
       }else{
         this.props._setModalType('view');
