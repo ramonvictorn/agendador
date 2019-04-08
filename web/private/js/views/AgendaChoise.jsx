@@ -20,6 +20,7 @@ class AgendaChoise extends Component {
     }
     render(){
         document.title = 'Agendador - Escolher agenda'
+        document.body.style = 'background: #ffffff;;';
         return(
             <React.Fragment>
                 <HeaderMenu></HeaderMenu>

@@ -8,13 +8,14 @@ import {
 
 class LoginView extends Component{
     render(){
+        document.body.style = 'background: #456;;';
         if(this.props.isLogged == true){
             return <Redirect to='/agenda'/>
         }
         return(
-            <div>    
-                <h1>ESSA É A PAGINA DE LOGIN</h1>
-                <Link to="/agenda">Agenda</Link>
+            <div className={'login'}>    
+                <div className="login-triangle"></div>
+                <h2 className="login-header">Log in</h2> 
                 <LoginContainer></LoginContainer>
             </div>
         )

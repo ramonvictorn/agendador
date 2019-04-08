@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import {Modal, Button, Form, Row,Col} from 'react-bootstrap';
 import {
     setLogged,
     saveMyId,
@@ -78,18 +79,27 @@ class FormLogin extends Component{
     }
     render(){
         return(
-            <div className='FormLogin'>
+            // <div className='FormLogin'>
+            <div className='login-container'>
                 <form>
-                    <label>
-                        Email:
-                        <input type="text" id='login' name="login" onKeyPress={this.onKeyPress}/>
-                    </label>
-                    <label>
-                        Senha:
-                        <input type="password" id='password' name="password" onKeyPress={this.onKeyPress}/>
-                    </label>
+                     <Row>
+                        <Col >
+                            <label className={'label'}>
+                                Email:
+                                <input type="email" id='login' name="login" onKeyPress={this.onKeyPress}/>
+                                </label>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col >
+                            <label className={'label'}>
+                                Senha:
+                                <input type="password" id='password' name="password" onKeyPress={this.onKeyPress}/>
+                            </label>
+                        </Col>
+                     </Row>
                 </form>
-                <button onClick={()=>{this.ajaxLogin()}}>Login</button>
+                <button className={'btLogin'} onClick={()=>{this.ajaxLogin()}}>Login</button>
             </div>
         )
     }

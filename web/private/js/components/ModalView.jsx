@@ -42,6 +42,7 @@ class ModalView extends Component {
         let agenda = this.props.modalValues.agenda;
         let user = this.props.modalValues.idUser;
         let usuario = this.props.users;
+        console.log('start aqui ', new Date(start).getTime())
         if(this.props.users[this.props.modalValues.idUser] == undefined){
             console.log('Nao tem esse user na store')
             this.getUser(this.props.modalValues.idUser)
@@ -65,19 +66,19 @@ class ModalView extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-                            Nome:{title}
+                            <h5>Nome: </h5>{title}
                         </Row>
                         <Row>
-                            Agenda:{agenda}
+                            {/* Sala:{agenda} */}
                         </Row>
                         <Row>
-                            Inicio:{start}
+                            <h5>Inicio: </h5>{start}
                         </Row>
                         <Row>
-                            Final:{end}
+                            <h5>Fim: </h5>{end}
                         </Row>
                         <Row>
-                            UserId:{user}
+                            <h5>Usuário:</h5> {user}
                         </Row>
                     </Modal.Body>
                 </Modal>

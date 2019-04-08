@@ -159,3 +159,8 @@ body{
     width: 500px;
     text-align: center!important;
 }
+
+/* fix view */
+body {
+    overflow: hidden;
+}

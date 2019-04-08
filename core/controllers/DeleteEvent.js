@@ -7,9 +7,9 @@ function deleteEvent(req,res){
     }
     deleteEventModel(data,(err,doc)=>{
         // console.log('cb delete event ', err,doc)
+        console.log('doc e err no delete ', doc, err)
         if(err == undefined || err == null){
             res.status(200).send({data:'event_Deleted'})
-            // console.log('doc ', doc, err)
         }else{
             res.status(400).send({error:'error_Delete_Event'})
             console.log('DELETE_EVENT_ERROR')
