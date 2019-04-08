@@ -12,7 +12,9 @@ function register(req,res){
         login:req.body.login,
         password:req.body.password,
         role: req.body.role,
-        details: req.body.details || {},
+        details:  {
+            urlUser:req.body.img
+        },
     }
     registerUserModel.register(data, 
         (response)=>{
