@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Modal, Button, Form, Row,Col} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
+import dateFns from "date-fns";
 import { 
     toggleModal,
 } from '../actions/agendaAction.js'
@@ -36,13 +37,13 @@ class ModalView extends Component {
 
     }
     render(){
-        let start = (this.props.modalValues.start).toString()
-        let end = (this.props.modalValues.end).toString()
+        let start = dateFns.format(new Date(this.props.modalValues.start), 'DD/MM/YYYY HH:MM')
+        let end = dateFns.format(new Date(this.props.modalValues.end), 'DD/MM/YYYY HH:MM')
         let title = this.props.modalValues.title;
         let agenda = this.props.modalValues.agenda;
         let user = this.props.modalValues.idUser;
         let usuario = this.props.users;
-        console.log('start aqui ', new Date(start).getTime())
+        console.log('start aqui ', dateFns.format(new Date(start), 'DD/MM/YYYY'))
         if(this.props.users[this.props.modalValues.idUser] == undefined){
             console.log('Nao tem esse user na store')
             this.getUser(this.props.modalValues.idUser)
