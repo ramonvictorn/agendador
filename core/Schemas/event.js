@@ -1,4 +1,5 @@
-const mongoose = require('../db.js');
+// const mongoose = require('../db.js');
+const mongoose = require('mongoose');
 const crypto = require('crypto');
 const EventSchema = new mongoose.Schema({
     agenda:{

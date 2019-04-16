@@ -124,7 +124,7 @@ class MyCalendar extends Component {
     });
   }
   onSelectEvent(event){
-    console.log('MyCalendar - onSelectEvent')
+    // console.log('MyCalendar - onSelectEvent')
     if(this.props.modalShow == false){
       this.props._toggleModal()
       this.props._setValuesModal({title:event.title})

@@ -47,7 +47,7 @@ class UserMenu extends Component {
         });
     }
     render(){
-        console.log('render user menu', this.props.users)
+        // console.log('render user menu', this.props.users)
         // {this.props.users['5c70b2fc03ee561eb476035e'].img}
         let name = '';
         let img = '';

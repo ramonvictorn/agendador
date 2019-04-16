@@ -10,11 +10,16 @@ const registerUserController = require('../controllers/registerUser');
 const userLogoutController = require('../controllers/logout.js');
 const getEventsController = require('../controllers/getEvents');
 const insertEventController = require('../controllers/insertEvent');
-const isLoggedController = require('../controllers/isLogged.js')
-const getUserController = require('../controllers/getUser.js')
-const deleteEventController = require('../controllers/DeleteEvent.js')
+const isLoggedController = require('../controllers/isLogged.js');
+const getUserController = require('../controllers/getUser.js');
+const deleteEventController = require('../controllers/DeleteEvent.js');
 
 const logoutController = require('../controllers/logout.js')
+
+// schedule
+// const insertScheduleController = require('../controllers/insertSchedule.js')
+// const getScheduleController = require('../controllers/getSchedules.js');
+const getUserSchedulesController = require('../controllers/getUserSchedules.js');
 /**  
 *
 * @desc Routes and controllers for API
@@ -26,19 +31,31 @@ function init(app){
     // app.get('/adm/user', checkSecurityAdm , renderAdmController.adm );
     // app.get('/agenda', checkSecurity ,renderAgendaControler.agenda);
     //app.get('*',  renderLoginController.login);
+
+    // user
     app.post('/user/isLogged', isLoggedController)
     app.post('/user/login', loginController.login);
     app.post('/user/logout', logoutController);
+    app.post('/user/registerUser', registerUserController.register)
+    app.post('/user/getUser',getUserController)
+
+
     // app.post('/user/login', (req,res)=>{
     //     console.log('to no routes', req.body)
     // });
     // app.post('/user/register',checkSecurityAdm, registerUserController.register)
     // app.post('/user/logout',checkSecurity, userLogoutController.logout )
+
+    //events 
     app.post('/events/getEvents', getEventsController.getEvents)
     app.post('/events/insertEvent', insertEventController.insertEvent)
-    app.post('/user/registerUser', registerUserController.register)
-    app.post('/user/getUser',getUserController)
     app.post('/events/deleteEvent',deleteEventController)
+
+    
+    //schedules
+    // app.post('/schedule/insertSchedule' , insertScheduleController);
+    // app.post('/schedule/getSchedule' ,checkSecurity , getScheduleController);
+    app.post('/schedule/getUserSchedules', checkSecurity , getUserSchedulesController);
 }
 
 

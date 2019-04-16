@@ -10,6 +10,7 @@ class AgendaView extends Component {
     constructor({match,history}) {
         super(); 
         this.history = history;
+        this.verifySchedule = this.verifySchedule.bind(this);
         
     }
 
@@ -22,8 +23,18 @@ class AgendaView extends Component {
             // console.log('AGENDA VIEW - getEvents Done result ->', result)
           });
     }
+    verifySchedule(){
+        $.ajax({
+            url: "/schedule/getSchedule",
+            type:'POST',
+            context: 'document',
+        }).done(function(result) {
+            // console.log('AGENDA VIEW - verifySchedulet ->', result)
+          });
+    }
 
     render(){
+        this.verifySchedule()
         return (
             <React.Fragment>
                 <HeaderMenu></HeaderMenu>

@@ -4,6 +4,7 @@ import {
   SET_VALUES_MODAL,
   SET_MODAL_TYPE,
   UPDATE_ORGANIZE_EVENTS,
+  ADD_SCHEDULE,
 } from '../actions/agendaAction.js';
 
 let dateNow = new Date();
@@ -24,6 +25,7 @@ const initialState = {
   },
   events : [],
   organizeEvents : {},
+  schedules : [],
 }
 
 let newValue;
@@ -56,6 +58,13 @@ const agendaReduce = (state = initialState, action)=>{
       return{...state,
         modalType:action.payload.value
       }    
+    case ADD_SCHEDULE:
+      console.log('agendaReduce > ADD_SCHEDULE ', action.payload.value)
+      var oldShedules = state.schedules;
+      var newSchedule =[... oldShedules, ...action.payload.value]
+      return{...state,
+        schedules : newSchedule
+      } 
     default:
       return state;
   }

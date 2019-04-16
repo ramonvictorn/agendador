@@ -59,11 +59,11 @@ class AppRoutes extends Component{
             error: (err) => { this.response = {error : err.responseJSON.error} },
             complete: () => {
                 if(this.response.data){
-                    console.log('setLogged para true')
+                    // console.log('setLogged para true')
                     this.props._setLogged(true);
                     this.getMyUser();       
                 }else{  
-                    console.log('setLogged para false')
+                    // console.log('setLogged para false')
                     this.props._setLogged(false)
                 }
                 
@@ -90,7 +90,7 @@ class AppRoutes extends Component{
         if (isLogged == null) {
             return <div></div>
         }
-        console.log('render  appRoutes props- > ', this.props)
+        // console.log('render  appRoutes props- > ', this.props)
         return(
             <Router>    
                 <Switch>

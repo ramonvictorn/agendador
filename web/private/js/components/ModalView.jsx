@@ -30,7 +30,7 @@ class ModalView extends Component {
                 success: (ans) => { response = ans; },
                 error: (err) => { response = {error : err.responseJSON.error} },
                 complete: () => {
-                    console.log('response do getUSer!',response.data)
+                    // console.log('response do getUSer!',response.data)
                     this.props._saveUser(response.data)
                 }
             });
@@ -43,19 +43,19 @@ class ModalView extends Component {
         let agenda = this.props.modalValues.agenda;
         let user = this.props.modalValues.idUser;
         let usuario = this.props.users;
-        console.log('start aqui ', dateFns.format(new Date(start), 'DD/MM/YYYY'))
+        // console.log('start aqui ', dateFns.format(new Date(start), 'DD/MM/YYYY'))
         if(this.props.users[this.props.modalValues.idUser] == undefined){
-            console.log('Nao tem esse user na store')
+            // console.log('Nao tem esse user na store')
             this.getUser(this.props.modalValues.idUser)
         }else{
-            console.log('ja tem esse user na store ', this.props.users[this.props.modalValues.idUser])
+            // console.log('ja tem esse user na store ', this.props.users[this.props.modalValues.idUser])
             user = this.props.users[this.props.modalValues.idUser].name;
         }
         return(
             <React.Fragment>
                 <Modal
                         show={this.props.modalShow}
-                        onHide={()=>{console.log('hide da modal view'); if(this.props.modalShow == true){this.props._toggleModal()}}}
+                        onHide={()=>{ if(this.props.modalShow == true){this.props._toggleModal()}}}
                         size="lg"
                         aria-labelledby="contained-modal-title-vcenter"
                         centered

@@ -1,4 +1,4 @@
-const mongoose = require('../db.js');
+const mongoose = require('mongoose');
 const crypto = require('crypto');
 const UserSchema = new mongoose.Schema({
     name:{
@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
         type:Object,
         required:true,
     },
-    schedule:{
+    schedules:{
         type:Array,
         required:false,
     },

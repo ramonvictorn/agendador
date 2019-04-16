@@ -17,7 +17,7 @@ import AppRoutes from './AppRoutes.js';
 
 
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={store} history={history}>
         <AppRoutes/>
     </Provider>
     ,

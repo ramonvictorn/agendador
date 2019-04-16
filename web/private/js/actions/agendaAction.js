@@ -3,6 +3,7 @@ export const UPDATE_EVENTS = 'UPDATE_EVENTS';
 export const SET_VALUES_MODAL = 'SET_VALUES_MODAL';
 export const SET_MODAL_TYPE = 'SET_MODAL_TYPE';
 export const UPDATE_ORGANIZE_EVENTS = 'UPDATE_ORGANIZE_EVENTS';
+export const ADD_SCHEDULE = 'ADD_SCHEDULE';
 
 export const toggleModal = () => ({
   type: TOGGLE_MODAL,
@@ -28,4 +29,10 @@ export const setValuesModal = values =>({
 export const setModalType = value =>({
   type: SET_MODAL_TYPE,
   payload: {value},
+})
+
+
+export const addSchedule = value => ({
+  type: ADD_SCHEDULE,
+  payload: {value}
 })

@@ -90,7 +90,14 @@ routes.init(app);
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{res.render('index.ejs', {scripts:['/js/index.js',]})});
 
-const port = process.env.PORT || 3006;
-app.listen(port);
-
-console.log('App is listening on port ' + port);
+const db = require('./core/db.js')
+db.dbConnect((error)=>{
+    if(error == undefined || error == null){
+        console.log('Database connected!')
+        const port = process.env.PORT || 3006;
+        app.listen(port);
+        console.log('App is listening on port ' + port);
+    }else{
+        console.log('Error on connect with database.', error)
+    }
+})
