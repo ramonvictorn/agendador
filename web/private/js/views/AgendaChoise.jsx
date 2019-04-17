@@ -20,29 +20,35 @@ class AgendaChoise extends Component {
     }
 
     getUserSchedules(){
-        let serverAns;
-        $.ajax({
-            url: '/schedule/getUserSchedules',
-            dataType: 'json',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({}),
-            success: (ans) => { serverAns = ans; },
-            error: (err) => { serverAns = {err : err.responseJSON} },
-            complete: () => {
-                if(!serverAns.err){
-                    // callback
-                    console.log("getUserSchedule ",serverAns.data)
-                    this.props._addSchedule(serverAns.data)
-                } 
-            }
-        });
+        console.log('agendaChoice getUserSchedules', this.props.schedules.length)
+        if(this.props.schedules.length == 0 ){
+            console.log('nao tem os schedules')
+            let serverAns;
+            $.ajax({
+                url: '/schedule/getUserSchedules',
+                dataType: 'json',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({}),
+                success: (ans) => { serverAns = ans; },
+                error: (err) => { serverAns = {err : err.responseJSON} },
+                complete: () => {
+                    if(!serverAns.err){
+                        // callback
+                        console.log('agendaChoice ', serverAns.data)
+                        this.props._addSchedule(serverAns.data)
+                    } 
+                }
+            });
+        }else{
+            console.log('ja tem os schedules')
+        }
     }
 
-    redirectToAgenda(eventKey,event){
-        // console.log('change o drop', eventKey)
+    redirectToAgenda(link){
+        console.log('change o drop')
         // if(eventKey == 501){
-        //     this.props.history.push('/agenda/501')
+            this.props.history.push(`/agenda/${link}`)
         // }
     }
     componentDidMount(){
@@ -51,16 +57,49 @@ class AgendaChoise extends Component {
     }
 
     render(){
-        console.log('render agenda choice', this.props)
+        console.log('render agenda choice', this.props.schedules)
         document.title = 'Agendador - Escolher agenda'
         document.body.style = 'background: #ffffff;;';
-        let cards = []
-        for(var cont = 0; cont <this.props.schedules.length; cont++){
-            console.log('looping', cont)
-            let name = this.props.schedules[cont].name;
-            let image = this.props.schedules[cont].details.images[0]
+        let cards = [];
+        let key = 0;
+        if(this.props.schedules.length > 0){
+            for(var cont = 0; cont <this.props.schedules.length; cont++){
+                let name = this.props.schedules[cont].name;
+                let image = this.props.schedules[cont].details.images[0];
+                let id = this.props.schedules[cont]['_id']
+                let keyToPass = {id:cont};
+                key = cont
+                console.log('looping', cont , keyToPass)
+                cards.push(
+                    <Card key={key}
+                    name={name} 
+                    image={image} id={id} 
+                    redirectToAgenda={this.redirectToAgenda}></Card>
+                )
+            }
+            // this.props.schedules.forEach(function(el,index){
+            //     // let self = this;
+            //     console.log('looping ramon', this)
+            //     console.log(el,index)
+            //     let key = index;
+            //     cards.push(
+            //             // <h1 key={index}>
+            //             //     {index}
+            //             // </h1>
+            //             <Card 
+            //             key={key} 
+            //             name={el.name} 
+            //             image={el.details.images[0]} 
+            //             id={el['_id']}
+            //             // redirectToAgenda={this.redirectToAgenda}
+            //             >
+            //          </Card>
+            //     )
+            // })
+        }else{
+            let key = 0;
             cards.push(
-                <Card key={cont} name={name} image={image}></Card>
+                <h1 key={key}>NÃO EXISTEM AGENDAS</h1>
             )
         }
         return(

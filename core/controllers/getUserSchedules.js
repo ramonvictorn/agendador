@@ -10,7 +10,7 @@ function getUserSchedules(req,res){
         let dataSchedules = [];
         for(var count = 0; count < ret.length;count++){
             getSchedulesModels({id:ret[count]},(dataReturned)=>{
-                dataSchedules.push(dataReturned.data[0])
+                dataSchedules.push(dataReturned.data)
                 if(dataSchedules.length == ret.length){
                     res.status(200).send({data:dataSchedules})
                 }

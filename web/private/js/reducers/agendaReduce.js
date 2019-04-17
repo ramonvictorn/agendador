@@ -59,7 +59,7 @@ const agendaReduce = (state = initialState, action)=>{
         modalType:action.payload.value
       }    
     case ADD_SCHEDULE:
-      console.log('agendaReduce > ADD_SCHEDULE ', action.payload.value)
+      // console.log('agendaReduce > ADD_SCHEDULE ', action.payload.value)
       var oldShedules = state.schedules;
       var newSchedule =[... oldShedules, ...action.payload.value]
       return{...state,

@@ -18,7 +18,7 @@ const logoutController = require('../controllers/logout.js')
 
 // schedule
 // const insertScheduleController = require('../controllers/insertSchedule.js')
-// const getScheduleController = require('../controllers/getSchedules.js');
+const getScheduleController = require('../controllers/getSchedules.js');
 const getUserSchedulesController = require('../controllers/getUserSchedules.js');
 /**  
 *
@@ -54,7 +54,7 @@ function init(app){
     
     //schedules
     // app.post('/schedule/insertSchedule' , insertScheduleController);
-    // app.post('/schedule/getSchedule' ,checkSecurity , getScheduleController);
+    app.post('/schedule/getSchedule' ,checkSecurity , getScheduleController);
     app.post('/schedule/getUserSchedules', checkSecurity , getUserSchedulesController);
 }
 

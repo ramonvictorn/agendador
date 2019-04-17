@@ -4,18 +4,20 @@ import {Link} from "react-router-dom";
 
 
 class Card extends Component{
-    constructor({history,img,name,link}){
+    // constructor({history,img,name,id,keyToPass,redirectToAgenda}){
+        constructor({history,img,name,id,redirectToAgenda}){
         super()
-        this.redirect = this.redirect.bind(this);
+        // this.redirectSchedule = this.redirectSchedule.bind(this);
         this.state = {
 
         }
     }
 
 
-    redirect(link){
-        this.props.history.push(`agenda/${link}`)
-    }
+    // redirectSchedule(link){
+    //     console.log('redirect card = ','link', this.props)
+    //     // this.props.history.push(`agenda/${link}`)
+    // }
     render(){
         console.log('ramon no card',this.props)
         var style = {
@@ -25,7 +27,8 @@ class Card extends Component{
         }
         return( 
             <React.Fragment>
-                <div className={'cardSpace'} style={style}>
+                {/* <div className={'cardSpace'} style={style} onClick={()=>{this.props.redirectToAgenda(this.props.id)}}> */}
+                <div className={'cardSpace'} style={style} onClick={()=>{this.props.redirectToAgenda(this.props.id)}}> }>
                     <div className={'nameSpace'}>
                         <h3 className={'nameTxt'}>{this.props.name}</h3>
                     </div>

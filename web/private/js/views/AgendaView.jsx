@@ -11,7 +11,6 @@ class AgendaView extends Component {
         super(); 
         this.history = history;
         this.verifySchedule = this.verifySchedule.bind(this);
-        
     }
 
     getEvents(){
@@ -24,17 +23,34 @@ class AgendaView extends Component {
           });
     }
     verifySchedule(){
+        // let schedulePath = (this.props.location.pathname.trim()).split('/')
+        let test = {id:this.props.location.pathname.split('/')[2]}
+        console.log('verifin url',  test);
+        let response;
         $.ajax({
             url: "/schedule/getSchedule",
             type:'POST',
             context: 'document',
-        }).done(function(result) {
-            // console.log('AGENDA VIEW - verifySchedulet ->', result)
-          });
+            data:test,
+            success: (ans) => { response = ans; },
+            error: (err) => { response = {error : err.responseJSON.error} },
+            complete:()=>{
+                if(response.error){
+                    console.log('essa agenda não existe');
+                    this.props.history.push(`/agenda/`)
+                }else{
+                    console.log('agenda existe')
+                }
+            }
+        })
     }
-
+    componentDidMount(){
+        console.log('agenda view component did mount');
+        this.verifySchedule();
+    }
     render(){
-        this.verifySchedule()
+        // this.verifySchedule()
+        console.log('render agenda view')
         return (
             <React.Fragment>
                 <HeaderMenu></HeaderMenu>

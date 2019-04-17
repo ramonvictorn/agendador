@@ -5,21 +5,24 @@ function getSchedulesController(req,res){
     if(verifyParams(req.body)){
         let context = {
             id: req.body.id,
-            code: req.body.code,
+            // code: req.body.code,
         }
         getScheduleModels(context,(ret)=>{
-            if(ret.err){
-                res.status(ret.err.code).send({error:ret.error.text})
+            if(ret.error){
+                res.status(ret.error.code).send({error:ret.error.text})
             }else{
                 res.status(200).send({data:ret.data})
             }
         })
+    }else{
+        res.status(400).send({error:'INVALID_PARAMS'})
     }
 }
 
     
 function verifyParams(params){
-    if(params.id == undefined && params.code == undefined) return false;
+    // if(params.id == undefined && params.code == undefined) return false;
+    if(params.id == undefined) return false;
     return true;
 }
             //     getUserScheduleModels(req.session.agendador.user._id,(data)=>{
