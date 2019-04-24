@@ -1,4 +1,4 @@
-exports.getEvents = getEvents;
+module.exports = getEvents;
 
 const EventsSchema = require('../Schemas/event')
 // async function getEvents(cb){
@@ -18,15 +18,19 @@ const EventsSchema = require('../Schemas/event')
  * @param {function} cb função de calback para ser executada
  * @param {function} erro é executado caso ocorra erro na query
  */
-function getEvents(cb,erro){
-    //console.log('model getEvents -> function getEvents');
-    EventsSchema.find({}, function(err,docs){
+function getEvents(context,cb){
+    let ret = {}
+    console.log('model getEvents -> function getEvents', context);
+    EventsSchema.find({agenda:context.agenda}, function(err,docs){
         if(err){
             console.log('Events_Not_Found')
-            erro()
+            ret.error = {
+                code:400,
+                text:'ERROR_GET_EVENTS'
+            }
         }else{
-            console.log('cb eventos');
-            cb(docs);
+            ret.data = docs
         }
+        cb(ret)
     })
 }

@@ -22,7 +22,8 @@ function getSchedulesController(req,res){
     
 function verifyParams(params){
     // if(params.id == undefined && params.code == undefined) return false;
-    if(params.id == undefined) return false;
+    if(params.id == undefined ) return false;
+    if (!(params.id.match(/^[0-9a-fA-F]{24}$/))) return false;
     return true;
 }
             //     getUserScheduleModels(req.session.agendador.user._id,(data)=>{

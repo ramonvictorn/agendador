@@ -32,6 +32,8 @@ class ModalEdit extends Component {
         this.props._setValuesModal(eventObj)
     }
     insertEvent(eventObj){  
+        console.log('insert get url ', this.props.currentSchedule)
+        eventObj.agenda = this.props.currentSchedule;
         let serverAns = {}
         $.ajax({
             url: '/events/insertEvent',
@@ -51,22 +53,23 @@ class ModalEdit extends Component {
     }
     getEvents(){
         let serverAns;
-        $.ajax({
-          url: '/events/getEvents',
-          dataType: 'json',
-          type: 'POST',
-          contentType: 'application/json',
-          success: (ans) => { serverAns = ans; },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-          error: (err) => { serverAns = {err : err.responseJSON} },
-          complete: () => {
-              if(!serverAns.err){
-                  const events = serverAns.data ? serverAns.data : [];
-                  this.props._updateEvents(events);  
-              }else{
-                  alert('error on get Events')
-              }
-          }
-        });
+        // $.ajax({
+        //   url: '/events/getEvents',
+        //   dataType: 'json',
+        //   type: 'POST',
+        //   contentType: 'application/json',
+        //   data: JSON.stringify({agenda:this.props.currentSchedule}),
+        //   success: (ans) => { serverAns = ans; },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        //   error: (err) => { serverAns = {err : err.responseJSON} },
+        //   complete: () => {
+        //       if(!serverAns.err){
+        //           const events = serverAns.data ? serverAns.data : [];
+        //           this.props._updateEvents(events);  
+        //       }else{
+        //           alert('error on get Events')
+        //       }
+        //   }
+        // });
     }
 
     onChange(value){
@@ -216,6 +219,7 @@ class ModalEdit extends Component {
     modalValues : store.agendaReduce.modalValues,
     modalType : store.agendaReduce.modalType,
     organizeEvents: store.agendaReduce.organizeEvents,
+    currentSchedule:store.agendaReduce.currentSchedule,
   });
 
 const mapDispatchToProps = dispatch => ({

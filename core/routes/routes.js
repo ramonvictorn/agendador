@@ -47,7 +47,7 @@ function init(app){
     // app.post('/user/logout',checkSecurity, userLogoutController.logout )
 
     //events 
-    app.post('/events/getEvents', getEventsController.getEvents)
+    app.post('/events/getEvents', getEventsController)
     app.post('/events/insertEvent', insertEventController.insertEvent)
     app.post('/events/deleteEvent',deleteEventController)
 
@@ -67,7 +67,7 @@ function init(app){
 function checkSecurity(req, res, next){
     if(req.session.agendador ){
         if(req.session.agendador.user){
-            console.log('User autenticado')
+            // console.log('User autenticado')
             next()
         }   
     }else{

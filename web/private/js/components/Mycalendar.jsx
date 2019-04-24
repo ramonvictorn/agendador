@@ -20,6 +20,7 @@ const mapStateToProps = store => ({
   myUser: store.appReduce.myUser,
   organizeEvents: store.agendaReduce.organizeEvents,
   modalValues : store.agendaReduce.modalValues,
+  currentSchedule: store.agendaReduce.currentSchedule,
 });
 
 
@@ -103,13 +104,14 @@ class MyCalendar extends Component {
   }
 
   getEvents(){
+    console.log('MyCalendar - getEvents - this.props', this.props.currentSchedule)
     let serverAns;
     $.ajax({
       url: '/events/getEvents',
       dataType: 'json',
       type: 'POST',
       contentType: 'application/json',
-      // data: JSON.stringify(data),
+      data: JSON.stringify({agenda:this.props.currentSchedule}),
       success: (ans) => { serverAns = ans; },
       error: (err) => { serverAns = {err : err.responseJSON} },
       complete: () => {

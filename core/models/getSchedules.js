@@ -21,7 +21,7 @@ function getSchedules(context,cb){
             }
             cb(returns)
         }else{
-            console.log('GET_SCHEDULE__SUCESS', docs);
+            // console.log('GET_SCHEDULE__SUCESS', docs);
             if(docs.length == 0){
                 returns.error = {
                     code:400,

@@ -2,7 +2,7 @@ module.exports = insertSchedule;
 
 const insertScheduleModel = require('../models/insertSchedule.js')
 function insertSchedule(req,res){
-    console.log('controller insert agenda ', req.body)
+    // console.log('controller insert agenda ', req.body)
     let context = {
         name: req.body.name,
         code:req.body.code,

@@ -28,7 +28,7 @@ class Card extends Component{
         return( 
             <React.Fragment>
                 {/* <div className={'cardSpace'} style={style} onClick={()=>{this.props.redirectToAgenda(this.props.id)}}> */}
-                <div className={'cardSpace'} style={style} onClick={()=>{this.props.redirectToAgenda(this.props.id)}}> }>
+                <div className={'cardSpace'} style={style} onClick={()=>{this.props.redirectToAgenda(this.props.id)}}>
                     <div className={'nameSpace'}>
                         <h3 className={'nameTxt'}>{this.props.name}</h3>
                     </div>
