@@ -20,7 +20,7 @@ const EventsSchema = require('../Schemas/event')
  */
 function getEvents(context,cb){
     let ret = {}
-    console.log('model getEvents -> function getEvents', context);
+    // console.log('model getEvents -> function getEvents', context);
     EventsSchema.find({agenda:context.agenda}, function(err,docs){
         if(err){
             console.log('Events_Not_Found')

@@ -32,8 +32,8 @@ class ModalEdit extends Component {
         this.props._setValuesModal(eventObj)
     }
     insertEvent(eventObj){  
-        console.log('insert get url ', this.props.currentSchedule)
-        eventObj.agenda = this.props.currentSchedule;
+        console.log('insert get url ', this.props.currentSchedule.id)
+        eventObj.agenda = this.props.currentSchedule.id;
         let serverAns = {}
         $.ajax({
             url: '/events/insertEvent',
@@ -114,7 +114,8 @@ class ModalEdit extends Component {
        this.props._setValuesModal({slotsExcludeStart:slotFunctions.getTimeSlot(slotsArray)})
     }
     componentDidUpdate(){
-       // this.blockSlotsStart()
+        console.log('modal edit update')
+    //    this.blockSlotsStart()
     }
     onChangePicket(value,type){
         this.props._setValuesModal({start:value})
@@ -153,13 +154,13 @@ class ModalEdit extends Component {
                                         <Form.Control type="text" placeholder="Digite o nome da reserva" onChange={ e => this.getValues(e.target.value, 'title')}  defaultValue={this.props.modalValues.title}/>
                                     </Form.Group>
     
-                                    <Form.Group as={Col} controlId="formGridState">
+                                    {/* <Form.Group as={Col} controlId="formGridState">
                                         <Form.Label>Sala</Form.Label>
                                         <Form.Control as="select" title=" Escolha uma agenda:" value={this.props.modalValues.agenda} onChange={(e)=>this.getValues(e.target.value,'agenda')}>
                                             <option value={501}>501 - Reunião.</option>
                                             <option  disabled value={500}>500 - Estudio</option>
                                         </Form.Control>
-                                    </Form.Group>
+                                    </Form.Group> */}
                                 </Form.Row>
     
                                 <Form.Row>

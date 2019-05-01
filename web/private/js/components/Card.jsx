@@ -19,7 +19,7 @@ class Card extends Component{
     //     // this.props.history.push(`agenda/${link}`)
     // }
     render(){
-        console.log('ramon no card',this.props)
+        // console.log('ramon no card',this.props)
         var style = {
             color:'black',
             background: ` url(${this.props.image})`,

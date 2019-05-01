@@ -12,14 +12,14 @@ export const toggleModal = () => ({
 });
 
 
-export const updateEvents = events => ({
+export const updateEvents = (events,agenda) => ({
   type: UPDATE_EVENTS,
-  payload: { events: events },
+  payload: { events: events, agenda:agenda },
 });
 
-export const updateOrganizeEvents = events => ({
+export const updateOrganizeEvents = (events,agenda) => ({
   type: UPDATE_ORGANIZE_EVENTS,
-  payload: { events: events },
+  payload: { events: events, agenda:agenda },
 });
 
 export const setValuesModal = values =>({

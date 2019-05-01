@@ -24,8 +24,8 @@ const initialState = {
     slotsExcludeEnd: null,
     idEvent:null
   },
-  currentSchedule: null,
-  events : [],
+  currentSchedule: {},
+  events : {},
   organizeEvents : {},
   schedules : [],
 }
@@ -38,10 +38,16 @@ const agendaReduce = (state = initialState, action)=>{
       return {...state, modalShow: newValue };
     
     case UPDATE_EVENTS:
-      return {...state, events : action.payload.events}
-    
+      return {...state, events : {...state.events,
+        [action.payload.agenda]:action.payload.events}
+      }
+      return {...state}
+
     case UPDATE_ORGANIZE_EVENTS:
-      return{...state, organizeEvents: action.payload.events} 
+      return{...state, organizeEvents: {...state.organizeEvents,
+          [action.payload.agenda]: action.payload.events
+        }
+      } 
       
     case SET_VALUES_MODAL:
       return {...state, 
@@ -67,9 +73,11 @@ const agendaReduce = (state = initialState, action)=>{
         schedules : newSchedule
       } 
     case SET_CURRENT_SCHEDULE:
-    console.log('set current scheule reduce ', action.payload)
-    return{...state,
-      currentSchedule:action.payload.value.id
+      return{...state,
+      currentSchedule: {
+        id: action.payload.value._id,
+        name: action.payload.value.name,
+      }
     }
     default:
       return state;

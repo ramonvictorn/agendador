@@ -23,13 +23,12 @@ const mapStateToProps = store => ({
   currentSchedule: store.agendaReduce.currentSchedule,
 });
 
-
 const mapDispatchToProps = dispatch => ({
   _toggleModal: () => dispatch(toggleModal()),
-  _updateEvents: (events) => dispatch(updateEvents(events)),
+  _updateEvents: (events,agenda) => dispatch(updateEvents(events,agenda)),
   _setValuesModal : (values) => dispatch(setValuesModal(values)),
   _setModalType : (value) => dispatch(setModalType(value)),
-  _updateOrganizeEvents:(events) =>dispatch(updateOrganizeEvents(events))
+  _updateOrganizeEvents:(events,agenda) =>dispatch(updateOrganizeEvents(events,agenda))
 });
 
 class MyCalendar extends Component {
@@ -45,6 +44,7 @@ class MyCalendar extends Component {
   }
   
   componentDidMount(){
+    console.log('did mount my calendar')
     this.getEvents();
   }  
 
@@ -63,6 +63,8 @@ class MyCalendar extends Component {
     this.props._setValuesModal({slotsExcludeEnd:endBLock})
   }
   selectSlot (slotInfo){
+    let scheduleEventsOrganized =  this.props.organizeEvents[this.props.currentSchedule.id]
+    console.log('select slots -> ', scheduleEventsOrganized)
     let year,month,hourStart,HourFinish, minutesStart,minutesFinish,day;
     year = slotInfo.start.getFullYear();
     day = slotInfo.start.getDate();
@@ -74,12 +76,12 @@ class MyCalendar extends Component {
     let can = true;
     let used = arrayFunctions.getSlots(slotInfo.start,slotInfo.end);
     if(this.props.modalShow == false){
-        if(this.props.organizeEvents[year]){
-          if(this.props.organizeEvents[year][month]){
-            if(this.props.organizeEvents[year][month][day]){
+        if(scheduleEventsOrganized[year]){
+          if(scheduleEventsOrganized[year][month]){
+            if(scheduleEventsOrganized[year][month][day]){
               //dia existe, varrer slots
               for(var i = used.inicial; i<= (used.inicial+used.linkeds-1); i++){
-                if(this.props.organizeEvents[year][month][day][i] != undefined){
+                if(scheduleEventsOrganized[year][month][day][i] != undefined){
                     can = false;
                     alert('Selecione outro horário, já existe reserva')
                     break
@@ -104,26 +106,26 @@ class MyCalendar extends Component {
   }
 
   getEvents(){
-    console.log('MyCalendar - getEvents - this.props', this.props.currentSchedule)
-    let serverAns;
-    $.ajax({
-      url: '/events/getEvents',
-      dataType: 'json',
-      type: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify({agenda:this.props.currentSchedule}),
-      success: (ans) => { serverAns = ans; },
-      error: (err) => { serverAns = {err : err.responseJSON} },
-      complete: () => {
-          if(!serverAns.err){
+      let serverAns;
+      $.ajax({
+        url: '/events/getEvents',
+        dataType: 'json',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({agenda:this.props.currentSchedule.id}),
+        success: (ans) => { serverAns = ans; },
+        error: (err) => { serverAns = {err : err.responseJSON} },
+        complete: () => {
+            if(!serverAns.err){
               const events = serverAns.data ? serverAns.data : [];
-              this.props._updateEvents(events);  
-              this.props._updateOrganizeEvents(arrayFunctions.organizeEvents(this.props.events))
-          }else{
-            alert('ERROR MY CALENDAR - getEvents')
-          } 
-      }
-    });
+              const agenda = this.props.currentSchedule.id;
+              this.props._updateEvents(events,agenda);  
+              this.props._updateOrganizeEvents(arrayFunctions.organizeEvents(events),agenda)
+            }else{
+              alert('ERROR MY CALENDAR - getEvents')
+            } 
+        }
+      });
   }
   onSelectEvent(event){
     // console.log('MyCalendar - onSelectEvent')
@@ -159,12 +161,18 @@ class MyCalendar extends Component {
     return true
   }
   render(){
-    let a = {}
+    let events;
+    let a;
     let selected = {}
+    if(this.props.events[this.props.currentSchedule.id] != undefined){
+      events = this.props.events[this.props.currentSchedule.id];
+    }else{
+      events = []
+    }
     return (
         <BigCalendar
           localizer={localizer}
-          events={this.props.events}
+          events={events}
           startAccessor={(event) => this.configDate(event.start)}
           endAccessor={(event)=>this.configDate(event.end)}
           defaultView='week'

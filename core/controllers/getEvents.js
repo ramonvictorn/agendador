@@ -16,7 +16,7 @@ function getEvents(req,res){
                 console.log('erro no cb get',ret)
                 res.status(400).send({Error:'error'})
             }else{
-                console.log('cb sucess ')
+                // console.log('cb sucess ')
                 res.status(200).send({data:ret.data})
             }
         })

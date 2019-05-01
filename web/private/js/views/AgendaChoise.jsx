@@ -20,9 +20,9 @@ class AgendaChoise extends Component {
     }
 
     getUserSchedules(){
-        console.log('agendaChoice getUserSchedules', this.props.schedules.length)
+        // console.log('agendaChoice getUserSchedules', this.props.schedules.length)
         if(this.props.schedules.length == 0 ){
-            console.log('nao tem os schedules')
+            // console.log('nao tem os schedules')
             let serverAns;
             $.ajax({
                 url: '/schedule/getUserSchedules',
@@ -35,13 +35,13 @@ class AgendaChoise extends Component {
                 complete: () => {
                     if(!serverAns.err){
                         // callback
-                        console.log('agendaChoice ', serverAns.data)
+                        // console.log('agendaChoice ', serverAns.data)
                         this.props._addSchedule(serverAns.data)
                     } 
                 }
             });
         }else{
-            console.log('ja tem os schedules')
+            // console.log('ja tem os schedules')
         }
     }
 
@@ -52,12 +52,12 @@ class AgendaChoise extends Component {
         // }
     }
     componentDidMount(){
-        console.log('agendaChoice didMount ')
+        // console.log('agendaChoice didMount ')
         this.getUserSchedules()
     }
 
     render(){
-        console.log('render agenda choice', this.props.schedules)
+        // console.log('render agenda choice', this.props.schedules)
         document.title = 'Agendador - Escolher agenda'
         document.body.style = 'background: #ffffff;;';
         let cards = [];
@@ -69,7 +69,7 @@ class AgendaChoise extends Component {
                 let id = this.props.schedules[cont]['_id']
                 let keyToPass = {id:cont};
                 key = cont
-                console.log('looping', cont , keyToPass)
+                // console.log('looping', cont , keyToPass)
                 cards.push(
                     <Card key={key}
                     name={name} 

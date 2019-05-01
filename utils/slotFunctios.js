@@ -65,6 +65,7 @@ function getTimeSlot(slots){
 }
 
 function organizeEvents(events){
+  console.log('organizando eventos')
   let slots;
   let linkedTemp;
   let organizedEvents = {};
