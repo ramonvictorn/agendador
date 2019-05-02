@@ -37,6 +37,7 @@ class AgendaView extends Component {
         this.verifySchedule();
     }
     render(){
+        console.log('AgendaView Render')
         let calendar = <div>Você não possui permissão nessa agenda</div>
         if(this.props.location.pathname.split('/')[2] == this.props.currentSchedule.id){
             calendar = <MyCalendar/>           

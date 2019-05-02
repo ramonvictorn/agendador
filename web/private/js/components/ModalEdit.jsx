@@ -7,6 +7,7 @@ import {
     setValuesModal,
     updateEvents,
     setModalType,
+    updateOrganizeEvents,
 } from '../actions/agendaAction.js'
 
 import slotFunctions from '../../../../utils/slotFunctios.js'
@@ -32,7 +33,7 @@ class ModalEdit extends Component {
         this.props._setValuesModal(eventObj)
     }
     insertEvent(eventObj){  
-        console.log('insert get url ', this.props.currentSchedule.id)
+        // console.log('insert get url ', this.props.currentSchedule.id)
         eventObj.agenda = this.props.currentSchedule.id;
         let serverAns = {}
         $.ajax({
@@ -53,23 +54,25 @@ class ModalEdit extends Component {
     }
     getEvents(){
         let serverAns;
-        // $.ajax({
-        //   url: '/events/getEvents',
-        //   dataType: 'json',
-        //   type: 'POST',
-        //   contentType: 'application/json',
-        //   data: JSON.stringify({agenda:this.props.currentSchedule}),
-        //   success: (ans) => { serverAns = ans; },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-        //   error: (err) => { serverAns = {err : err.responseJSON} },
-        //   complete: () => {
-        //       if(!serverAns.err){
-        //           const events = serverAns.data ? serverAns.data : [];
-        //           this.props._updateEvents(events);  
-        //       }else{
-        //           alert('error on get Events')
-        //       }
-        //   }
-        // });
+        $.ajax({
+            url: '/events/getEvents',
+            dataType: 'json',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({agenda:this.props.currentSchedule.id}),
+            success: (ans) => { serverAns = ans; },
+            error: (err) => { serverAns = {err : err.responseJSON} },
+            complete: () => {
+                if(!serverAns.err){
+                const events = serverAns.data ? serverAns.data : [];
+                const agenda = this.props.currentSchedule.id;
+                this.props._updateEvents(events,agenda);  
+                this.props._updateOrganizeEvents(arrayFunctions.organizeEvents(events),agenda)
+                }else{
+                alert('ERROR MY CALENDAR - getEvents')
+                } 
+            }
+        });
     }
 
     onChange(value){
@@ -88,8 +91,10 @@ class ModalEdit extends Component {
             success: (ans) => { serverAns = ans; },
             error: (err) => { serverAns = {err : err.responseJSON} },
             complete: () => {
+                console.log('delete aqui ', serverAns)
                 if(!serverAns.err){
                     this.getEvents()
+                    this.props._toggleModal()
                 } 
             }
         });
@@ -127,15 +132,18 @@ class ModalEdit extends Component {
         this.props._setValuesModal({slotsExcludeEnd:endBLock})
     }
     render(){
+        let buttonPrimary;
         let buttonSecundary;
         let title;
         if(this.props.modalType == 'edit'){
             title = 'Editar'
             buttonSecundary =  <Button onClick={()=>this.deleteEvent()} >Deletar Evento</Button>
+            buttonPrimary =   <Button disabled={true} onClick={()=>this.insertEvent(this.props.modalValues)} >Salvar</Button>
 
         }else{
             title = "Cadastrar"
-            buttonSecundary =  <Button onClick={()=>{}} >Cancelar</Button>
+            buttonPrimary =   <Button onClick={()=>this.insertEvent(this.props.modalValues)} >Salvar</Button>
+            buttonSecundary =  <Button onClick={()=>{this.props._toggleModal()}} >Cancelar</Button>
         }
         return(
             <React.Fragment>
@@ -211,7 +219,7 @@ class ModalEdit extends Component {
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button onClick={()=>this.insertEvent(this.props.modalValues)} >Salvar</Button>
+                            {buttonPrimary}
                             {buttonSecundary}
                         </Modal.Footer>
                     </Modal> 
@@ -232,8 +240,9 @@ class ModalEdit extends Component {
 const mapDispatchToProps = dispatch => ({
     _toggleModal: () => dispatch(toggleModal()),
     _setValuesModal : (values) => dispatch(setValuesModal(values)),
-    _updateEvents: (events) => dispatch(updateEvents(events)),
+    _updateEvents: (events,agenda) => dispatch(updateEvents(events,agenda)),
     _setModalType: (value) => dispatch(setModalType(value)),
+    _updateOrganizeEvents:(events,agenda) =>dispatch(updateOrganizeEvents(events,agenda))
 });
 
 

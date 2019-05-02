@@ -64,7 +64,7 @@ class MyCalendar extends Component {
   }
   selectSlot (slotInfo){
     let scheduleEventsOrganized =  this.props.organizeEvents[this.props.currentSchedule.id]
-    console.log('select slots -> ', scheduleEventsOrganized)
+    // console.log('select slots -> ', scheduleEventsOrganized)
     let year,month,hourStart,HourFinish, minutesStart,minutesFinish,day;
     year = slotInfo.start.getFullYear();
     day = slotInfo.start.getDate();
@@ -106,6 +106,7 @@ class MyCalendar extends Component {
   }
 
   getEvents(){
+    console.log('get eventss no my calendar')
       let serverAns;
       $.ajax({
         url: '/events/getEvents',
@@ -161,6 +162,7 @@ class MyCalendar extends Component {
     return true
   }
   render(){
+    console.log('MyCaledar Render')
     let events;
     let a;
     let selected = {}
