@@ -37,8 +37,12 @@ class ModalView extends Component {
 
     }
     render(){
-        let start = dateFns.format(new Date(this.props.modalValues.start), 'DD/MM/YYYY HH:MM')
-        let end = dateFns.format(new Date(this.props.modalValues.end), 'DD/MM/YYYY HH:MM')
+        // let newAqui = dateFns.format(new Date(this.props.modalValues.start), 'DD/MM/YYYY HH:mm',)
+        // console.log('foo modal view', newAqui)
+        // let start = dateFns.format(new Date(this.props.modalValues.start), 'DD/MM/YYYY HH:MM')
+        let start =  dateFns.format(new Date(this.props.modalValues.start), 'DD/MM/YYYY HH:mm',)
+        // let end = dateFns.format(new Date(this.props.modalValues.end), 'DD/MM/YYYY HH:MM')
+        let end =  dateFns.format(new Date(this.props.modalValues.end), 'DD/MM/YYYY HH:mm',)
         let title = this.props.modalValues.title;
         let agenda = this.props.modalValues.agenda;
         let user = this.props.modalValues.idUser;

@@ -5,12 +5,7 @@ const ScheduleSchema = require('../Schemas/schedule.js')
 function getSchedules(context,cb){
     let query = {}
     let returns = {};
-
-    // if ((context.id).match(/^[0-9a-fA-F]{24}$/)) {
-        query._id = context.id
-    // }else{
-    //     query.code = context.code;
-    // }
+    query._id = context.id
     
     ScheduleSchema.find(query, function(err,docs){
         if(err){
