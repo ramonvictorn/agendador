@@ -88,7 +88,9 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'web/public')));
 routes.init(app);
 // Handles any requests that don't match the ones above
-app.get('*', (req,res) =>{res.render('index.ejs', {scripts:['/js/index.js',]})});
+app.get('*', (req,res) =>{
+    console.log('get page')
+    res.render('index.ejs', {scripts:['/js/index.js',]})});
 
 const db = require('./core/db.js')
 db.dbConnect((error)=>{

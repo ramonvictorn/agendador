@@ -96,7 +96,8 @@ class ModalEdit extends Component {
 
     }
     blockSlotsStart(start){
-        console.log('blockSlotsStart modal Edit -> ', this.props.modalValues)
+        console.log('blockSlotsStart')
+        // console.log('blockSlotsStart modal Edit -> ', this.props.modalValues)
         let slotsArray = []
         let selected = this.props.modalValues.start;
          let day = selected.getDate();
@@ -114,23 +115,27 @@ class ModalEdit extends Component {
        this.props._setValuesModal({slotsExcludeStart:slotFunctions.getTimeSlot(slotsArray)})
     }
     componentDidUpdate(){
-        console.log('modal edit update')
+        // console.log('componentDidUpdate')
     //    this.blockSlotsStart()
     }
     onChangePicket(value,type){
-        this.props._setValuesModal({start:value})
-        let startBlock = arrayFunctions.blockSlotsStart(value,this.props.organizeEvents)
-        this.props._setValuesModal({slotsExcludeStart:startBlock})
+        console.log('onChangePicket', this.props.currentSchedule.id)
+        this.props._setValuesModal({[type]:value})
+        let startBlock = arrayFunctions.blockSlotsStart(value,this.props.organizeEvents[this.props.currentSchedule.id])
         let endBLock = arrayFunctions.blockSlotsEnd(value, this.props.modalValues.end,this.props.organizeEvents)
+        this.props._setValuesModal({slotsExcludeStart:startBlock})
         this.props._setValuesModal({slotsExcludeEnd:endBLock})
     }
     render(){
-        
+        let buttonSecundary;
         let title;
         if(this.props.modalType == 'edit'){
             title = 'Editar'
+            buttonSecundary =  <Button onClick={()=>this.deleteEvent()} >Deletar Evento</Button>
+
         }else{
             title = "Cadastrar"
+            buttonSecundary =  <Button onClick={()=>{}} >Cancelar</Button>
         }
         return(
             <React.Fragment>
@@ -167,7 +172,7 @@ class ModalEdit extends Component {
                                     <Form.Group as={Col} controlId="formGridEmail">
                                         <Form.Label>Inicio </Form.Label>
                                         <DatePicker
-                                        //  locale="pt"
+                                        disabled={true}
                                         readOnly={false}
                                         className='picker form-control'
                                         selected={new Date(this.props.modalValues.start)}
@@ -189,6 +194,7 @@ class ModalEdit extends Component {
                                         <DatePicker
                                         className='picker form-control'
                                         readOnly={false}
+                                        disabled={true} 
                                         selected={new Date(this.props.modalValues.end)}
                                         onChange={(value)=>{this.getValues(value,'end')}}
                                         showTimeSelect
@@ -205,8 +211,8 @@ class ModalEdit extends Component {
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button onClick={()=>this.deleteEvent()} >Deletar Evento</Button>
-                            <Button onClick={()=>this.insertEvent(this.props.modalValues)} >Save</Button>
+                            <Button onClick={()=>this.insertEvent(this.props.modalValues)} >Salvar</Button>
+                            {buttonSecundary}
                         </Modal.Footer>
                     </Modal> 
             </React.Fragment>
