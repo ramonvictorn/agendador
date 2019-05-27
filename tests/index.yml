@@ -9,4 +9,4 @@ config:
 scenarios:
   - flow:
     - get:
-        url: "/"
+        url: "/agenda/5cb3dd7462935c1ca482630d"

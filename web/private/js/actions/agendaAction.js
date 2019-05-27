@@ -5,6 +5,12 @@ export const SET_MODAL_TYPE = 'SET_MODAL_TYPE';
 export const UPDATE_ORGANIZE_EVENTS = 'UPDATE_ORGANIZE_EVENTS';
 export const ADD_SCHEDULE = 'ADD_SCHEDULE';
 export const SET_CURRENT_SCHEDULE = 'SET_CURRENT_SCHEDULE';
+export const ADD_MONTH_VERIFIED = 'ADD_MONTH_VERIFIED';
+export const CLEAN_MONTHS_VIRIFIEDS= 'CLEAN_MONTHS_VIRIFIEDS';
+
+
+// refactored
+export const ADD_EVENTS = 'ADD_EVENTS';
 
 export const toggleModal = () => ({
   type: TOGGLE_MODAL,
@@ -42,4 +48,20 @@ export const addSchedule = value => ({
 export const setCurrentSchedule = value => ({
   type: SET_CURRENT_SCHEDULE,
   payload: {value}
+})
+
+
+export const addMonthVerified = month =>({
+  type:ADD_MONTH_VERIFIED,
+  payload : {month},
+})
+
+export const cleanMonthsVerifieds= month =>({
+  type:ADD_MONTH_VERIFIED,
+  payload : {month},
+})
+
+export const addEvents = (agenda,year,month,events)=>({
+  type: ADD_EVENTS,
+  payload: {agenda,year,month,events},
 })

@@ -21,7 +21,22 @@ const EventsSchema = require('../Schemas/event')
 function getEvents(context,cb){
     let ret = {}
     // console.log('model getEvents -> function getEvents', context);
-    EventsSchema.find({agenda:context.agenda}, function(err,docs){
+    let find = {};
+        find.agenda = context.agenda
+        find.month = context.monthStart;
+        find.monthEnd = context.month;
+        find.yearStart = context.year;
+        find.year = context.year;
+        
+    let query = {
+        // month: { $gte: context.monthStart, $lte: context.monthEnd }
+        month : context.month,
+        agenda: context.agenda,
+        
+    }
+    
+    // console.log('find é ', context)
+    EventsSchema.find(query, function(err,docs){
         if(err){
             console.log('Events_Not_Found')
             ret.error = {

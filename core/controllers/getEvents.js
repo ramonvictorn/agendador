@@ -9,8 +9,14 @@ module.exports = getEvents;
 function getEvents(req,res){
     if(verifyParams(req.body)){
         let context = {
-            agenda: req.body.agenda
+            agenda: req.body.agenda,
+            day: req.body.day,
+            month: req.body.month,
+            monthEnd: req.body.month == 12 ? req.body.month+1 : 1,
+            yearStart : req.body.month >  1 ? req.body.year : req.body.year-1,
+            year:req.body.year,
         }
+
         GetEventsModel(context,(ret)=>{
             if(ret.error){
                 console.log('erro no cb get',ret)

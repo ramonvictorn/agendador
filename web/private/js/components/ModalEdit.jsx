@@ -67,7 +67,7 @@ class ModalEdit extends Component {
                 const events = serverAns.data ? serverAns.data : [];
                 const agenda = this.props.currentSchedule.id;
                 this.props._updateEvents(events,agenda);  
-                this.props._updateOrganizeEvents(arrayFunctions.organizeEvents(events),agenda)
+                this.props._updateOrganizeEvents(arrayFunctions.organizedEvents(events),agenda)
                 }else{
                 alert('ERROR MY CALENDAR - getEvents')
                 } 
@@ -108,7 +108,7 @@ class ModalEdit extends Component {
          let day = selected.getDate();
         let year = selected.getFullYear()
         let month = selected.getMonth() + 1
-        let dayEvents = (((this.props.organizeEvents[year] || {})[month]|| {})[day] ||{});
+        let dayEvents = (((this.props.organizedEvents[year] || {})[month]|| {})[day] ||{});
         for(var a = 0; a<=48; a++){
             if(dayEvents[a] != undefined && dayEvents[a] != null ){
                 //console.log('llop ', dayEvents[a])
@@ -126,8 +126,8 @@ class ModalEdit extends Component {
     onChangePicket(value,type){
         console.log('onChangePicket', this.props.currentSchedule.id)
         this.props._setValuesModal({[type]:value})
-        let startBlock = arrayFunctions.blockSlotsStart(value,this.props.organizeEvents[this.props.currentSchedule.id])
-        let endBLock = arrayFunctions.blockSlotsEnd(value, this.props.modalValues.end,this.props.organizeEvents)
+        let startBlock = arrayFunctions.blockSlotsStart(value,this.props.organizedEvents[this.props.currentSchedule.id])
+        let endBLock = arrayFunctions.blockSlotsEnd(value, this.props.modalValues.end,this.props.organizedEvents)
         this.props._setValuesModal({slotsExcludeStart:startBlock})
         this.props._setValuesModal({slotsExcludeEnd:endBLock})
     }
@@ -233,7 +233,7 @@ class ModalEdit extends Component {
     modalShow: store.agendaReduce.modalShow,
     modalValues : store.agendaReduce.modalValues,
     modalType : store.agendaReduce.modalType,
-    organizeEvents: store.agendaReduce.organizeEvents,
+    organizedEvents: store.agendaReduce.organizedEvents,
     currentSchedule:store.agendaReduce.currentSchedule,
   });
 

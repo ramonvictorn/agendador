@@ -1,14 +1,20 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {DropdownButton,Dropdown} from 'react-bootstrap';
-import Card from '../components/Card.jsx';
+
 //components
 import HeaderMenu from '../components/HeaderMenu.jsx';
+import Card from '../components/Card.jsx';
+import Loading from '../components/Loading.jsx';
+
 
 // acions
 import {
     addSchedule,
 } from '../actions/agendaAction.js'
+import {
+    toggleLoading,
+} from '../actions/appActions.js'
 
 class AgendaChoise extends Component {
     constructor({match,history}){
@@ -24,6 +30,7 @@ class AgendaChoise extends Component {
         if(this.props.schedules.length == 0 ){
             // console.log('nao tem os schedules')
             let serverAns;
+            this.props._toggleLoading();
             $.ajax({
                 url: '/schedule/getUserSchedules',
                 dataType: 'json',
@@ -33,6 +40,7 @@ class AgendaChoise extends Component {
                 success: (ans) => { serverAns = ans; },
                 error: (err) => { serverAns = {err : err.responseJSON} },
                 complete: () => {
+                    this.props._toggleLoading();
                     if(!serverAns.err){
                         // callback
                         // console.log('agendaChoice ', serverAns.data)
@@ -57,7 +65,12 @@ class AgendaChoise extends Component {
     }
 
     render(){
-        // console.log('render agenda choice', this.props.schedules)
+        let loading;
+        // if(this.props.loading){
+            loading = <Loading></Loading>
+        // }else{
+        //     loading = <h1>DEU false</h1>
+        // }
         document.title = 'Agendador - Escolher agenda'
         document.body.style = 'background: #ffffff;;';
         let cards = [];
@@ -77,25 +90,6 @@ class AgendaChoise extends Component {
                     redirectToAgenda={this.redirectToAgenda}></Card>
                 )
             }
-            // this.props.schedules.forEach(function(el,index){
-            //     // let self = this;
-            //     console.log('looping ramon', this)
-            //     console.log(el,index)
-            //     let key = index;
-            //     cards.push(
-            //             // <h1 key={index}>
-            //             //     {index}
-            //             // </h1>
-            //             <Card 
-            //             key={key} 
-            //             name={el.name} 
-            //             image={el.details.images[0]} 
-            //             id={el['_id']}
-            //             // redirectToAgenda={this.redirectToAgenda}
-            //             >
-            //          </Card>
-            //     )
-            // })
         }else{
             let key = 0;
             cards.push(
@@ -104,6 +98,7 @@ class AgendaChoise extends Component {
         }
         return(
             <React.Fragment>
+                {loading}
                 <HeaderMenu></HeaderMenu>
                     <div className={'cards'}>
                     {cards}
@@ -125,9 +120,11 @@ class AgendaChoise extends Component {
 
 const mapStateToProps = store => ({
     schedules: store.agendaReduce.schedules,
+    loading: store.appReduce.loading,
   });
 
 const mapDispatchToProps = dispatch => ({
     _addSchedule : (value) => dispatch(addSchedule(value)),
+    _toggleLoading:()=>dispatch(toggleLoading()),
 });
 export default connect(mapStateToProps,mapDispatchToProps)(AgendaChoise)

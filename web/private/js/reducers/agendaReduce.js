@@ -6,14 +6,18 @@ import {
   UPDATE_ORGANIZE_EVENTS,
   ADD_SCHEDULE,
   SET_CURRENT_SCHEDULE,
+  ADD_MONTH_VERIFIED,
+  CLEAN_MONTHS_VIRIFIEDS,
+  ADD_EVENTS,
 } from '../actions/agendaAction.js';
 
 let dateNow = new Date();
 
 const initialState = {
-  modalShow: false,
-  modalType: 'view',
-  modalValues: {
+  modalShow: false, //monstrar modal
+  monthsVerified: [], //meses que foram baixados
+  modalType: 'view', // tipo da modal
+  modalValues: { //valores da modal
     title:'',
     start : new Date(),
     end: new Date(),
@@ -24,18 +28,18 @@ const initialState = {
     slotsExcludeEnd: null,
     idEvent:null
   },
-  currentSchedule: {},
-  events : {},
-  organizeEvents : {},
-  schedules : [],
+  currentSchedule: {}, //agenda que estou atualmente
+  events : {}, // todos os eventos
+  organizedEvents : {}, //eventos organizados
+  schedules : [], //agenda
 }
 
 let newValue;
 const agendaReduce = (state = initialState, action)=>{
   switch(action.type){
+
     case TOGGLE_MODAL:
-      state.modalShow == false ?  newValue = true : newValue = false
-      return {...state, modalShow: newValue };
+      return {...state, modalShow: !state.modalShow };
     
     case UPDATE_EVENTS:
       return {...state, events : {...state.events,
@@ -44,7 +48,7 @@ const agendaReduce = (state = initialState, action)=>{
       return {...state}
 
     case UPDATE_ORGANIZE_EVENTS:
-      return{...state, organizeEvents: {...state.organizeEvents,
+      return{...state, organizedEvents: {...state.organizedEvents,
           [action.payload.agenda]: action.payload.events
         }
       } 
@@ -79,9 +83,37 @@ const agendaReduce = (state = initialState, action)=>{
         name: action.payload.value.name,
       }
     }
+
+    case ADD_MONTH_VERIFIED:
+
+    // let oldArray = state.monthsVerified;
+    // console.log('add month ', oldArray)
+    // oldArray.push(action.payload.month)
+      return{
+        ...state,
+        monthsVerified:[action.payload.month],
+      }
+      // refactores
+      case ADD_EVENTS:
+        let oldMonths = {...state.events};
+        let newMonths = {
+          [action.payload.agenda]:{
+            [action.payload] : ''
+          }
+        }
+        return{...state,
+          events:{
+            ...state.events,
+          }
+        }
     default:
       return state;
   }
   
 }
 export default agendaReduce;
+
+
+//events:{
+  // [agenda]: []
+//}

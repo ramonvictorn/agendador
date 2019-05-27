@@ -6,6 +6,7 @@ import {
   setValuesModal,
   setModalType,
   updateOrganizeEvents,
+  addMonthVerified,
 } from '../actions/agendaAction.js';
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
@@ -18,9 +19,10 @@ const mapStateToProps = store => ({
   modalShow: store.agendaReduce.modalShow,
   events:store.agendaReduce.events,
   myUser: store.appReduce.myUser,
-  organizeEvents: store.agendaReduce.organizeEvents,
+  organizedEvents: store.agendaReduce.organizedEvents,
   modalValues : store.agendaReduce.modalValues,
   currentSchedule: store.agendaReduce.currentSchedule,
+  monthsVerified: store.agendaReduce.monthsVerified,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -28,6 +30,7 @@ const mapDispatchToProps = dispatch => ({
   _updateEvents: (events,agenda) => dispatch(updateEvents(events,agenda)),
   _setValuesModal : (values) => dispatch(setValuesModal(values)),
   _setModalType : (value) => dispatch(setModalType(value)),
+  _addMonthVerified : (value) => dispatch(addMonthVerified(value)),
   _updateOrganizeEvents:(events,agenda) =>dispatch(updateOrganizeEvents(events,agenda))
 });
 
@@ -41,6 +44,7 @@ class MyCalendar extends Component {
     this.setStartTime = this.setStartTime.bind(this);
     this.onSelecting = this.onSelecting.bind(this);
     this.openModal =  this.openModal.bind(this);
+    this.navigate = this.navigate.bind(this);
   }
   
   componentDidMount(){
@@ -55,15 +59,15 @@ class MyCalendar extends Component {
   openModal(type,slotInfo){
     this.props._setValuesModal({start : slotInfo.start})
     this.props._setValuesModal({end : slotInfo.end})
-    let startBlock = arrayFunctions.blockSlotsStart(this.props.modalValues.start,this.props.organizeEvents)
+    let startBlock = arrayFunctions.blockSlotsStart(this.props.modalValues.start,this.props.organizedEvents)
     this.props._setValuesModal({slotsExcludeStart:startBlock})
     this.props._setModalType(type);
     this.props._toggleModal();
-    let endBLock = arrayFunctions.blockSlotsEnd(this.props.modalValues.start, this.props.modalValues.end,this.props.organizeEvents)
+    let endBLock = arrayFunctions.blockSlotsEnd(this.props.modalValues.start, this.props.modalValues.end,this.props.organizedEvents)
     this.props._setValuesModal({slotsExcludeEnd:endBLock})
   }
   selectSlot (slotInfo){
-    let scheduleEventsOrganized =  this.props.organizeEvents[this.props.currentSchedule.id]
+    let scheduleEventsOrganized =  this.props.organizedEvents[this.props.currentSchedule.id]
     // console.log('select slots -> ', scheduleEventsOrganized)
     let year,month,hourStart,HourFinish, minutesStart,minutesFinish,day;
     year = slotInfo.start.getFullYear();
@@ -108,12 +112,18 @@ class MyCalendar extends Component {
   getEvents(){
     console.log('get eventss no my calendar')
       let serverAns;
+      let data = {
+        agenda:this.props.currentSchedule.id,
+        day: new Date().getDate(),
+        month: (new Date().getMonth()) + 1,
+        year: new Date().getFullYear(),
+      }
       $.ajax({
         url: '/events/getEvents',
         dataType: 'json',
         type: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify({agenda:this.props.currentSchedule.id}),
+        data: JSON.stringify(data),
         success: (ans) => { serverAns = ans; },
         error: (err) => { serverAns = {err : err.responseJSON} },
         complete: () => {
@@ -121,7 +131,8 @@ class MyCalendar extends Component {
               const events = serverAns.data ? serverAns.data : [];
               const agenda = this.props.currentSchedule.id;
               this.props._updateEvents(events,agenda);  
-              this.props._updateOrganizeEvents(arrayFunctions.organizeEvents(events),agenda)
+              this.props._updateOrganizeEvents(arrayFunctions.organizedEvents(events),agenda)
+              this.props._addMonthVerified(data.month);
             }else{
               alert('ERROR MY CALENDAR - getEvents')
             } 
@@ -161,6 +172,41 @@ class MyCalendar extends Component {
     // console.log('selected ', selected)
     return true
   }
+  navigate(dateNav){
+    let dateNavegate = new Date(dateNav);
+    let serverAns;
+    let data = {
+      agenda:this.props.currentSchedule.id,
+      day: new Date(dateNav).getDate(),
+      month: (new Date(dateNav).getMonth()) + 1,
+      year: new Date(dateNav).getFullYear(),
+    }
+    if(this.props.monthsVerified.indexOf(dateNavegate.getMonth()+1) == -1){
+      $.ajax({
+        url: '/events/getEvents',
+        dataType: 'json',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: (ans) => { serverAns = ans; },
+        error: (err) => { serverAns = {err : err.responseJSON} },
+        complete: () => {
+            if(!serverAns.err){
+              const events = serverAns.data ? serverAns.data : [];
+              const agenda = this.props.currentSchedule.id;
+              this.props._updateEvents(events,agenda);  
+              this.props._updateOrganizeEvents(arrayFunctions.organizedEvents(events),agenda)
+              this.props._addMonthVerified(data.month);
+            }else{
+              alert('ERROR MY CALENDAR - getEvents')
+            } 
+        }
+      });
+    }else{
+      // console.log('esse mes ja tem') nada
+    }
+  }
+
   render(){
     console.log('MyCaledar Render')
     let events;
@@ -189,6 +235,13 @@ class MyCalendar extends Component {
           min={this.setStartTime(7)}
           max={this.setStartTime(22)}
           onSelecting={(selected)=>this.onSelecting(selected)}
+          views={{
+            month: true,
+            week: true,
+            day: true,
+          }}
+          toolbar={true}
+          onNavigate={(date)=>this.navigate(date)}
         />
     )
   }

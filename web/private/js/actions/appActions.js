@@ -3,11 +3,17 @@ export const SET_LOGGED = 'SET_LOGGED';
 // export const SAVE_USER = 'SAVE_USER';
 export const SAVE_MY_ID = 'SAVE_MY_ID'
 
+export const TOGGLE_LOADING = 'TOGGLE_LOADING';
+
 export const isLogged = {
   type: IS_LOGGED,
   payload : {}
 };
 
+export const toggleLoading = () => ({
+  type: TOGGLE_LOADING,
+  payload : {}
+});
 
 export const saveMyId = value =>({
   type:SAVE_MY_ID,

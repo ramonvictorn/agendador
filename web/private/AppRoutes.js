@@ -23,6 +23,7 @@ import NoMatch404 from '../private/js/views/NoMatch404.jsx';
 import AgendaView from '../private/js/views/AgendaView.jsx';
 import AgendaChoise from '../private/js/views/AgendaChoise.jsx'
 import Administrative from '../private/js/views/Administrative.jsx'
+import Contact from '../private/js/views/Contact.jsx'
 
 
 import HeaderMenu from '../private/js/components/HeaderMenu.jsx'
@@ -99,6 +100,8 @@ class AppRoutes extends Component{
                     <PrivateRoute path='/agenda' isLogged={this.props.isLogged} component={AgendaChoise}/>
                     <PrivateRoute path='/choiseAgenda' isLogged={this.props.isLogged} component={AgendaChoise}/>
                     <PrivateRoute path='/administrative/' isLogged={this.props.isLogged} component={Administrative}/>
+                    <PrivateRoute path='/contato/' isLogged={this.props.isLogged} component={Contact}/>
+
                     <PrivateRoute exact path='/' isLogged={this.props.isLogged} component={AgendaChoise}/>
                     <Route component={NoMatch404}/>
                     {/* <Route path={'/'} component={AgendaView}/> */}

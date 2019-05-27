@@ -81,3 +81,10 @@
   padding-top: 9%;
   color:#fff
 }
+
+.loading{
+  position: absolute;
+  left: 38%;
+  z-index: 999;
+  top: 38%;
+}
