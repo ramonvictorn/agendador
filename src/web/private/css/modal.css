@@ -1,0 +1,17 @@
+.modalEvent{
+    position:absolute;
+    top: 50%;
+    left: 20%;
+    z-index: 9;
+
+}
+
+.picker{
+    display: block;
+    width: 377px!important;
+}
+
+.react-datepicker-wrapper {
+    display: block!important;
+
+}

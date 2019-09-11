@@ -2,9 +2,9 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path');
 
 module.exports = {
-    entry: "./web/private/index.js",
+    entry: "./src/web/private/index.js",
     output: {
-        path: path.resolve(__dirname, "web/public/js"),
+        path: path.resolve(__dirname, "src/web/public/js"),
         filename: "index.js"
     },
     performance: { hints: false },

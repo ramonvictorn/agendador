@@ -1,0 +1,12 @@
+config:
+  target: 'http://localhost:3006'
+  phases:
+    - duration: 40
+      arrivalRate: 100
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
+scenarios:
+  - flow:
+    - get:
+        url: "/agenda/5cb3dd7462935c1ca482630d"
