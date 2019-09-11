@@ -1,0 +1,8 @@
+version: "3.7"
+services:
+  api: 
+    build: .
+    ports: 
+    - "3006:3006"
+    stdin_open: true
+    tty: true
