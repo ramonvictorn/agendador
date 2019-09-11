@@ -56,7 +56,7 @@ class UserMenu extends Component {
             img = this.props.users[this.props.myUser]['img'];
         }else{
             name = 'nao sei';
-            img = 'nao sei';
+            img = '/images/crying.gif';
         }
         /* <h1>NOME AQUI: {this.props.myUser} </h1>
         <h1>IMG AQUI: {name} </h1> */
