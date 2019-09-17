@@ -96,14 +96,14 @@ class AppRoutes extends Component{
             <Router>    
                 <Switch>
                     <Route path='/login' component={LoginView}/>
-                    <Route path='/agenda/:idAgenda' isLogged={this.props.isLogged} component={AgendaView}/>
-                    <Route path='/agenda' isLogged={this.props.isLogged} component={AgendaChoise}/>
-                    <Route path='/choiseAgenda' isLogged={this.props.isLogged} component={AgendaChoise}/>
-                    <Route path='/administrative/' isLogged={this.props.isLogged} component={Administrative}/>
-                    <Route path='/contato/' isLogged={this.props.isLogged} component={Contact}/>
+                    {/* <Route path='/agenda/:idAgenda' isLogged={this.props.isLogged} component={AgendaView}/> */}
+                    {/* <Route path='/agenda' isLogged={this.props.isLogged} component={AgendaChoise}/> */}
+                    {/* <Route path='/choiseAgenda' isLogged={this.props.isLogged} component={AgendaChoise}/> */}
+                    {/* <Route path='/administrative/' isLogged={this.props.isLogged} component={Administrative}/> */}
+                    {/* <Route path='/contato/' isLogged={this.props.isLogged} component={Contact}/> */}
 
-                    <Route exact path='/' isLogged={this.props.isLogged} component={AgendaChoise}/>
-                    <Route component={NoMatch404}/>
+                    {/* <Route exact path='/' isLogged={this.props.isLogged} component={AgendaChoise}/> */}
+                    <Route component={LoginView}/>
                     {/* <Route path={'/'} component={AgendaView}/> */}
                     {/* <PrivateRoute path='/' isLogged={this.props.isLogged} component={AgendaChoise}/> */}
                 </Switch>

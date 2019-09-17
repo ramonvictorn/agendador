@@ -79,8 +79,10 @@ class FormLogin extends Component{
     }
     render(){
         return(
-            // <div className='FormLogin'>
-            <div className='login-container'>
+            <div className='FormLogin'>
+            {/* <div className='login-container'> */}
+            <h1>Fazer login</h1>
+            <p>Novo usuário ? Crie uma conta</p>
                 <form>
                      <Row>
                         <Col >
@@ -99,6 +101,7 @@ class FormLogin extends Component{
                         </Col>
                      </Row>
                 </form>
+                Esqueceu sua senha?
                 <button className={'btLogin'} onClick={()=>{this.ajaxLogin()}}>Login</button>
             </div>
         )

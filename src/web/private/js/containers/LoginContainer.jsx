@@ -8,9 +8,8 @@ class LoginContainer extends React.Component{
     }
     render() {
         return (
-          <div>
-              <FormLogin></FormLogin>
-          </div>  
+          
+          <FormLogin></FormLogin>  
         );
       }
 }
