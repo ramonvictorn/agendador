@@ -86,18 +86,26 @@ class FormLogin extends Component{
                 <form>
                      <Row>
                         <Col >
-                            <label className={'label'}>
-                                Email:
-                                <input type="email" id='login' name="login" onKeyPress={this.onKeyPress}/>
-                                </label>
+                            <input 
+                                className={'inputLogin'}
+                                type="email"
+                                placeholder="Endereço de e-mail"
+                                id='login'
+                                name="login" 
+                                onKeyPress={this.onKeyPress}
+                            />
                         </Col>
                     </Row>
                     <Row>
                         <Col >
-                            <label className={'label'}>
-                                Senha:
-                                <input type="password" id='password' name="password" onKeyPress={this.onKeyPress}/>
-                            </label>
+                            <input 
+                                className={'inputLogin'}
+                                type="password" 
+                                placeholder="Senha"
+                                id='password' 
+                                name="password" 
+                                onKeyPress={this.onKeyPress}
+                            />
                         </Col>
                      </Row>
                 </form>

@@ -1,7 +1,13 @@
 
 * {
     font-family: 'Cabin', sans-serif;
+    padding: 0;
+    border: none;
+    background: none;
 }
+button:focus { outline: none; }
+input:focus { outline: none; }
+
 body {
     height: 100%;
 }

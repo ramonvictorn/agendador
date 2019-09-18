@@ -1,17 +1,36 @@
 .loginBackgroung{
-  display: flex;
+  /* display: flex; */
+  /* flex-direction: column; */
+  height: 100%;
 }
 
 .loginBackgroung .FormLogin {
   border-radius: 29px;
   background-color: #fff;
-  height: 223px;
+  height: 300px;
+}
+
+.loginBackgroung .FormLogin h1,p,form {
+  margin-left: 30px;
 }
 
 .loginBackgroung .loginLogo{
-  position: relative;
-  top: 68px;
-  width: 50%;
+  position: ABSOLUTE;
+  top: 60px;
+  left: 46px;
+  max-height: 250px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.loginBackgroung .loginDiv {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  /* top: 37px; */
+  /* left: -86px; */
 }
 
 .btLogin{
@@ -21,14 +40,20 @@
   top: 817px;
   background: #26819D;
   border-radius: 100px;
+  color: #fff;
+  font-weight: bold;
 }
 html {
   background-color: #26819D;
   height: 100%;
 }
-body {
-  /* height: 100%; */
-  /* background-size: 50% auto; */
+.inputLogin{
+  border: 2px solid #AFAFB3;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin-top: 10px;
+  height: 50px;
+  width: 236px;
 }
 
 .loginLogo{
@@ -38,5 +63,6 @@ body {
 
 .loginLogo svg{
   margin-top: 4%;
+  width: 300px;
 }
 
