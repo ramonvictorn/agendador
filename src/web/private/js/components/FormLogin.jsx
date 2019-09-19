@@ -15,7 +15,7 @@ import {
 
 
 class FormLogin extends Component{
-    constructor(){
+    constructor({history}){
         super()
         this.formValues = {}
         this.getValues = this.getValues.bind(this);
@@ -29,33 +29,35 @@ class FormLogin extends Component{
         this.formValues.password = $('#password').val();
     }
     ajaxLogin(){
-        this.getValues();
-        if(this.formValues.login.length != 0 && this.formValues.password.length != 0){
-            $.ajax({
-                url: '/user/login',
-                dataType: 'json',
-                type: 'post',
-                contentType: 'application/json',
-                data: JSON.stringify(this.formValues),
-                success: (ans) => { this.response = ans; },
-                error: (err) => { this.response = {error : err.responseJSON.error} },
-                complete: () => {
-                    // console.log('foi a res ', this.response);
-                    if(this.response.data){
-                        this.props._setLogged(true)
-                        console.log('FormLogin data: loggado com sucesso', this.props)
-                        this.getMyUser();     
-                        return <Redirect to='/login'/>
-                    }else{  
-                        console.log('FormLogin error: ' + this.response.error)
-                        alert('dados incorretos')
-                    }
+        console.log('ajaxLogin',this.history);
+        
+        // this.getValues();
+        // if(this.formValues.login.length != 0 && this.formValues.password.length != 0){
+        //     $.ajax({
+        //         url: '/user/login',
+        //         dataType: 'json',
+        //         type: 'post',
+        //         contentType: 'application/json',
+        //         data: JSON.stringify(this.formValues),
+        //         success: (ans) => { this.response = ans; },
+        //         error: (err) => { this.response = {error : err.responseJSON.error} },
+        //         complete: () => {
+        //             // console.log('foi a res ', this.response);
+        //             if(this.response.data){
+        //                 this.props._setLogged(true)
+        //                 console.log('FormLogin data: loggado com sucesso', this.props)
+        //                 this.getMyUser();     
+                        // return <Redirect to='/programacao'/>
+        //             }else{  
+        //                 console.log('FormLogin error: ' + this.response.error)
+        //                 alert('dados incorretos')
+        //             }
                     
-                }
-            });
-        }else{
-            alert('Preencha todos os campos para fazer login!')
-        }
+        //         }
+        //     });
+        // }else{
+        //     alert('Preencha todos os campos para fazer login!')
+        // }
     }
     getMyUser(){
         let response;
@@ -109,8 +111,12 @@ class FormLogin extends Component{
                         </Col>
                      </Row>
                 </form>
-                Esqueceu sua senha?
-                <button className={'btLogin'} onClick={()=>{this.ajaxLogin()}}>Login</button>
+                <Row>
+                    <div className={'divPassword'}>
+                        <h2>Esqueceu sua senha?</h2>
+                        <button className={'btLogin'} onClick={()=>{this.ajaxLogin()}}>Login</button>
+                    </div>
+                </Row>
             </div>
         )
     }

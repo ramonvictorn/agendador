@@ -223,7 +223,7 @@ class MyCalendar extends Component {
           events={events}
           startAccessor={(event) => this.configDate(event.start)}
           endAccessor={(event)=>this.configDate(event.end)}
-          defaultView='week'
+          defaultView='month'
           ignoreEvents={false}
           step={30}
           timeslots={2}

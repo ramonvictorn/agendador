@@ -30,7 +30,7 @@ class LoginView extends Component{
         let largura = window.innerWidth;
         let altura =  window.innerHeight;
         // document.body.style = 'background:#26819D;';
-        document.body.style = `background: linear-gradient(180deg, #26819D 60%, #ffffff 40%);`;
+        document.body.style = `background: linear-gradient(180deg, #26819D 55%, #ffffff 45%);`;
         // <Helmet bodyAttributes={{style: 'background-color : #fff'}}/>
 
         if(this.props.isLogged == true){
@@ -38,7 +38,7 @@ class LoginView extends Component{
         }
         // let altura =  window.innerHeight;
         console.log('altura é ->>>>>>> ', altura);
-        let altura2 = altura*0.60
+        let altura2 = altura*0.55
         console.log('altura 2 ficou ', altura2, 'e o left -> ', largura);
         let styleObj = {
             // background: 'black',

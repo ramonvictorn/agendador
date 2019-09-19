@@ -20,7 +20,7 @@ import {
 // views
 import LoginView from '../private/js/views/LoginView.jsx'
 import NoMatch404 from '../private/js/views/NoMatch404.jsx';
-import AgendaView from '../private/js/views/AgendaView.jsx';
+import ProgramacaoView from '../private/js/views/ProgramacaoView.jsx';
 import AgendaChoise from '../private/js/views/AgendaChoise.jsx'
 import Administrative from '../private/js/views/Administrative.jsx'
 import Contact from '../private/js/views/Contact.jsx'
@@ -101,7 +101,7 @@ class AppRoutes extends Component{
                     {/* <Route path='/choiseAgenda' isLogged={this.props.isLogged} component={AgendaChoise}/> */}
                     {/* <Route path='/administrative/' isLogged={this.props.isLogged} component={Administrative}/> */}
                     {/* <Route path='/contato/' isLogged={this.props.isLogged} component={Contact}/> */}
-
+                    <Route path='/programacao' component={ProgramacaoView}/>
                     {/* <Route exact path='/' isLogged={this.props.isLogged} component={AgendaChoise}/> */}
                     <Route component={LoginView}/>
                     {/* <Route path={'/'} component={AgendaView}/> */}

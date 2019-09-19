@@ -3,6 +3,7 @@
     font-family: 'Cabin', sans-serif;
     padding: 0;
     border: none;
+    margin: 0;
     background: none;
 }
 button:focus { outline: none; }

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { setCurrentSchedule} from '../actions/agendaAction.js'
 
 
-class AgendaView extends Component {
+class ProgramacaoView extends Component {
     constructor({match,history}) {
         super(); 
         this.history = history;
@@ -61,4 +61,4 @@ const mapStateToProps = store => ({
     _setCurrentSchedule : (values) => dispatch(setCurrentSchedule(values)),
 });
 
-  export default connect(mapStateToProps,mapDispatchToProps)(AgendaView);
+  export default connect(mapStateToProps,mapDispatchToProps)(ProgramacaoView);
