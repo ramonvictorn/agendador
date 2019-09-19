@@ -62,16 +62,18 @@ var FileStore = require('session-file-store')(session);
 
 const express = require('express');
 const path = require('path');
+var compression = require('compression');
+
 const app = express();
 
 //Config view engine
 app.set('views', path.resolve('./src/web/private/templates')) // specify the views directory
 app.set('view engine', 'ejs');
-
 var bodyParser = require('body-parser');
+
+app.use(compression());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
-
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
     store: new FileStore('../session'),
