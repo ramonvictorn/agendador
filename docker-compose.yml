@@ -3,6 +3,6 @@ services:
   api: 
     build: .
     ports: 
-    - "3006:3006"
+    - "4545:3006"
     stdin_open: true
     tty: true

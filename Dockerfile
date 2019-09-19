@@ -9,9 +9,10 @@ COPY . .
 
 RUN npm install
 RUN npm install -D
-
 COPY --chown=node:node . .
 
 USER node
 
+RUN npm run build-prod
+# RUN node src/app.js &&
 CMD [ "node", "src/app.js" ]
