@@ -3,7 +3,7 @@ services:
   api: 
     build: .
     ports: 
-    - "4545:3006"
+    - "80:3006"
     stdin_open: true
     tty: true
     environment:
