@@ -43,7 +43,7 @@
   "scripts": {
     "build-dev": "webpack --mode development --watch ",
     "build-dev2": "webpack --watch-poll --watch --progress --hot --mode development",
-    "build-prod": "webpack --mode production",
+    "build-prod": "webpack --mode production --profile",
     "watch": "webpack --watch --info-verbosity verbose",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-dev": "NODE_ENV=development node app.js",

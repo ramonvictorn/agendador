@@ -30,6 +30,12 @@ class MyCalendar extends Component {
       events={[]}
       startAccessor="start"
       endAccessor="end"
+      views={{
+        month: true,
+        week: true,
+        // day: true,
+        work_month: true,
+      }}
     />
     )
   }
