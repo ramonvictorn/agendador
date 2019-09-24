@@ -9,8 +9,9 @@ import {
   addMonthVerified,
 } from '../actions/agendaAction.js';
 
-import { Calendar, momentLocalizer } from '../../../../utils/react-big-calendar/dist/react-big-calendar.min.js'
+import { Calendar, momentLocalizer } from '../../../../utils/reactBigCalendar/dist/react-big-calendar.min.js'
 import moment from 'moment'
+
 const localizer = momentLocalizer(moment) // or globalizeLocalizer
 
 
