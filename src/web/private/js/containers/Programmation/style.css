@@ -1,0 +1,7 @@
+.programation-container{
+    display: flex;
+    height: 100%;
+}
+.programation-container > .calendar-container{
+    width: 80%;
+}

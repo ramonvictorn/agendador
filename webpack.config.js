@@ -1,4 +1,3 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path');
 
 module.exports = {
@@ -37,21 +36,13 @@ module.exports = {
           loader: "babel-loader"
         }
       },
-      // {
-      //   test: /\.html$/,
-      //   use: [
-      //     {
-      //       loader: "html-loader"
-      //     }
-      //   ]
-      // },
       {
         test: /\.css$/,
         use: [ 'style-loader', 'css-loader' ]
       }
     ]
   },
-  watch: false,
+  watch: true,
   watchOptions: {
     ignored: /node_modules/
   }
