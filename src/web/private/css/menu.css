@@ -1,16 +1,4 @@
 
-.headerMenu {
-  height: 50px;
-  background-color: #F6F6F8;
-}
-
-.menu , .menu a {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  
-}
-
 .linkStyle{
   color: #160F1F;
   font-weight: bold;
@@ -24,47 +12,7 @@
   font-size: 16px;
 }
 
-.userMenu {
-  cursor: pointer;
-  min-width: 240px;
-  height: 50px;
-  max-width: 250px;
-  float: right;
-  overflow: hidden;
-}
 
- .userMenu h1 {
-  /* max-width: 10px; */
-  /* max-height: 10px; */
-  font-size: 15px;
-  color: #160F1F;
-  float: left;
-  margin: 7px;
-}
-
-.userImg{
-  max-width: 52px;
-  max-height: 50px;
-  border: white;
-  float: right
-} 
-
-
-.circle {
-  /* background-color: #aaa; */
-  border-radius: 50%;
-  width: 52px;
-  height: 47px;
-  overflow: hidden;
-  position: relative;
-  float: right
-}
-
-.circle img {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
 
 .currentAgenda{
   float: left;

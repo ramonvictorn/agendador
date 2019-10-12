@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {
+import './style.css'
+// import {
 //     saveMyId,
-    setLogged,
-} from '../actions/appActions.js';
-import {
-    saveUser
-} from  '../actions/usersActions.js';
+//     setLogged,
+// } from '../actions/appActions.js';
+// import {
+//     saveUser
+// } from  '../actions/usersActions.js';
 
 class UserMenu extends Component {
     constructor(){
@@ -31,33 +32,33 @@ class UserMenu extends Component {
         // });
     }
     logout(){
-        let serverAns;
-        $.ajax({
-            url: '/user/logout',
-            dataType: 'json',
-            type: 'POST',
-            success: (ans) => { serverAns = ans; },
-            error: (err) => { serverAns = {err : err.responseJSON} },
-            complete: () => {
-                if(serverAns.err == undefined){
-                    this.props._setLogged(false);
-                    // this.props._saveUser(null);
-                }
-            }
-        });
+        // let serverAns;
+        // $.ajax({
+        //     url: '/user/logout',
+        //     dataType: 'json',
+        //     type: 'POST',
+        //     success: (ans) => { serverAns = ans; },
+        //     error: (err) => { serverAns = {err : err.responseJSON} },
+        //     complete: () => {
+        //         if(serverAns.err == undefined){
+        //             this.props._setLogged(false);
+        //             // this.props._saveUser(null);
+        //         }
+        //     }
+        // });
     }
     render(){
         // console.log('render user menu', this.props.users)
         // {this.props.users['5c70b2fc03ee561eb476035e'].img}
         let name = '';
         let img = '';
-        if(this.props.users[this.props.myUser]){
-            name = this.props.users[this.props.myUser]['name'];
-            img = this.props.users[this.props.myUser]['img'];
-        }else{
-            name = 'nao sei';
+        // if(this.props.users[this.props.myUser]){
+            // name = this.props.users[this.props.myUser]['name'];
+            // img = this.props.users[this.props.myUser]['img'];
+        // }else{
+            name = 'João Silva';
             img = '/images/crying.gif';
-        }
+        // }
         /* <h1>NOME AQUI: {this.props.myUser} </h1>
         <h1>IMG AQUI: {name} </h1> */
         return (
@@ -76,16 +77,17 @@ class UserMenu extends Component {
 }
 
 
-const mapStateToProps = store => ({
-    myUser: store.appReduce.myUser,
-    users: store.usersReduce.users,
-    // isLogged: store.appReduce.isLogged,
-  });
+// const mapStateToProps = store => ({
+//     myUser: store.appReduce.myUser,
+//     users: store.usersReduce.users,
+//     // isLogged: store.appReduce.isLogged,
+//   });
 
-const mapDispatchToProps = dispatch => ({
-    // _saveUser: (values) => dispatch(saveUser(values)),
-    // _saveMyId: (values) => dispatch(saveMyId(values)),
-   // _isLogged: () => dispatch(isLogged),
-   _setLogged: (value) => dispatch(setLogged(value)),
-});
-export default connect(mapStateToProps,mapDispatchToProps)(UserMenu)
+// const mapDispatchToProps = dispatch => ({
+//     // _saveUser: (values) => dispatch(saveUser(values)),
+//     // _saveMyId: (values) => dispatch(saveMyId(values)),
+//    // _isLogged: () => dispatch(isLogged),
+//    _setLogged: (value) => dispatch(setLogged(value)),
+// });
+// export default connect(mapStateToProps,mapDispatchToProps)(UserMenu)
+export default UserMenu;

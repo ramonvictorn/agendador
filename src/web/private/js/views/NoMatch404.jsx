@@ -2,7 +2,7 @@ import React from 'react';
 
 
 //components
-import HeaderMenu from '../components/HeaderMenu.jsx'
+import HeaderMenu from '../components/HeaderMenu/index.jsx'
 const NoMatch404 = ()=>{
     return(
         <React.Fragment>

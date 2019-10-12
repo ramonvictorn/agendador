@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import ProgrammationContainer from '../containers/Programmation/index.jsx';
-// import teste from '../containers/Programmation/index'
-import MyCalendar from '../components/MyCalendar/index.jsx';
-// import ModalEvent from '../components/ModalEvent.jsx';
-import HeaderMenu from '../components/HeaderMenu.jsx';
+import HeaderMenu from '../components/HeaderMenu/index.jsx';
 import { connect } from 'react-redux';
-import { setCurrentSchedule} from '../actions/agendaAction.js'
-// import Calendar from '@toast-ui/react-calendar';
-import 'tui-calendar/dist/tui-calendar.css';
-
-// If you use the default popups, use this.
-import 'tui-date-picker/dist/tui-date-picker.css';
-import 'tui-time-picker/dist/tui-time-picker.css';
 
 class ProgramacaoView extends Component {
     constructor({match,history}) {
@@ -59,13 +49,11 @@ class ProgramacaoView extends Component {
         if(this.props.location.pathname.split('/')[2] == this.props.currentSchedule.id){
             // calendar = <MyCalendar/>           
         }
+        // const [startDate, setStartDate] = useState(new Date());
         return (
             <React.Fragment>
-                <HeaderMenu></HeaderMenu>
-                {/* <ModalEvent></ModalEvent> */}
-                {/* {calendar} */}
+                <HeaderMenu></HeaderMenu>          
                 <ProgrammationContainer/>
-            {/* <MyCalendar/> */}
             </React.Fragment>
         )
     }

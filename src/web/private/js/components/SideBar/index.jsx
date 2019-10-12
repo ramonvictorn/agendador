@@ -1,5 +1,7 @@
 import React,{ Component } from "react";
 import './style.css'
+import CalendarPicket from '../CalendarPicket/index.jsx';
+import Carosel from '../Carousel/index.jsx'
 class SideBar extends Component{
     constructor(){
         super();
@@ -8,8 +10,8 @@ class SideBar extends Component{
         return(
             <>
             <div className={'side-bar'}>
-                SIDE BAR HERE
-
+                <CalendarPicket/>
+                <Carosel/>
             </div>
             </>
         )
