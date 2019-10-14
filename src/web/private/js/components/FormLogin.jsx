@@ -15,8 +15,8 @@ import {
 
 
 class FormLogin extends Component{
-    constructor({history}){
-        super()
+    constructor(props){
+        super(props)
         this.formValues = {}
         this.getValues = this.getValues.bind(this);
         this.ajaxLogin = this.ajaxLogin.bind(this);
@@ -30,7 +30,7 @@ class FormLogin extends Component{
     }
     ajaxLogin(){
         console.log('ajaxLogin',this.history);
-        
+       this.props.history.push("/programation")
         // this.getValues();
         // if(this.formValues.login.length != 0 && this.formValues.password.length != 0){
         //     $.ajax({

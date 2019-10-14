@@ -9,7 +9,7 @@ class LoginContainer extends React.Component{
     render() {
         return (
           
-          <FormLogin></FormLogin>  
+          <FormLogin history={this.props.history}></FormLogin>  
         );
       }
 }

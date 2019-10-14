@@ -54,7 +54,7 @@ class LoginView extends Component{
                     <div className={'loginDiv'} style={styleObj}>    
                         {/* <div className="login-triangle"></div>
                         <h2 className="login-header">Log in</h2>  */}
-                        <LoginContainer></LoginContainer>
+                        <LoginContainer history={this.props.history}></LoginContainer>
                     </div>
                 </div>
             </React.Fragment>
