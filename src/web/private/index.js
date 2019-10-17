@@ -10,7 +10,6 @@ import './css/agenda.css';
 import './css/modal.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/menu.css'
-import './css/login.css'
 import './css/index.css'
 
 // routes

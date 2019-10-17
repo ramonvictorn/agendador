@@ -11,10 +11,6 @@
     
 }
 /*  version1  */
-.logo-div {
-    display: flex;
-    flex-direction: column;
-}
 .logo-a{
     color: #3683A4
 }

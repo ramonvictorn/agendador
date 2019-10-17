@@ -1,0 +1,4 @@
+.login-logo-div{
+    display: flex;
+    flex-direction: column;
+}

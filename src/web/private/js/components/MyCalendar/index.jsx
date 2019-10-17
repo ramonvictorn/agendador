@@ -9,6 +9,38 @@ import './style.css';
 class MyCalendar extends Component {
     constructor() {
         super(); 
+        this.state = {
+            schedules: [
+                {
+                    id: '1',
+                    calendarId: '1',
+                    title: 'Reunião de supervisão',
+                    category: 'time',
+                    dueDateClass: '',
+                    start: '2019-10-16T22:30:00+09:00',
+                    end: '2019-10-17T02:30:00+09:00'
+                },
+                {
+                    id: '2',
+                    body:'aaaa',
+                    calendarId: '2',
+                    title: 'Reunião da coordenação',
+                    category: 'time',
+                    dueDateClass: '',
+                    start: '2019-10-16T12:30:00+09:00',
+                    end: '2019-10-16T13:30:00+09:00'
+                },
+                {
+                    id: '3',
+                    calendarId: '1',
+                    title: 'Reunião da coordenação',
+                    category: 'time',
+                    dueDateClass: '',
+                    start: '2019-10-23T12:30:00+09:00',
+                    end: '2019-10-23T13:30:00+09:00'
+                },
+            ]
+        }
         this.calendarRef = React.createRef();
         // this.verifySchedule = this.verifySchedule.bind(this);
         // this.Calendar = {}
@@ -37,6 +69,28 @@ class MyCalendar extends Component {
                             daynames: ['Dom', 'Seg', 'Ter', 'Quar', 'Qui', 'Sex', 'Sab'],
                             visibleWeeksCount: 4
                         }}
+                        scheduleView={['time']}
+                        calendars={
+                            [
+                                {
+                                id: '1',
+                                name: 'My Calendar',
+                                color: '#ffffff',
+                                bgColor: '#9e5fff',
+                                dragBgColor: '#9e5fff',
+                                borderColor: '#9e5fff'
+                                },
+                                {
+                                    id: '2',
+                                    name: 'My Calendar',
+                                    color: '#ffffff',
+                                    bgColor: '#9e5fff',
+                                    dragBgColor: '#9e5fff',
+                                    borderColor: '#9e5fff'
+                                    }
+                            ]
+                        }
+                        schedules={this.state.schedules}
                     />
                 </div>
             </React.Fragment>

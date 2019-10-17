@@ -43,6 +43,7 @@ class ProgramacaoView extends Component {
 
     }
     render(){
+        document.body.style = 'background-image:""';
         let today = new Date();
         console.log('AgendaView Render')
         let calendar = <div>Você não possui permissão nessa agenda</div>

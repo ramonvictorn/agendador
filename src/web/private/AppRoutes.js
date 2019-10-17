@@ -18,7 +18,7 @@ import {
 
 
 // views
-import LoginView from '../private/js/views/LoginView.jsx'
+import LoginView from '../private/js/views/Login/index.jsx'
 import NoMatch404 from '../private/js/views/NoMatch404.jsx';
 import RoomsView from '../private/js/views/Rooms/index.jsx';
 import ProgramacaoView from '../private/js/views/ProgramacaoView.jsx';
