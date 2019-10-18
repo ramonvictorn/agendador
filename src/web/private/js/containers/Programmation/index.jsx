@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MyCalendar from '../../components/MyCalendar/index.jsx';
 import SideBar from '../../components/SideBar/index.jsx';
+import ModalSchedule from '../../components/ModalSchedule/index.jsx';
 import './style.css';
 class Programmation extends Component {
     constructor() {
@@ -26,6 +27,7 @@ class Programmation extends Component {
             <React.Fragment>
                 <div className={'programation-container'}>
                     <SideBar/>
+                    <ModalSchedule/>
                     <MyCalendar/>
                 </div>
             </React.Fragment>

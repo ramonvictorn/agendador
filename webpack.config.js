@@ -4,7 +4,7 @@ module.exports = {
     entry: "./src/web/private/index.js",
     output: {
         path: path.resolve(__dirname, "src/web/public/js"),
-        filename: "index.js"
+        filename: 'index.js'
     },
   module: {
     rules: [
@@ -24,7 +24,12 @@ module.exports = {
   watch: true,
   watchOptions: {
     ignored: /node_modules/
-  }
+  },
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'all',
+  //   },
+  // },
   // plugins: [
   //   new HtmlWebPackPlugin({
   //     template: "./web/private/templates/index.ejs",

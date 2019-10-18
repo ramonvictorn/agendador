@@ -1,0 +1,38 @@
+.modal-schedule {
+    position: absolute;
+    /* top: 50%; */
+    z-index: 1;
+    left: 50%;
+    width: 541px;
+    height: 660px;
+    background: #F6F6F8;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 22px;
+}
+
+.modal-schedule > input{
+    border: 2px solid #AFAFB3;
+    box-sizing: border-box;
+    border-radius: 8px;
+    width: 436px;
+    height: 48px;
+    font-size: 20px;
+    line-height: 30px;
+    color: #BAB6BF;
+}
+
+.send-schedule{
+    width: 274px;
+    height: 64px;
+    background: #FFB501;
+    border-radius: 100px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #000000;
+}

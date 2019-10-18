@@ -9,6 +9,7 @@ import './style.css';
 class MyCalendar extends Component {
     constructor() {
         super(); 
+        this.triggerClicks = this.triggerClicks.bind(this);
         this.state = {
             schedules: [
                 {
@@ -46,6 +47,7 @@ class MyCalendar extends Component {
         // this.Calendar = {}
     }
     componentDidMount(){
+        this.triggerClicks();
         // this.verifySchedule();
         // console.log('calendarRef ',  this.calendarRef.current.getInstance());
         // this.Calendar = this.calendarRef.current.getInstance();
@@ -53,6 +55,38 @@ class MyCalendar extends Component {
         // this.Calendar.changeView('month', true);
         // this.calendarRef.current.getInstance();
     }
+
+    triggerClicks(){
+        const calendarInstance = this.calendarRef.current.getInstance();
+
+        // calendarInstance.next();
+        // calendarInstance.on('clickSchedule', function(event) {
+        //     console.log('clickSchedule',event)
+        //     var schedule = event.schedule
+        // });
+
+        // calendarInstance.on('clickDayname', function(event) {
+        //     console.log('clickDayname ')
+        //     // if (calendarInstance.getViewName() === 'week') {
+        //     //     calendar.setDate(new Date(event.date));
+        //     //     calendar.changeView('day', true);
+        //     // }
+        // });
+
+        calendarInstance.on('beforeCreateSchedule', function(event) {
+            console.log('AGR VAIR beforeCreateSchedule ',event)
+            // if (calendarInstance.getViewName() === 'week') {
+            //     calendar.setDate(new Date(event.date));
+            //     calendar.changeView('day', true);
+            // }
+        });
+    }
+    handleClickDayname(ev) {
+        // view : week, day
+        console.group('onClickDayname');
+        console.log(ev.date);
+        console.groupEnd();
+    };
     render(){
         let today = new Date();
         console.log('AgendaView Render')
@@ -97,6 +131,13 @@ class MyCalendar extends Component {
         )
     }
 }
-
-
 export default MyCalendar;
+
+let templateCalendar = {
+    popupDetailRepeat: function(model) {
+        return model.recurrenceRule;
+    },
+    popupDetailBody: function(model) {
+        return model.body;
+    }
+}

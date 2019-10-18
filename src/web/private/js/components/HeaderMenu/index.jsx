@@ -16,7 +16,7 @@ class HeaderMenu extends Component{
     }
     componentDidMount(){
         window.addEventListener('resize', this.borderOnActiveMenu);
-        this.borderOnActiveMenu();
+        // this.borderOnActiveMenu();
     }
     componentDidUpdate(){
         // this.borderOnActiveMenu();
@@ -91,7 +91,7 @@ class HeaderMenu extends Component{
                         </div>
                         <Link className={'link-style ' + (currentPath == '/programation' ? 'current-path' : '')} to="/programation">Programação</Link>
                         <Link  className={'link-style ' + (currentPath == '/rooms' ? 'current-path' : '')} to="/rooms">Salas</Link>
-                        <Link  className={'link-style ' + (currentPath == '/choiseAgenda' ? 'current-path' : '')} to="/choiseAgenda">Minhas Reservas</Link>
+                        <Link  className={'link-style ' + (currentPath == '/choiseAgenda' ? 'current-path' : '')} to="/my-schedules">Minhas Reservas</Link>
                         {/* <Link  className={'linkStyle'}to="/administrative">Administrativo</Link> */}
                     </div>
                     <span className="target"></span>

@@ -11,6 +11,8 @@ class SideBar extends Component{
             <>
             <div className={'side-bar'}>
                 <CalendarPicket/>
+                <button className={'bt-side'}>Agendar</button>
+                <h3>Selecionar sala</h3>
                 <Carosel/>
             </div>
             </>

@@ -1,0 +1,25 @@
+.rooms-card{
+    width: 688px;
+    height: 287px;
+    background: #F6F6F8;
+    border: 2px solid #BB4430;
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+}
+
+.rooms-card > div , .rooms-card > div > img {
+    height: 100%;
+}
+
+.rooms-card > div > img {
+    width: 100%;
+}
+
+.rooms-card > .imgs-carosel {
+    width: 65%;
+}
+.rooms-card > .details {
+    width: 35%;
+}
